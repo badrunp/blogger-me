@@ -11,11 +11,11 @@ function register() {
             <GuestLayout title="Sign Un">
                 <div className="flex flex-row items-center justify-start space-x-2">
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <h1 className="block text-gray-600 font-semibold text-xl">Sign Up your account</h1>
+                    <h1 className="block text-gray-500 font-semibold text-xl">Sign Up your account</h1>
                 </div>
 
                 <div className="mt-6">
@@ -45,7 +45,7 @@ function register() {
                             />
                         </div>
 
-                        <Button type="button" className="bg-blue-500 text-white font-medium text-sm py-3 px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1">Sign Up</Button>
+                        <Button type="button" className="bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1">Sign Up</Button>
 
 
                         <div className="mt-8 text-center">
