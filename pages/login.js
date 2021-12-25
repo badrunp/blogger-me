@@ -1,17 +1,28 @@
 import Link from "next/link"
-import { useState } from "react"
+import {useState } from "react"
+import Alert from "../components/Alert"
 import AuthInput from "../components/AuthInput"
 import AuthLabel from "../components/AuthLabel"
 import Button from "../components/Button"
 import GuestLayout from "../components/GuestLayout"
 import ValidationMessage from "../components/ValidationMessage"
+import Cookies from "js-cookie";
+import { useDispatch } from "react-redux"
+import { useRouter } from "next/router"
+import { addUserSuccess } from "../action/userAction"
 
 function login() {
 
-    const [data, setData] = useState({})
+
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+    })
     const [loading, setLoading] = useState(false);
     const [validations, setValidations] = useState({})
     const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleChangeInput = (e) => {
 
@@ -25,43 +36,70 @@ function login() {
 
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         setLoading(true);
         try {
-                const request = await fetch('/api/auth/login', {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json",
-                    },
-                    body: JSON.stringify(data)
+            const request = await fetch('/api/auth/login', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+
+            const response = await request.json()
+
+            const { status, validations, message, token, user } = response;
+
+            if (status === 402 && Object.keys(validations).length > 0) {
+
+                setMessage('');
+                setValidations(validations)
+
+            }
+
+            if (status === 403 && message) {
+
+                setData({
+                    ...data,
+                    password: ''
                 })
+                setValidations({})
+                setMessage(message);
 
-                const response = await request.json()
+            }
 
-                const {status, validations, message} = response;
+            if (status === 200 && token && user) {
 
-                if( status === 402 && Object.keys(validations).length > 0 ){
+                setMessage('');
+                setValidations({})
+                Cookies.set('_TOKEN', token, {
+                    expires: 7,
+                    secure: true
+                });
+                Cookies.set('_USR', JSON.stringify(user), {
+                    expires: 7,
+                    secure: true
+                })
+                dispatch(addUserSuccess(user))
+                router.replace('/');
+                setData({
+                    email: '',
+                    password: ''
+                })
+                
 
-                    setValidations(validations)
+            }
 
-                }
-
-                if( status === 403 && message){
-
-                    setValidations({})
-
-                    setMessage(message);
-
-                }
-
-                setLoading(false);
-                console.log(response);
+            setLoading(false);
 
         } catch (error) {
-            console.log(error);
+
             setLoading(false);
+
 
         }
 
@@ -80,10 +118,14 @@ function login() {
                 </div>
 
                 {
-                    true && (
-                        <div className="py-4 px-5 rounded mt-6 bg-red-500 text-white">
-                            <span className="block text-sm text-left tracking-normal">{"Email atau password salah"}</span>
-                        </div>
+                    message && (
+                        <Alert className="bg-red-500 text-white" message={message} />
+                    )
+                }
+
+                {
+                    router.query.message && (
+                        <Alert className="bg-emerald-500 text-white" message={router.query.message} />
                     )
                 }
 
@@ -93,8 +135,9 @@ function login() {
                             <AuthLabel inputFor={'email'} title={'Email'} />
                             <AuthInput
                                 type="text"
-                                placeholder="bbadrunn@gmail.com"
+                                placeholder="example@example.com"
                                 name="email"
+                                value={data.email}
                                 onChange={handleChangeInput}
                             />
                             <ValidationMessage validations={validations} name={'email'} />
@@ -106,6 +149,7 @@ function login() {
                                 type="password"
                                 placeholder="*******"
                                 name="password"
+                                value={data.password}
                                 onChange={handleChangeInput}
                             />
                             <ValidationMessage validations={validations} name={'password'} />

@@ -29,15 +29,14 @@ export default function handler(req,res){
         
     ])
 
-    if(Object.keys(validations).length > 0){
-        return res.status(402).json({ validations })
-    }
+    if(Object.keys(validations).length > 0) return res.status(402).json({ status: res.statusCode, validations })
 
     User.findOne({email: email})
         .then(user => {
             
             if(user){
                 return res.status(403).json({
+                    status: res.statusCode,
                     message: "Email sudah digunakan",
                 })
             }
@@ -57,7 +56,8 @@ export default function handler(req,res){
                     newUser.save()
                         .then(result => {
                             return res.status(200).json({
-                                message: "Register berhasil",
+                                status: res.statusCode,
+                                message: "Register berhasil, silahkan login",
                             })
                         })
                         .catch(errno => {

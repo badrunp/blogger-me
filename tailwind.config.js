@@ -5,7 +5,11 @@ module.exports = {
     "./layouts/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sanss: ['Open Sans']
+      }
+    },
   },
   plugins: [],
 }

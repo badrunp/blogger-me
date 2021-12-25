@@ -9,8 +9,8 @@ function Footer() {
             <div className="w-full h-auto relative overflow-hidden bg-zinc-800">
                 <Container>
                     <div className="flex flex-col justify-start items-start divide-y divide-gray-500 w-full">
-                        <ul className="grid grid-cols-5 w-full pb-8 pt-14 gap-6">
-                            <li className="flex flex-col justify-start items-start space-y-4 col-span-2 pr-8">
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 w-full pb-8 pt-14 gap-6">
+                            <li className="flex flex-col justify-start items-start space-y-4 col-span-1 md:col-span-2 pr-8">
                                 <Link href={'/'}>
                                     <a className="flex flex-row items-center justify-center space-x-2">
                                         <div>

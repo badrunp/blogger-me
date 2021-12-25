@@ -10,7 +10,7 @@ function NavbarItem({
         <>
            <li className="relative">
                <Link href={link}>
-                    <a className="block text-gray-50 font-medium hover:text-gray-800 transition-all duration-150 ease-in-out text-base tracking-tight">{label}</a>
+                    <a className="block text-white hover:text-black transition-all font-medium duration-150 ease-in-out text-sm tracking-wide">{label}</a>
                </Link>
            </li>
         </>

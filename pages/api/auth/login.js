@@ -26,9 +26,7 @@ export default async function handler(req,res){
         }
     ])
 
-    if(Object.keys(validations).length > 0){
-        return res.status(402).json({ status: res.statusCode, validations })
-    }
+    if(Object.keys(validations).length > 0) return res.status(402).json({ status: res.statusCode, validations })
 
 
     User.findOne({ email })
@@ -57,6 +55,7 @@ export default async function handler(req,res){
                 const token = jwt.sign({_id}, process.env.JWT_SECRET, {
                     expiresIn: '7d'
                 })
+
 
                 return res.status(200).json({
                     status: res.statusCode,

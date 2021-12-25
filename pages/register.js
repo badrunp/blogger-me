@@ -1,11 +1,103 @@
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { registerSuccess } from '../action/userAction'
+import Alert from '../components/Alert'
 import AuthInput from '../components/AuthInput'
 import AuthLabel from '../components/AuthLabel'
 import Button from '../components/Button'
 import GuestLayout from '../components/GuestLayout'
+import ValidationMessage from '../components/ValidationMessage'
 
 function register() {
+
+    const [data, setData] = useState({
+        username: '',
+        email: '',
+        password: '',
+    })
+    const [loading, setLoading] = useState(false);
+    const [validations, setValidations] = useState({})
+    const [message, setMessage] = useState('');
+    const router = useRouter();
+    const dispatch = useDispatch();
+
+    const handleChangeInput = (e) => {
+
+        const name = e.target.name;
+        const value = e.target.value;
+
+        setData({
+            ...data,
+            [name]: value
+        })
+
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        setLoading(true);
+        try {
+            const request = await fetch('/api/auth/register', {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+
+            const response = await request.json()
+
+            const { status, validations, message } = response;
+
+            if (status === 402 && Object.keys(validations).length > 0) {
+
+                setMessage('');
+                setValidations(validations)
+
+            }
+
+            if (status === 403 && message) {
+
+                setData({
+                    ...data,
+                    password: ''
+                })
+                setValidations({})
+                setMessage(message);
+
+            }
+
+            if (status === 200 && message) {
+
+                setMessage('');
+                setData({
+                    email: '',
+                    password: ''
+                })
+                setValidations({})
+                router.push({
+                    pathname: '/login',
+                    query: { message },
+                })
+
+                dispatch(registerSuccess(message))
+
+            }
+
+            setLoading(false);
+
+        } catch (error) {
+
+            setLoading(false);
+
+
+        }
+
+    }
+
     return (
         <>
             <GuestLayout title="Sign Un">
@@ -18,23 +110,33 @@ function register() {
                     <h1 className="block text-gray-500 font-semibold text-xl">Sign Up your account</h1>
                 </div>
 
+                {
+                    message && (
+                        <Alert className="bg-red-500 text-white" message={message} />
+                    )
+                }
+
                 <div className="mt-6">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-6">
                             <AuthLabel inputFor={'username'} title={'Username'} />
                             <AuthInput
                                 type="text"
-                                placeholder="Muhammad Badrun"
+                                placeholder="Example"
                                 name="username"
+                                onChange={handleChangeInput}
                             />
+                            <ValidationMessage validations={validations} name='username' />
                         </div>
                         <div className="mb-6">
                             <AuthLabel inputFor={'email'} title={'Email'} />
                             <AuthInput
                                 type="text"
-                                placeholder="bbadrunn@gmail.com"
+                                placeholder="example@example.com"
                                 name="email"
+                                onChange={handleChangeInput}
                             />
+                            <ValidationMessage validations={validations} name='email' />
                         </div>
                         <div className="mb-6">
                             <AuthLabel inputFor={'password'} title={'Password'} />
@@ -42,10 +144,12 @@ function register() {
                                 type="password"
                                 placeholder="*******"
                                 name="password"
+                                onChange={handleChangeInput}
                             />
+                            <ValidationMessage validations={validations} name='password' />
                         </div>
 
-                        <Button type="button" className="bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1">Sign Up</Button>
+                        <Button type="submit" className="bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1">{loading ? 'Loading...' : 'Sign Up'}</Button>
 
 
                         <div className="mt-8 text-center">
