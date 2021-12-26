@@ -1,10 +1,11 @@
 import { Menu, Transition } from "@headlessui/react"
 import Cookies from "js-cookie"
 import Link from "next/link"
+import Image from 'next/image'
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addUserFailure, addUserSuccess, userLogout } from "../action/userAction"
+import {userIsLogin, userLogout } from "../action/userAction"
 import { navbarAuth, navbarLinks } from "../constant/navbar"
 import Container from "./Container"
 import DropdownButton from "./DropdownButton"
@@ -15,20 +16,11 @@ function Navbar() {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth)
     const router = useRouter();
-    const [openDropdown, setOpenDropdown] = useState(false)
 
     useEffect(() => {
 
-        const userInCookie = Cookies.get('_USR');
-        const tokenInCookie = Cookies.get('_TOKEN')
-        if (userInCookie && tokenInCookie) {
-            dispatch(addUserSuccess(JSON.parse(userInCookie)))
-        } else {
-            Cookies.remove('_USR')
-            Cookies.remove('_TOKEN')
-            dispatch(addUserFailure())
-        }
-
+        dispatch(userIsLogin())
+        console.log(auth);
 
     }, [])
 
@@ -37,7 +29,6 @@ function Navbar() {
 
         router.replace('/login')
 
-        Cookies.remove('_USR')
         Cookies.remove('_TOKEN')
 
         setTimeout(() => {
@@ -49,7 +40,7 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 relative bg-blue-500 shadow-md z-50">
+            <div className="w-full h-16 relative bg-blue-500 shadow md:shadow-md z-50">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
                         <Link href={'/'}>
@@ -91,7 +82,10 @@ function Navbar() {
                                         auth.user ? (
                                             <li>
                                                 <Menu as={'div'} className="relative">
-                                                    <Menu.Button className="bg-transparent tracking-wide text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
+                                                    <Menu.Button className="tracking-wide text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
+                                                        <div className="w-7 h-7 bg-gray-200 rounded-full overflow-hidden relative flex-none mr-1">
+                                                            <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
+                                                        </div>
                                                         <span className="block">{auth.user.username}</span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                                             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -99,7 +93,7 @@ function Navbar() {
                                                     </Menu.Button>
                                                     <Transition
                                                         enter="transition duration-100 ease-out"
-                                                        enterFrom="opacity-0"
+                                                        enterFrom="opacity-0 "
                                                         enterTo="opacity-100"
                                                         leave="transition duration-75 ease-out"
                                                         leaveFrom="opacity-100"

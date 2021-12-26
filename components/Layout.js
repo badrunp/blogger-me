@@ -2,7 +2,7 @@ import Head from "next/head"
 import Navbar from "../components/Navbar"
 import Footer from "./Footer"
 
-function Layout({ children, title = 'Home' }) {
+function Layout({ children, title = 'Home', className="" }) {
     return (
         <>
             <Head>
@@ -12,7 +12,9 @@ function Layout({ children, title = 'Home' }) {
 
             <Navbar />
 
-            {children}
+            <div className={className}>
+                {children}
+            </div>
 
             <Footer />
         </>

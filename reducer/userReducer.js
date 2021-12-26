@@ -2,43 +2,67 @@ import { userConstant } from "../constant/redux";
 
 const initialState = {
     user: null,
-    loading: true,
-    message: ''
+    loading: false,
+    message: '',
+    error: null,
+    validations: {}
 }
 
 export default function userReducer(state = initialState, action){
 
     switch(action.type){
-        case userConstant.ADD_USER_REQUEST:
+        case userConstant.USER_LOGOUT:
+            return initialState
+
+        case userConstant.USER_LOGIN_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case userConstant.ADD_USER_SUCCESS:
+        case userConstant.USER_LOGIN_SUCCESS:
             return {
-                ...state,
-                loading: false,
-                user: action.payload
+                ...initialState,
+                user: action.payload.user
             }
-        case userConstant.ADD_USER_FAILURE:
+        case userConstant.USER_LOGIN_FAILURE:
             return {
-                ...state,
-                loading: false
+                ...initialState,
+                error: action.payload.error,
             }
-        case userConstant.USER_LOGOUT:
+        case userConstant.USER_LOGIN_ERROR_VALIDATION:
             return {
-                ...state,
-                user: null
+                ...initialState,
+                validations: action.payload.validations
             }
-        case userConstant.USER_REGISTER_SUCCESS: 
+        case userConstant.USER_LOGIN_ERROR_MESSAGE:
             return {
-                ...state,
+                ...initialState,
                 message: action.payload.message
             }
-        case userConstant.USER_REMOVE_MESSAGE:
+
+        case userConstant.USER_REGISTER_REQUEST:
             return {
                 ...state,
-                message: ''
+                loading: true
+            }
+        case userConstant.USER_REGSITER_SUCCESS:
+            return {
+                ...initialState,
+            }
+        case userConstant.USER_REGSITER_FAILURE:
+            return {
+                ...initialState,
+                error: action.payload.error,
+            }
+        case userConstant.USER_REGSITER_ERROR_VALIDATION:
+            return {
+                ...initialState,
+                validations: action.payload.validations
+            }
+        case userConstant.USER_REGSITER_ERROR_MESSAGE:
+            return {
+                ...initialState,
+                message: action.payload.message
             }
         default: 
             return state;

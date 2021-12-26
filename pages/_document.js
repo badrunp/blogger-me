@@ -14,7 +14,7 @@ class MyDocument extends Document {
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
                     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;800&display=swap" rel="stylesheet" />
                 </Head>
-                <body className="antialiased font-sanss">
+                <body className="antialiased font-sanss bg-gray-100">
                     <Main />
                     <NextScript />
                 </body>
