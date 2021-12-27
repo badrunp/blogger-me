@@ -48,6 +48,7 @@ export default async function handler(req,res){
                     _id,
                     username,
                     email,
+                    title,
                     createdAt,
                     updatedAt
                 } = user;
@@ -56,6 +57,7 @@ export default async function handler(req,res){
                     id: _id,
                     username,
                     email,
+                    title,
                     createdAt,
                     updatedAt
                 }, process.env.JWT_SECRET, {

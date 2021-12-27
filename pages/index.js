@@ -17,7 +17,7 @@ export default function Home() {
           <div className="w-full md:py-14 space-y-14">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:px-8 lg:px-14">
               <div className="md:col-span-3">
-                <div className="relative w-full h-[398px] overflow-hidden md:rounded">
+                <div className="relative w-full h-[398px] overflow-hidden">
                   <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
                 </div>
               </div>
@@ -52,7 +52,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-8 lg:px-14">
               {
                 [3, 4, 5, 3, 4, 5].map((item, i) => (
-                  <div key={i} className="w-full h-auto relative flex flex-col items-start justify-start bg-white shadow rounded">
+                  <div key={i} className="w-full h-auto relative flex flex-col items-start justify-start bg-white shadow rounded overflow-hidden">
                     <div className="h-56 relative overflow-hidden w-full">
                       <Image src={`/images/img-blog${item}.png`} alt="image" layout="fill" />
                     </div>

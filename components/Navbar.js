@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {userIsLogin, userLogout } from "../action/userAction"
+import { userIsLogin, userLogout } from "../action/userAction"
 import { navbarAuth, navbarLinks } from "../constant/navbar"
 import Container from "./Container"
 import DropdownButton from "./DropdownButton"
@@ -20,14 +20,13 @@ function Navbar() {
     useEffect(() => {
 
         dispatch(userIsLogin())
-        console.log(auth);
 
     }, [])
 
     const handleUserLogout = (e) => {
         e.preventDefault()
 
-        router.replace('/login')
+        router.replace('/')
 
         Cookies.remove('_TOKEN')
 
@@ -102,12 +101,14 @@ function Navbar() {
                                                         <Menu.Items className="absolute top-0 right-0 bg-white shadow mt-12 rounded w-44 py-2 px-[6px] focus:outline-none">
                                                             <Menu.Item>
                                                                 {({ active }) => (
-                                                                    <DropdownButton onClick={handleUserLogout} active={active}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                                        </svg>
-                                                                        <span className="block">Profile</span>
-                                                                    </DropdownButton>
+                                                                    <Link href={`/${auth.user.id}`} >
+                                                                        <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                                            </svg>
+                                                                            <span className="block">Profile</span>
+                                                                        </a>
+                                                                    </Link>
                                                                 )}
                                                             </Menu.Item>
                                                             <Menu.Item>
