@@ -1,7 +1,7 @@
-function AuthLabel({ inputFor, title }) {
+function AuthLabel({ inputFor, title, className="" }) {
     return (
         <>
-            <label htmlFor={inputFor} className="block mb-1 text-gray-500">{title}</label>
+            <label htmlFor={inputFor} className={`block mb-1 text-gray-500 ${className}`}>{title}</label>
         </>
     )
 }

@@ -54,7 +54,7 @@ export default async function handler(req,res){
                 } = user;
 
                 const token = jwt.sign({
-                    id: _id,
+                    _id,
                     username,
                     email,
                     title,

@@ -11,8 +11,8 @@ function detailBlog() {
                     <div className="w-full py-8 md:py-14">
                         <div className="grid grid-cols-1 xl:grid-cols-6 md:px-8">
                             <div className="md:col-span-5 xl:pr-8 space-y-8">
-                                <div className="relative w-full h-80 lg:h-[488px] overflow-hidden md:rounded">
-                                    <Image src={'/images/img-blog4.png'} alt="image" layout="fill" />
+                                <div className="relative w-full h-80 lg:h-[488px] overflow-hidden">
+                                    <Image className="object-cover object-top" src={'/images/img-blog3.png'} alt="image" layout="fill" />
                                 </div>
 
                                 <div className="flex flex-row items-center space-x-2">
@@ -44,7 +44,7 @@ function detailBlog() {
                                 </div>
 
                                 <div className="flex flex-row items-center justify-start space-x-4 border-t border-gray-300 py-6">
-                                    <div className="md:w-14 md:h-14 h-12 w-12 bg-blue-500 rounded-full overflow-hidden relative">
+                                    <div className="md:w-14 md:h-14 h-12 w-12 bg-gray-100 rounded-full overflow-hidden relative">
                                         <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
                                     </div>
 
@@ -61,7 +61,7 @@ function detailBlog() {
                                         [3, 4, 5, 3, 4, 5].map((item, i) => (
                                             <div key={i} className="w-full h-auto relative flex flex-col items-start justify-start bg-white shadow rounded overflow-hidden">
                                                 <div className="h-44 md:h-32 relative overflow-hidden w-full flex-shrink-0">
-                                                    <Image src={`/images/img-blog${item}.png`} alt="image" layout="fill" />
+                                                    <Image className="object-cover object-top" src={`/images/img-blog${item}.png`} alt="image" layout="fill" />
                                                 </div>
                                                 <div className="py-2 px-3 flex flex-col space-y-1 overflow-hidden">
                                                     <div className="flex flex-row items-center space-x-1">
