@@ -8,7 +8,10 @@ async function handler(req,res){
 
     await dbConnect();
 
+    const {limit, skip} = req.query;
+
     Post.find({})
+        .limit(parseInt(limit) || 6)
         .then(posts => {
             
             return res.status(200).json({

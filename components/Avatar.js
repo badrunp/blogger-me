@@ -5,7 +5,7 @@ function Avatar({ image, name, title }) {
     return (
         <>
             <div className="flex flex-row items-center justify-start space-x-3 pt-2">
-                <div className="w-10 h-10 bg-blue-500 rounded-full overflow-hidden relative">
+                <div className="w-10 h-10 bg-zinc-200 rounded-full overflow-hidden relative">
                     <Image src={image} alt="image" layout="fill" />
                 </div>
 

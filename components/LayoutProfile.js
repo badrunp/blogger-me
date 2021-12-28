@@ -13,14 +13,16 @@ export default function LayoutProfil({ children }) {
 
     const dispatch = useDispatch()
     const { loading, user } = useSelector(state => state.profile)
+    const {user:auth} = useSelector(state => state.auth)
     const router = useRouter();
     const { id } = router.query;
 
 
     useEffect(() => {
+        
         if (id) {
 
-            if (Object.keys(user).length === 0 && id[0] !== user._id) {
+            if (id[0] !== user._id) { 
                 async function getProfil() {
                     const isProfile = await dispatch(getUserProfile(id[0]))
                     if (!isProfile) {
@@ -32,7 +34,7 @@ export default function LayoutProfil({ children }) {
             }
         }
 
-    }, [id, user])
+    }, [id])
 
 
     return (

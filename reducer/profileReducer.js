@@ -5,7 +5,7 @@ const initialState = {
     loading: false,
     error: null,
     posts: {
-        loading: false,
+        loading: true,
         validations: {},
         message: "",
         data: []
@@ -14,6 +14,10 @@ const initialState = {
 
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
+        case profileConstant.RESET_PROFILE:
+            return {
+                ...initialState
+            }
         case profileConstant.USER_PROFILE_REQUEST:
             return {
                 ...initialState,

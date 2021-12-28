@@ -3,7 +3,7 @@ import Layout from "../../components/Layout"
 import Image from 'next/image'
 import Link from "next/link"
 
-function blogs() {
+function blogs({posts}) {
     return (
         <>
             <Layout title="Blogs">
@@ -14,10 +14,16 @@ function blogs() {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
-                                [3, 4, 5, 3, 4, 5].map((item, i) => (
+                                posts.map((item, i) => (
                                     <div key={i} className="w-full h-auto relative flex flex-col items-start justify-start bg-white shadow rounded">
                                         <div className="h-60 relative overflow-hidden w-full">
-                                            <Image className="object-cover object-top" src={`/images/img-blog${item}.png`} alt="image" layout="fill" />
+                                            {
+                                                item.image ? (
+                                                     <Image className="object-cover object-top" src={`${item.image}`} alt="image" layout="fill" /> 
+                                                ) : (
+                                                    <div className="w-full h-full bg-zinc-200"></div>
+                                                )
+                                            }
                                         </div>
                                         <div className="p-4 flex flex-col space-y-2">
                                             <div className="flex flex-row items-center space-x-2">
@@ -33,7 +39,7 @@ function blogs() {
                                             <p className="block text-xs text-gray-600">Daan ini adalah conetetc blog pos yang saya buat di dala tag p karena menurut saya cocok untuk ukuran text uang seperti ada di dalah text ini</p>
 
                                             <div className="flex flex-row items-center justify-start space-x-2 pt-2">
-                                                <div className="w-10 h-10 bg-blue-500 rounded-full overflow-hidden relative">
+                                                <div className="w-10 h-10 bg-zinc-200 rounded-full overflow-hidden relative">
                                                     <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
                                                 </div>
 
@@ -49,6 +55,20 @@ function blogs() {
             </Layout>
         </>
     )
+}
+
+export async function getStaticProps(){
+
+    const request = await fetch('http://localhost:3000/api/blogs');
+    const response = await request.json();
+    const {posts} = response;
+
+    return {
+        props: {
+            posts
+        },
+        revalidate: 10
+    }
 }
 
 export default blogs
