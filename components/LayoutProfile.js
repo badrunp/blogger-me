@@ -20,16 +20,19 @@ export default function LayoutProfil({ children }) {
     useEffect(() => {
         if (id) {
 
-            async function getProfil(){
-                const isProfile = await dispatch(getUserProfile(id))
-                if(!isProfile){
-                    router.replace('/')
+            if (Object.keys(user).length === 0 && id[0] !== user._id) {
+                async function getProfil() {
+                    const isProfile = await dispatch(getUserProfile(id[0]))
+                    if (!isProfile) {
+                        router.replace('/')
+                    }
                 }
-            }
 
-            getProfil();
+                getProfil();
+            }
         }
-    }, [id])
+
+    }, [id, user])
 
 
     return (

@@ -82,7 +82,7 @@ function Navbar() {
                                         auth.user ? (
                                             <li>
                                                 <Menu as={'div'} className="relative">
-                                                    <Menu.Button className="tracking-wide text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
+                                                    <Menu.Button className="tracking-tight text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
                                                         <div className="w-7 h-7 bg-gray-200 rounded-full overflow-hidden relative flex-none mr-1">
                                                             <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
                                                         </div>
@@ -158,8 +158,8 @@ function Navbar() {
                             <div className="block md:hidden">
                                 <Menu as={'div'} className="relative">
                                     <Menu.Button className="tracking-wide text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
                                         </svg>
                                     </Menu.Button>
                                     <Transition
@@ -188,8 +188,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                                                                         </svg>
                                                                         <span className="block">Home</span>
                                                                     </a>
@@ -200,8 +200,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/blogs`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                                                         </svg>
                                                                         <span className="block">Blogs</span>
                                                                     </a>
@@ -212,8 +212,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/about`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
                                                                         </svg>
                                                                         <span className="block">About</span>
                                                                     </a>
@@ -270,8 +270,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                                                                         </svg>
                                                                         <span className="block">Home</span>
                                                                     </a>
@@ -282,8 +282,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/blogs`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                                                         </svg>
                                                                         <span className="block">Blogs</span>
                                                                     </a>
@@ -294,8 +294,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/about`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
                                                                         </svg>
                                                                         <span className="block">About</span>
                                                                     </a>
@@ -320,8 +320,8 @@ function Navbar() {
                                                             {({ active }) => (
                                                                 <Link href={`/register`} >
                                                                     <a className={`${active ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-transparent text-gray-600 hover:bg-zinc-200'} rounded w-full text-left font-medium text-sm px-4 py-3 flex flex-row space-x-3 items-center justify-start`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                                                                         </svg>
                                                                         <span className="block">Sign Up</span>
                                                                     </a>
