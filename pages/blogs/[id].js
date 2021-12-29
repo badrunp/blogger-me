@@ -4,7 +4,7 @@ import Container from "../../components/Container"
 import Layout from "../../components/Layout"
 import PostListItem from "../../components/posts/PostListItem"
 
-function detailBlog({posts}) {
+function detailBlog({ posts, post }) {
     return (
         <>
             <Layout title="Detail Blog" className="bg-white">
@@ -59,17 +59,21 @@ function detailBlog({posts}) {
                             <div className="md:col-span-1">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8">
                                     {
-                                        posts && posts.map((item) => (
-                                            <PostListItem
-                                                key={item._id}
-                                                id={item._id}
-                                                title={item.title}
-                                                content={item.content}
-                                                category={item.category}
-                                                time={item.createdAt}
-                                                image={item.image}
-                                            />
-                                        ))
+                                        posts && posts.map((item) => {
+                                            if (item._id != post._id) {
+                                                return (
+                                                    <PostListItem
+                                                        key={item._id}
+                                                        id={item._id}
+                                                        title={item.title}
+                                                        content={item.content}
+                                                        category={item.category}
+                                                        time={item.createdAt}
+                                                        image={item.image}
+                                                    />
+                                                )
+                                            }
+                                        })
                                     }
                                 </div>
                             </div>
@@ -81,12 +85,12 @@ function detailBlog({posts}) {
     )
 }
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
 
     const request = await fetch('http://localhost:3000/api/blogs')
-    const {posts} = await request.json();
+    const { posts } = await request.json();
 
-    const paths = posts.map(item => ({params: {id: item._id.toString()}}))
+    const paths = posts.map(item => ({ params: { id: item._id.toString() } }))
 
     return {
         paths: paths,
@@ -96,13 +100,19 @@ export async function getStaticPaths(){
 
 export async function getStaticProps(ctx) {
 
-    const request = await fetch('http://localhost:3000/api/blogs?limit=7');
-    const response = await request.json();
-    const { posts } = response;
+    const { id } = ctx.params;
+    const reqPost = await fetch('http://localhost:3000/api/blogs/' + id + '/id');
+    const resPost = await reqPost.json();
+    const { post } = resPost;
+
+    const reqPosts = await fetch('http://localhost:3000/api/blogs?limit=7');
+    const resPosts = await reqPosts.json();
+    const { posts } = resPosts;
 
     return {
         props: {
-            posts: posts
+            posts,
+            post
         }
     }
 }

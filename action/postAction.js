@@ -62,25 +62,24 @@ export function createPost(data){
     }
 }
 
-export function getPostsById(id){
+export function getPostsByAuthor(id){
     return async (dispatch) => {
 
         dispatch({
-            type: postConstant.GET_USER_BY_ID_REQUEST
+            type: postConstant.GET_POST_BY_AUTHOR_REQUEST
         });
 
         try {
 
-            const resquest = await fetch('/api/blogs/' + id);
+            const resquest = await fetch('/api/blogs/' + id + '/author');
 
             const response = await resquest.json();
 
             const {status, posts} = response;
 
             if(status === 200 && posts){
-
                 dispatch({
-                    type: postConstant.GET_USER_BY_ID_SUCCESS,
+                    type: postConstant.GET_POST_BY_AUTHOR_SUCCESS,
                     payload: {
                         posts
                     }
@@ -89,13 +88,11 @@ export function getPostsById(id){
                 return true;
 
             }
-
             return false;
 
         } catch (error) {
-            console.log(error);
             dispatch({
-                type: postConstant.GET_USER_BY_ID_FAILURE,
+                type: postConstant.GET_POST_BY_AUTHOR_FAILURE,
                 error
             })
             return false;

@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { Fragment, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createPost, getPostsById } from "../../action/postAction"
+import { createPost, getPostsByAuthor } from "../../action/postAction"
 import { updateUserProfil } from "../../action/profileAction"
 import Alert from "../../components/Alert"
 import AuthLabel from "../../components/AuthLabel"
@@ -46,19 +46,17 @@ export default function Profil() {
 
         if (auth && id) {
             if (id[0] === auth._id) {
-                console.log("auth");
                 if (id[1] === 'posts') {
-    
                     if (data.length === 0) {
-                        dispatch(getPostsById(id[0]))
+                        dispatch(getPostsByAuthor(id[0]))
                     }
     
                 }
             } else {
-                console.log("tidak");
-                dispatch(getPostsById(id[0]))
+                dispatch(getPostsByAuthor(id[0]))
             }
         }
+
 
     }, [id, auth])
 

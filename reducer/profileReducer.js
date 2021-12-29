@@ -110,7 +110,7 @@ export default function profileReducer(state = initialState, action) {
                 }
             }
 
-        case postConstant.GET_USER_BY_ID_REQUEST:
+        case postConstant.GET_POST_BY_AUTHOR_REQUEST:
             return {
                 ...state,
                 posts: {
@@ -118,7 +118,7 @@ export default function profileReducer(state = initialState, action) {
                     loading: true
                 }
             }
-        case postConstant.GET_USER_BY_ID_SUCCESS:
+        case postConstant.GET_POST_BY_AUTHOR_SUCCESS:
             return {
                 ...state,
                 posts: {
@@ -127,7 +127,7 @@ export default function profileReducer(state = initialState, action) {
                     data: action.payload.posts
                 }
             }
-        case postConstant.GET_USER_BY_ID_FAILURE:
+        case postConstant.GET_POST_BY_AUTHOR_FAILURE:
             return {
                 ...state,
                 posts: {
