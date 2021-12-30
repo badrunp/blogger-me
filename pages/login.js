@@ -6,10 +6,9 @@ import AuthLabel from "../components/AuthLabel"
 import Button from "../components/Button"
 import GuestLayout from "../components/GuestLayout"
 import ValidationMessage from "../components/ValidationMessage"
-import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
-import { addUserSuccess, userLogin } from "../action/userAction"
+import { userLogin } from "../action/userAction"
 import AuthTitle from "../components/AuthTitle"
 import AuthFooter from "../components/AuthFooter"
 

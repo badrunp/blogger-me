@@ -11,11 +11,13 @@ function PostListItem({
     category,
     image,
     time,
+    avatar = true,
+    imageSize = 'h-64'
 }) {
     return (
         <>
             <div className="w-full h-auto relative flex flex-col items-start justify-start bg-white shadow rounded overflow-hidden">
-                <div className="h-56 relative overflow-hidden w-full">
+                <div className={`${imageSize} relative overflow-hidden w-full`}>
                     <PostImage image={image} />
                 </div>
                 <div className="p-4 flex flex-col space-y-2">
@@ -29,15 +31,19 @@ function PostListItem({
                         title={title}
                     />
 
-                    <PostContent 
-                        content={content} 
+                    <PostContent
+                        content={content}
                     />
 
-                    <Avatar
-                        image={'/images/img-blog3.png'}
-                        name="Muhammad Badrun"
-                        title={'Software Enginering'}
-                    />
+                    {
+                        avatar && (
+                            <Avatar
+                                image={'/images/img-blog3.png'}
+                                name="Muhammad Badrun"
+                                title={'Software Enginering'}
+                            />
+                        )
+                    }
                 </div>
             </div>
         </>

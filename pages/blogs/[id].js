@@ -1,8 +1,11 @@
-import Image from "next/image"
-import Link from "next/link"
+import Avatar from "../../components/Avatar"
 import Container from "../../components/Container"
 import Layout from "../../components/Layout"
+import PostCategoryAndTime from "../../components/posts/PostCategoryAndTime"
+import PostContent from "../../components/posts/PostContent"
+import PostImage from "../../components/posts/PostImage"
 import PostListItem from "../../components/posts/PostListItem"
+import PostTitle from "../../components/posts/PostTitle"
 
 function detailBlog({ posts, post }) {
     return (
@@ -12,52 +15,32 @@ function detailBlog({ posts, post }) {
                     <div className="w-full py-8 md:py-14">
                         <div className="grid grid-cols-1 xl:grid-cols-6 md:px-8">
                             <div className="md:col-span-5 xl:pr-8 space-y-8">
+                                <Avatar
+                                    image={'/images/img-blog4.png'}
+                                    name={'Muhmmad Badrun'}
+                                    title={'Software Enginering'}
+                                />
+
                                 <div className="relative w-full h-80 lg:h-[488px] overflow-hidden">
-                                    <Image className="object-cover object-top" src={'/images/img-blog3.png'} alt="image" layout="fill" />
+                                    <PostImage image={post.image} />
                                 </div>
 
-                                <div className="flex flex-row items-center space-x-2">
-                                    <h5 className="block text-base tracing-tight text-blue-500 font-semibold">Category</h5>
-                                    <span className="block">-</span>
-                                    <h5 className="block text-base text-gray-600 tracing-tight">2020-06-12</h5>
-                                </div>
+                                <PostCategoryAndTime
+                                    category={post.category}
+                                    time={post.createdAt}
+                                    size="text-base"
+                                />
 
                                 <div className="flex flex-col items-start justify-start space-y-2">
-                                    <h2 className="block text-3xl font-semibold text-gray-800">Ini adalah judul blog</h2>
+                                    <PostTitle title={post.title} size="text-3xl" />
 
-                                    <div className="block relative overflow-hidden space-y-2">
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                        <p className="block text-base text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates dolorum cupiditate rerum ad nemo repudiandae mollitia aspernatur, ratione, officiis tenetur minus itaque dicta natus veniam, quia ducimus qui dolore in alias. Molestias, sit repellat. Ea culpa aut nobis sunt odio sint laborum dolor quam quidem, rem dolorum blanditiis earum iusto debitis commodi repellendus incidunt illo cupiditate, id obcaecati perferendis! Sed architecto voluptates autem veniam sapiente assumenda debitis deleniti, incidunt corporis mollitia repellendus delectus, officiis temporibus pariatur inventore earum, eveniet vitae quis odit aperiam rem. Mollitia cupiditate nemo ipsum harum aliquid vero, quasi at ipsam. Autem harum atque ea earum velit!</p>
-                                    </div>
+                                    <PostContent content={post.content} />
 
-                                </div>
-
-                                <div className="flex flex-row items-center justify-start space-x-4 border-t border-gray-300 py-6">
-                                    <div className="md:w-14 md:h-14 h-12 w-12 bg-gray-100 rounded-full overflow-hidden relative">
-                                        <Image src={'/images/img-blog3.png'} alt="image" layout="fill" />
-                                    </div>
-
-                                    <div className="flex flex-col">
-                                        <h5 className="block text-gray-800 font-semibold text-base font-sans">Muhammad Badrun</h5>
-                                        <h5 className="block text-gray-500 text-sm font-sans">Software Enginering</h5>
-                                    </div>
                                 </div>
 
                             </div>
-                            <div className="md:col-span-1">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8">
+                            <div className="md:col-span-1 md:pt-[83px]">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8 ">
                                     {
                                         posts && posts.map((item) => {
                                             if (item._id != post._id) {
@@ -70,6 +53,8 @@ function detailBlog({ posts, post }) {
                                                         category={item.category}
                                                         time={item.createdAt}
                                                         image={item.image}
+                                                        avatar={false}
+                                                        imageSize="aspect-video"
                                                     />
                                                 )
                                             }
@@ -94,7 +79,7 @@ export async function getStaticPaths() {
 
     return {
         paths: paths,
-        fallback: false
+        fallback: false,
     }
 }
 
@@ -102,18 +87,17 @@ export async function getStaticProps(ctx) {
 
     const { id } = ctx.params;
     const reqPost = await fetch('http://localhost:3000/api/blogs/' + id + '/id');
-    const resPost = await reqPost.json();
-    const { post } = resPost;
+    const {post} = await reqPost.json();
 
     const reqPosts = await fetch('http://localhost:3000/api/blogs?limit=7');
-    const resPosts = await reqPosts.json();
-    const { posts } = resPosts;
+    const {posts} = await reqPosts.json();
 
     return {
         props: {
             posts,
             post
-        }
+        },
+        revalidate: 1
     }
 }
 
