@@ -6,6 +6,7 @@ const initialState = {
     error: null,
     posts: {
         loading: true,
+        sendPostLoading: false,
         validations: {},
         message: "",
         data: []
@@ -61,7 +62,7 @@ export default function profileReducer(state = initialState, action) {
                 ...state,
                 posts: {
                     ...state.posts,
-                    loading: true,
+                    sendPostLoading: true,
                     message: ''
                 }
             }
@@ -71,7 +72,7 @@ export default function profileReducer(state = initialState, action) {
                 error: null,
                 posts: {
                     ...state.posts,
-                    loading: false,
+                    sendPostLoading: false,
                     validations: {},
                     message: action.payload.message,
                     data: [
@@ -87,7 +88,7 @@ export default function profileReducer(state = initialState, action) {
                 ...state,
                 posts: {
                     ...state.posts,
-                    loading: false,
+                    sendPostLoading: false,
                     validations: action.payload.validations
                 }
             }
@@ -97,7 +98,7 @@ export default function profileReducer(state = initialState, action) {
                 posts: {
                     ...state.posts,
                     validations: {},
-                    loading: false,
+                    sendPostLoading: false,
                     error: action.payload.error
                 }
             }

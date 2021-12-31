@@ -23,7 +23,7 @@ const MDEditor = dynamic(
 export default function Profil() {
 
     const { id } = useRouter().query;
-    const { user, loading, posts: { loading: loadingPost, validations, data, message } } = useSelector(state => state.profile)
+    const { user, loading, posts: { loading: loadingPost, validations, data, message, sendPostLoading } } = useSelector(state => state.profile)
     const { user: auth } = useSelector(state => state.auth);
     const [uid, setUid] = useState();
     const dispatch = useDispatch();
@@ -227,7 +227,7 @@ export default function Profil() {
 
                                 </div>
 
-                                <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 text-sm md:text-base">{loadingPost ? 'Loading...' : 'Tambah Post'}</Button>
+                                <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 text-sm md:text-base">{sendPostLoading ? 'Loading...' : 'Tambah Post'}</Button>
                             </form>
                         )
                     }

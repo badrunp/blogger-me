@@ -1,19 +1,19 @@
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../action/profileAction";
 import Container from "./Container";
 import Layout from "./Layout";
 import ProfilInfoItem from "./ProfilInfoItem";
+import ProfilTitle from "./ProfilTitle";
 import Skeleton from "./Skeleton";
 
 
 export default function LayoutProfil({ children }) {
 
     const dispatch = useDispatch()
-    const { loading, user } = useSelector(state => state.profile)
-    const {user:auth} = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.profile)
     const router = useRouter();
     const { id } = router.query;
 
@@ -45,12 +45,7 @@ export default function LayoutProfil({ children }) {
                         <div className="grid lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-1">
                                 <div className="bg-white w-full h-auto relative shadow rounded-md">
-                                    <h2 className="text-gray-500 font-medium text-base flex items-center justify-start space-x-1 px-4 py-4 border-b border-gray-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
-                                        <span className="block tracking-tight">Profile Info</span>
-                                    </h2>
+                                    <ProfilTitle/>
 
                                     <div className="flex flex-col items-start justify-start py-5 px-6 space-y-4 divide-y divide-gray-300 w-full">
 
@@ -84,8 +79,8 @@ export default function LayoutProfil({ children }) {
                                                 <>
                                                     <div className="w-40 h-40 rounded-full bg-zinc-100 mx-auto animate-pulse"></div>
                                                     {
-                                                        [...Array(3)].map((item, i) => (
-                                                            <div key={i} className="w-full py-2 space-y-2">
+                                                        [...Array(3)].map((item) => (
+                                                            <div key={item} className="w-full py-2 space-y-2">
                                                                 <Skeleton className={'w-2/6 h-4'} />
                                                                 <Skeleton className={'w-4/5 h-4'} />
                                                             </div>
