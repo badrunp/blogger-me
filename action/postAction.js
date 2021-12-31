@@ -74,6 +74,7 @@ export function getPostsByAuthor(id){
             const resquest = await fetch('/api/blogs/' + id + '/author');
 
             const response = await resquest.json();
+            console.log(response);
 
             const {status, posts} = response;
 

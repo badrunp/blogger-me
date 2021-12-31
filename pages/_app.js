@@ -1,3 +1,5 @@
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import { Provider } from 'react-redux'
 import store from '../store'
 import '../styles/globals.css'

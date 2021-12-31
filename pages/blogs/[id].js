@@ -34,7 +34,7 @@ function detailBlog({ posts, post }) {
                                 <div className="flex flex-col items-start justify-start space-y-2">
                                     <PostTitle title={post.title} size="text-3xl" />
 
-                                    <PostContent content={post.content} />
+                                    <PostContent content={post.content} markdown={true} />
 
                                 </div>
 

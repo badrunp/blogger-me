@@ -10,9 +10,15 @@ import Input from "../../components/Input"
 import LayoutProfil from "../../components/LayoutProfile"
 import PostInProfil from "../../components/posts/PostInProfil"
 import ProfilLink from "../../components/ProfilLink"
-import Textarea from "../../components/Textarea"
 import ValidationMessage from "../../components/ValidationMessage"
 import { postConstant } from "../../constant/redux"
+import dynamic from "next/dynamic";
+
+const MDEditor = dynamic(
+    () => import("@uiw/react-md-editor"),
+    { ssr: false }
+  );
+  
 
 export default function Profil() {
 
@@ -28,8 +34,8 @@ export default function Profil() {
     const [dataPost, setDataPost] = useState({
         title: '',
         category: '',
-        content: ''
     })
+    const [dataContent, setDataContent] = useState("");
 
     useEffect(() => {
 
@@ -80,13 +86,19 @@ export default function Profil() {
     const handleSubmitCreatePost = async (e) => {
         e.preventDefault();
 
-        const isPost = await dispatch(createPost(dataPost))
+        const data = {
+            title: dataPost.title,
+            category: dataPost.category,
+            content: dataContent
+        }
+
+        const isPost = await dispatch(createPost(data))
         if (isPost) {
             setDataPost({
                 title: '',
                 category: '',
-                content: ''
             })
+            setDataContent('');
             setTimeout(() => {
                 dispatch({ type: postConstant.USER_POST_CLEAR_MESSAGE })
             }, 3000)
@@ -205,11 +217,9 @@ export default function Profil() {
                                 <div className="grid grid-cols-1 gap-6 mb-6">
                                     <div className="block">
                                         <AuthLabel className="text-sm md:text-base" title={'Content'} inputFor={'content'} />
-                                        <Textarea
-                                            name={'content'}
-                                            value={dataPost.content}
-                                            placeholder={'Content'}
-                                            onChange={handleChangeInputPost}
+                                        <MDEditor
+                                            value={dataContent}
+                                            onChange={(value) => setDataContent(value)}
                                         />
                                         <ValidationMessage validations={validations} name={'content'} />
 
