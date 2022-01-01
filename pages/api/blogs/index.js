@@ -14,7 +14,7 @@ async function handler(req, res) {
 
         if (limit) {
 
-            const posts = await Post.find({}).limit(limit)
+            const posts = await Post.find({}).populate('author').limit(limit)
 
             return res.status(200).json({
                 status: res.statusCode,
@@ -23,7 +23,7 @@ async function handler(req, res) {
 
         } else {
 
-            const posts = await Post.find({})
+            const posts = await Post.find({}).populate('author')
 
             return res.status(200).json({
                 status: res.statusCode,

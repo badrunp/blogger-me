@@ -17,8 +17,8 @@ function detailBlog({ posts, post }) {
                             <div className="md:col-span-5 xl:pr-8 space-y-8">
                                 <Avatar
                                     image={'/images/img-blog4.png'}
-                                    name={'Muhmmad Badrun'}
-                                    title={'Software Enginering'}
+                                    name={post.author.username}
+                                    title={post.author.title}
                                 />
 
                                 <div className="relative w-full h-80 lg:h-[488px] overflow-hidden">
@@ -32,14 +32,14 @@ function detailBlog({ posts, post }) {
                                 />
 
                                 <div className="flex flex-col items-start justify-start space-y-2">
-                                    <PostTitle title={post.title} size="text-3xl" />
+                                    <PostTitle title={post.title} size="text-3xl" redirect={false} />
 
                                     <PostContent content={post.content} markdown={true} />
 
                                 </div>
 
                             </div>
-                            <div className="md:col-span-1 md:pt-[83px]">
+                            <div className="md:col-span-1 mt-9 md:mt-0 md:pt-[83px]">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8 ">
                                     {
                                         posts && posts.map((item) => {

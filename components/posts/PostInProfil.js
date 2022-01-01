@@ -10,6 +10,7 @@ function PostInProfil({ auth, id, loadingPost, data }) {
                         <PostInProfilItem
                             loadingPost={loadingPost}
                             data={data}
+                            edited={true}
                         />
                     )
                 ) : (

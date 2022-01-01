@@ -12,6 +12,7 @@ function PostTopNav({
     category,
     image,
     time,
+    author = {}
 }) {
     return (
         <>
@@ -40,11 +41,16 @@ function PostTopNav({
                             size="text-sm"
                         />
 
-                        <Avatar
-                            image={'/images/img-blog3.png'}
-                            name="Muhammad Badrun"
-                            title={'Software Enginering'}
-                        />
+                        {
+                            Object.keys(author).length > 0 && (
+                                <Avatar
+                                    image={'/images/img-blog3.png'}
+                                    name={author.username}
+                                    title={author.title}
+                                    id={author._id}
+                                />
+                            )
+                        }
                     </div>
                 </div>
             </div>

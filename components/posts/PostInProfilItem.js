@@ -1,7 +1,7 @@
 import PostListItem from "./PostListItem"
 import PostSkeleton from "./PostSkeleton"
 
-function PostInProfilItem({ loadingPost, data }) {
+function PostInProfilItem({ loadingPost, data, edited = false }) {
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
@@ -22,6 +22,7 @@ function PostInProfilItem({ loadingPost, data }) {
                                     time={item.createdAt}
                                     image={item.image}
                                     imageSize="h-44"
+                                    edited={edited}
                                 />
                             ))
                         ) : (

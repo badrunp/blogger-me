@@ -26,6 +26,7 @@ function Home(props) {
                   category={post.category}
                   time={post.createdAt}
                   image={post.image}
+                  author={post.author}
                 />
               )
             }
@@ -41,6 +42,7 @@ function Home(props) {
                     category={item.category}
                     time={item.createdAt}
                     image={item.image}
+                    author={item.author}
                   />
                 ))
               }

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import {  useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createPost, getPostsByAuthor } from "../../action/postAction"
 import { updateUserProfil } from "../../action/profileAction"
@@ -17,12 +17,12 @@ import dynamic from "next/dynamic";
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
     { ssr: false }
-  );
-  
+);
+
 
 export default function Profil() {
 
-    const { id } = useRouter().query;
+    const { query: { id } } = useRouter();
     const { user, loading, posts: { loading: loadingPost, validations, data, message, sendPostLoading } } = useSelector(state => state.profile)
     const { user: auth } = useSelector(state => state.auth);
     const [uid, setUid] = useState();
@@ -60,6 +60,7 @@ export default function Profil() {
             } else {
                 dispatch(getPostsByAuthor(id[0]))
             }
+
         }
 
 
@@ -238,4 +239,20 @@ export default function Profil() {
 
         </LayoutProfil>
     )
+}
+
+export function getServerSideProps(ctx){
+   
+    if(ctx.params.id.length > 2){
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
 }

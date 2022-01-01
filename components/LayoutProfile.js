@@ -14,24 +14,23 @@ export default function LayoutProfil({ children }) {
 
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.profile)
-    const router = useRouter();
-    const { id } = router.query;
+    const { query: { id }, replace } = useRouter();
 
 
     useEffect(() => {
-        
-        if (id) {
 
-            if (id[0] !== user._id) { 
+        if (id) {
+            if (id[0] !== user._id) {
                 async function getProfil() {
                     const isProfile = await dispatch(getUserProfile(id[0]))
                     if (!isProfile) {
-                        router.replace('/')
+                        replace('/')
                     }
                 }
 
                 getProfil();
             }
+
         }
 
     }, [id])
@@ -45,7 +44,7 @@ export default function LayoutProfil({ children }) {
                         <div className="grid lg:grid-cols-3 gap-6">
                             <div className="lg:col-span-1">
                                 <div className="bg-white w-full h-auto relative shadow rounded-md">
-                                    <ProfilTitle/>
+                                    <ProfilTitle />
 
                                     <div className="flex flex-col items-start justify-start py-5 px-6 space-y-4 divide-y divide-gray-300 w-full">
 

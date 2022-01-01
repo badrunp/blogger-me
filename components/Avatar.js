@@ -1,7 +1,8 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-function Avatar({ image, name, title }) {
+function Avatar({ image, name, title, id }) {
     return (
         <>
             <div className="flex flex-row items-center justify-start space-x-3 pt-2">
@@ -10,7 +11,9 @@ function Avatar({ image, name, title }) {
                 </div>
 
                 <div className="flex flex-col">
-                    <h5 className="block text-gray-800 font-semibold text-base tracking-tight font-sans">{name}</h5>
+                    <Link href={`/${id}`}>
+                        <a className="block text-gray-800 font-semibold text-base tracking-tight font-sans hover:underline">{name}</a>
+                    </Link>
                     <h5 className="block text-gray-500 text-sm font-sans tracking-tight">{title}</h5>
                 </div>
             </div>

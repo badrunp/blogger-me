@@ -23,6 +23,7 @@ function blogs({ posts }) {
                                         category={item.category}
                                         time={item.createdAt}
                                         image={item.image}
+                                        author={item.author}
                                     />
                                 ))
                             }
@@ -42,7 +43,8 @@ export async function getStaticProps() {
 
     return {
         props: {
-            posts
+            posts,
+            revalidate: 1
         }
     }
 }
