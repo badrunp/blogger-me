@@ -137,7 +137,7 @@ function Navbar() {
                                                     navbarDropdownMenuLinksAuthMobile.map(item => (
                                                         <NavbarDropdownLink
                                                             key={item.id}
-                                                            url={`${item.id > 2 && auth.user._id}${item.link}`}
+                                                            url={`${item.id > 3 ? auth.user._id : ''}${item.link}`}
                                                             icon={item.icon}
                                                             title={item.title}
                                                         />

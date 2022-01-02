@@ -14,16 +14,17 @@ async function handler(req, res) {
 
         if (limit) {
 
-            const posts = await Post.find({}).populate('author').limit(limit)
-
+            const posts = await Post.find({}).populate('author').limit(parseInt(limit))
+            
             return res.status(200).json({
                 status: res.statusCode,
                 posts
             })
-
+            
         } else {
-
+            
             const posts = await Post.find({}).populate('author')
+            console.log("tidak limit");
 
             return res.status(200).json({
                 status: res.statusCode,

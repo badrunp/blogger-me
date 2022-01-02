@@ -6,7 +6,9 @@ const initialState = {
     error: null,
     posts: {
         loading: true,
+        isCreate: false,
         sendPostLoading: false,
+        updatePostLoading: false,
         validations: {},
         message: "",
         data: []
@@ -75,6 +77,7 @@ export default function profileReducer(state = initialState, action) {
                     sendPostLoading: false,
                     validations: {},
                     message: action.payload.message,
+                    isCreate: true,
                     data: [
                         ...state.posts.data,
                         {
@@ -125,6 +128,7 @@ export default function profileReducer(state = initialState, action) {
                 posts: {
                     ...state,
                     loading: false,
+                    isCreate: false,
                     data: action.payload.posts
                 }
             }
@@ -136,7 +140,42 @@ export default function profileReducer(state = initialState, action) {
                     loading: false,
                     error: action.payload.error
                 }
-        }
+            }
+        case postConstant.UPDATE_POST_REQUEST:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: true
+                }
+            }
+        case postConstant.UPDATE_POST_SUCCESS:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: false,
+                    message: action.payload.message
+                }
+            }
+        case postConstant.UPDATE_POST_VALIDATION:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: false,
+                    validations: action.payload.validations
+                }
+            }
+        case postConstant.UPDATE_POST_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: true
+                }
+            }
         default:
             return state;
     }

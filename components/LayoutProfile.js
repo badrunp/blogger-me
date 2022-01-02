@@ -78,8 +78,8 @@ export default function LayoutProfil({ children }) {
                                                 <>
                                                     <div className="w-40 h-40 rounded-full bg-zinc-100 mx-auto animate-pulse"></div>
                                                     {
-                                                        [...Array(3)].map((item) => (
-                                                            <div key={item} className="w-full py-2 space-y-2">
+                                                        [...Array(3)].map((item, i) => (
+                                                            <div key={i} className="w-full py-2 space-y-2">
                                                                 <Skeleton className={'w-2/6 h-4'} />
                                                                 <Skeleton className={'w-4/5 h-4'} />
                                                             </div>

@@ -23,7 +23,7 @@ const MDEditor = dynamic(
 export default function Profil() {
 
     const { query: { id } } = useRouter();
-    const { user, loading, posts: { loading: loadingPost, validations, data, message, sendPostLoading } } = useSelector(state => state.profile)
+    const { user, loading, posts: { loading: loadingPost, validations, data, message, sendPostLoading, isCreate } } = useSelector(state => state.profile)
     const { user: auth } = useSelector(state => state.auth);
     const [uid, setUid] = useState();
     const dispatch = useDispatch();
@@ -52,10 +52,9 @@ export default function Profil() {
         if (auth && id) {
             if (id[0] === auth._id) {
                 if (id[1] === 'posts') {
-                    if (data.length === 0) {
+                    if (isCreate || data.length === 0) {
                         dispatch(getPostsByAuthor(id[0]))
                     }
-
                 }
             } else {
                 dispatch(getPostsByAuthor(id[0]))
@@ -241,9 +240,9 @@ export default function Profil() {
     )
 }
 
-export function getServerSideProps(ctx){
-   
-    if(ctx.params.id.length > 2){
+export function getServerSideProps(ctx) {
+
+    if (ctx.params.id.length > 2) {
         return {
             redirect: {
                 destination: '/',

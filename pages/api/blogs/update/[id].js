@@ -1,30 +1,56 @@
 import dbConnect from '../../../../lib/dbConnect';
 import Post from '../../../../models/Posts';
 
-export default async function handler(req,res){
+export default async function handler(req, res) {
 
-    if(req.method != "POST") return res.status(404).json({})
+    if (req.method != "POST") return res.status(404).json({})
 
     await dbConnect();
 
+    const { id } = req.query;
+
+    const {title, category, content} = req.body;
+
+    const validations = validate([
+        {
+            label: "title",
+            required: true,
+            value: title
+        },
+        {
+            label: "category",
+            required: true,
+            value: category
+        },
+        {
+            label: "content",
+            required: true,
+            value: content
+        }
+    ])
+
+    if (Object.keys(validations).length > 0) return res.status(402).json({ status: res.statusCode, validations });
+
     try {
 
-        const {id} = req.query;
-        const body = req.body;
-
-        if(id){
+        if (id) {
             const post = await Post.findOne({ _id: id })
-            if(post){
-                const newPost = await Post.updateOne({_id: id}, {$set: body}, {new: true})
+            if (post) {
+                const newPost = await Post.updateOne({ _id: id }, { $set: {
+                    title,
+                    category,
+                    content
+                } }, { new: true })
                 return res.status(200).json({
                     status: res.statusCode,
+                    message: 'Ubah post berhasil',
                     post: newPost
                 })
             }
         }
-        
+
         throw new "Vailed updated post!";
-        
+
 
     } catch (error) {
         console.log(error);

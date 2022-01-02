@@ -4,7 +4,7 @@ function Dropdown({ title, children, className = 'w-44' }) {
     return (
         <>
             <Menu as={'div'} className="relative">
-                <Menu.Button className="tracking-tight text-gray-800 px-5 text-sm font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
+                <Menu.Button className="tracking-tight text-gray-800 px-5 text-sm shadow font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
                     {title}
                 </Menu.Button>
                 <Transition
