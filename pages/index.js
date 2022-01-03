@@ -60,12 +60,11 @@ export async function getStaticProps() {
 
   const request = await fetch('http://localhost:3000/api/blogs?limit=7');
   const response = await request.json();
-  console.log(response.posts.length);
   const { posts } = response;
 
   return {
     props: {
-      posts: posts 
+      posts: posts || []
     }
   }
 }

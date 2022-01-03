@@ -150,12 +150,26 @@ export default function profileReducer(state = initialState, action) {
                 }
             }
         case postConstant.UPDATE_POST_SUCCESS:
+            const post = action.payload.post;
+            const newPosts = state.posts.data.map(item => {
+                if(item._id === post._id){
+                    return {
+                        ...item,
+                        title: post.title,
+                        category: post.category,
+                        content: post.content,
+                    }
+                }
+
+                return item;
+            })
             return {
                 ...state,
                 posts: {
                     ...state.posts,
                     updatePostLoading: false,
-                    message: action.payload.message
+                    message: action.payload.message,
+                    data: newPosts
                 }
             }
         case postConstant.UPDATE_POST_VALIDATION:
@@ -175,6 +189,35 @@ export default function profileReducer(state = initialState, action) {
                     ...state.posts,
                     updatePostLoading: true
                 }
+            }
+        case postConstant.DELETE_POST_REQUEST:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: true
+                }
+            }
+        case postConstant.DELELE_POST_SUCCESS:
+            const newPost = state.posts.data.filter(item => item._id != action.payload.post._id)
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: false,
+                    message: action.payload.message,
+                    data: newPost
+                }
+            }
+        case postConstant.DELETE_POST_FAILURE:
+            return {
+                ...state,
+                posts: {
+                    ...state.posts,
+                    updatePostLoading: false,
+                    error: action.payload.error
+                }
+
             }
         default:
             return state;

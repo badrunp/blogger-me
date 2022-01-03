@@ -18,7 +18,8 @@ function PostListItem({
     imageSize = 'h-64',
     author = {},
     edited = false,
-    handleClickModalEdit = null
+    handleClickModalEdit = null,
+    handleClickModalDelete = null
 }) {
 
     return (
@@ -42,7 +43,7 @@ function PostListItem({
                                             </button>
                                         </Menu.Item>
                                         <Menu.Item as="div" className="block">
-                                            <button className="text-gray-700 flex text-sm flex-row items-center space-x-2 py-2 px-2 hover:bg-gray-200 w-full rounded" >
+                                            <button className="text-gray-700 flex text-sm flex-row items-center space-x-2 py-2 px-2 hover:bg-gray-200 w-full rounded" onClick={() => handleClickModalDelete(id)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                 </svg>

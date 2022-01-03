@@ -1,7 +1,7 @@
-import Link from "next/link"
 import { contacts, footerPageAuthLinks, footerPageMenuLinks } from "../constant/footer"
 import Container from "./Container"
 import FooterPageMenu from "./FooterPageMenu"
+import Logo from "./Logo"
 
 function Footer() {
     return (
@@ -11,16 +11,7 @@ function Footer() {
                     <div className="flex flex-col justify-start items-start divide-y divide-gray-500 w-full">
                         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 w-full pb-8 pt-14 gap-6">
                             <li className="flex flex-col justify-start items-start space-y-4 col-span-1 md:col-span-2 pr-8">
-                                <Link href={'/'}>
-                                    <a className="flex flex-row items-center justify-center space-x-2">
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                            </svg>
-                                        </div>
-                                        <h1 className="block text-gray-100 font-semibold text-xl">Blogger Me</h1>
-                                    </a>
-                                </Link>
+                                <Logo/>
 
                                 <h4 className="block text-gray-100 font-sans tracking-wide text-sm">Blogger Me adalah suatu website dimana web ini menyajikan kontent atau informasi yang dapat kalian baca atau pelajari.</h4>
                             </li>

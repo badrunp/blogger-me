@@ -6,11 +6,12 @@ import jsonwebtoken from "jsonwebtoken";
 export default async function handler(req,res){
 
     if(req.method !== "POST") return res.status(404).json({})
+    
+    await dbConnect();
 
     const {title, category, content} = req.body;
     const {_TOKEN} = req.cookies;
 
-    await dbConnect();
 
     if(!_TOKEN) return res.status(404).json({})
 

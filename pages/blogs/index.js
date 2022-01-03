@@ -9,9 +9,13 @@ function blogs({ posts }) {
             <Layout title="Blogs">
                 <Container className="md:container px-0 md:px-4">
                     <div className="w-full py-8 sm:py-14 flex flex-col items-strart justify-start space-y-6 md:space-y-14 px-6 md:px-8 lg:px-12">
-                        <BlogTitle
-                            title="All Posts"
-                        />
+                        {
+                            posts.length > 0 && (
+                                <BlogTitle
+                                    title="All Posts"
+                                />
+                            )
+                        }
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
                                 posts.map((item, i) => (
@@ -37,14 +41,14 @@ function blogs({ posts }) {
 
 export async function getStaticProps() {
 
-    const request = await fetch('http://localhost:3000/api/blogs');
+    const request = await fetch('http://localhost:3000/api/blogs?limit=9');
     const response = await request.json();
     const { posts } = response;
 
     return {
         props: {
             posts,
-            revalidate: 1
+            revalidate: 5
         }
     }
 }

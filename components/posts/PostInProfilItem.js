@@ -1,10 +1,19 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { deletePost, updatePost } from "../../action/postAction"
+import { postConstant } from "../../constant/redux"
+import Alert from "../Alert"
+import PostDelete from "./PostDelete"
 import PostEdit from "./PostEdit"
 import PostListItem from "./PostListItem"
 import PostSkeleton from "./PostSkeleton"
 
 function PostInProfilItem({ loadingPost, data, edited = false }) {
+    const { message, updatePostLoading: loading, validations } = useSelector(state => state.profile.posts)
+    const dispatch = useDispatch()
     const [modalEditActive, setModalEditActive] = useState(false)
+    const [modalDeleteActive, setModalDeleteActive] = useState(false)
+    const [postId, setPostId] = useState('')
     const [dataPost, setDataPost] = useState({
         id: '',
         title: '',
@@ -34,10 +43,10 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
         setDataPostContent(content)
 
         setModalEditActive(true)
-        
+
     }
 
-    const handleClickEdit = () => {
+    const handleClickEdit = async () => {
 
         const data = {
             title: dataPost.title,
@@ -45,10 +54,31 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
             content: dataPostContent
         }
 
-        console.log(data);
+        const isUpdate = await dispatch(updatePost(dataPost.id, data))
+        if (isUpdate) {
+            setModalEditActive(false)
+            setTimeout(() => {
+                dispatch({ type: postConstant.USER_POST_CLEAR_MESSAGE })
+            }, 3000)
+        }
 
     }
-    
+
+    const handleClickModalDelete = (id) => {
+        setPostId(id)
+        setModalDeleteActive(true)
+    }
+
+    const handleClickDelete = async () => {
+        const isDelete = await dispatch(deletePost(postId))
+        if (isDelete) {
+            setModalDeleteActive(false)
+            setTimeout(() => {
+                dispatch({ type: postConstant.USER_POST_CLEAR_MESSAGE })
+            }, 3000)
+        }
+    }
+
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
@@ -71,6 +101,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
                                     imageSize="h-44"
                                     edited={edited}
                                     handleClickModalEdit={handleClickModalEdit}
+                                    handleClickModalDelete={handleClickModalDelete}
                                 />
                             ))
                         ) : (
@@ -89,9 +120,24 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
                 handleChangeInput={handleChangeInput}
                 handleChangeContent={handleChangeContent}
                 handleClick={handleClickEdit}
+                loading={loading}
+                validations={validations}
             />
 
+            <PostDelete
+                modalActive={modalDeleteActive}
+                setModalActive={setModalDeleteActive}
+                handleClick={handleClickDelete}
+                loading={loading}
+            />
 
+            {
+                message && !loading ? (
+                    <div className="fixed top-0 left-4 z-50">
+                        <Alert message={message} className="bg-green-500 text-white w-52" />
+                    </div>
+                ) : null
+            }
         </>
     )
 }

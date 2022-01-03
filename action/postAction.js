@@ -71,7 +71,7 @@ export function getPostsByAuthor(id){
 
         try {
 
-            const resquest = await fetch('/api/blogs/' + id + '/author');
+            const resquest = await fetch('/api/blogs/' + id + '/author/6');
 
             const response = await resquest.json();
 
@@ -96,6 +96,106 @@ export function getPostsByAuthor(id){
                 error
             })
             return false;
+        }
+
+    }
+}
+
+
+export function deletePost(id){
+    return async (dispatch) => {
+
+        dispatch({type: postConstant.DELETE_POST_REQUEST});
+        try {
+            
+            const request = await fetch('/api/blogs/delete', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id})
+            })
+
+            const {message, status, post} = await request.json()
+
+            if(status == 200 && message){
+                dispatch({
+                    type: postConstant.DELELE_POST_SUCCESS,
+                    payload: {
+                         message,
+                         post
+                    }
+                })
+
+                return true;
+            }
+
+            return false;
+
+        } catch (error) {
+            dispatch({type: postConstant.DELETE_POST_FAILURE, payload: {error}})
+            return false;
+        }
+
+    }
+}
+
+export function updatePost(id, data){
+    return async (dispatch) => {
+
+
+        dispatch({type: postConstant.UPDATE_POST_REQUEST})
+        try {
+
+            const request = await fetch('/api/blogs/update/' + id, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            const response = await request.json();
+
+            const {post, status, validations, message} = response;
+
+            if(status === 402 && validations){
+                dispatch({
+                    type: postConstant.UPDATE_POST_VALIDATION,
+                    payload: {
+                        validations
+                    }
+                })
+
+                return false;
+            }
+
+            if(status === 200 && post){
+
+                dispatch({
+                    type: postConstant.UPDATE_POST_SUCCESS,
+                    payload: {
+                        message,
+                        post
+                    }
+                })
+                return true;
+
+            }
+
+            return false;
+
+        } catch (error) {
+            
+            dispatch({
+                type: postConstant.UPDATE_POST_FAILURE,
+                payload: {
+                    error
+                }
+            })
+
+            return false;
+
         }
 
     }

@@ -1,5 +1,7 @@
 import dbConnect from '../../../../lib/dbConnect';
 import Post from '../../../../models/Posts';
+import validate from "../../../../lib/validation";
+
 
 export default async function handler(req, res) {
 
@@ -36,7 +38,7 @@ export default async function handler(req, res) {
         if (id) {
             const post = await Post.findOne({ _id: id })
             if (post) {
-                const newPost = await Post.updateOne({ _id: id }, { $set: {
+                const newPost = await Post.findOneAndUpdate({ _id: id }, { $set: {
                     title,
                     category,
                     content

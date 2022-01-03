@@ -50,6 +50,8 @@ function register() {
                 email: '',
                 password: '',
             })
+
+            return;
         }
 
         setData({

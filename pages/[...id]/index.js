@@ -184,7 +184,7 @@ export default function Profil() {
                             <form className={`${id && id[1] === 'create-post' ? 'block' : 'hidden'}`} onSubmit={handleSubmitCreatePost}>
                                 {
                                     message && (
-                                        <Alert className="my-6 mt-0 bg-green-600 text-white" message={message} />
+                                        <Alert className="my-6 mt-0 bg-green-500 text-white" message={message} />
                                     )
                                 }
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">

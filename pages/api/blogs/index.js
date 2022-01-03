@@ -24,7 +24,6 @@ async function handler(req, res) {
         } else {
             
             const posts = await Post.find({}).populate('author')
-            console.log("tidak limit");
 
             return res.status(200).json({
                 status: res.statusCode,
@@ -34,7 +33,6 @@ async function handler(req, res) {
         }
 
     } catch (error) {
-        console.log(error);
         return res.status(400).json({
             status: res.statusCode,
             error
