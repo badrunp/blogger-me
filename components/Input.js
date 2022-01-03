@@ -8,4 +8,6 @@ const Input = forwardRef(({ type = 'text', name, placeholder = '', onChange, val
     )
 }) 
 
+Input.displayName = "Input"
+
 export default Input

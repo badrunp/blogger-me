@@ -58,7 +58,7 @@ function Home(props) {
 
 export async function getStaticProps() {
 
-  const request = await fetch('http://localhost:3000/api/blogs?limit=7');
+  const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/blogs?limit=7`);
   const response = await request.json();
   const { posts } = response;
 

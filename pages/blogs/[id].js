@@ -17,7 +17,7 @@ function detailBlog({ posts, post }) {
                             <div className="md:col-span-5 xl:pr-8 space-y-8">
                                 <Avatar
                                     image={'/images/img-blog4.png'}
-                                    name={post.author.username}
+                                    name={post && post.author.username}
                                     title={post && post.author.title}
                                 />
 
@@ -89,7 +89,7 @@ export async function getStaticProps(ctx) {
     const reqPost = await fetch('http://localhost:3000/api/blogs/' + id + '/id');
     const {post} = await reqPost.json();
 
-    const reqPosts = await fetch('http://localhost:3000/api/blogs?limit=7');
+    const reqPosts = await fetch(`${process.env.NEXT_PUBLIC_URL}/blogs?limit=7`);
     const {posts} = await reqPosts.json();
 
     return {

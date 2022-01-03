@@ -18,7 +18,7 @@ function blogs({ posts }) {
                         }
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {
-                                posts.map((item, i) => (
+                                posts.length > 0 && posts.map((item) => (
                                     <PostListItem
                                         key={item._id}
                                         id={item._id}
@@ -41,13 +41,13 @@ function blogs({ posts }) {
 
 export async function getStaticProps() {
 
-    const request = await fetch('http://localhost:3000/api/blogs?limit=9');
+    const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/blogs?limit=9`);
     const response = await request.json();
     const { posts } = response;
 
     return {
         props: {
-            posts,
+            posts: posts || [],
             revalidate: 5
         }
     }

@@ -12,7 +12,7 @@ import { userLogin } from "../action/userAction"
 import AuthTitle from "../components/AuthTitle"
 import AuthFooter from "../components/AuthFooter"
 
-function login() {
+function Login() {
 
 
     const [data, setData] = useState({
@@ -110,4 +110,4 @@ function login() {
     )
 }
 
-export default login
+export default Login

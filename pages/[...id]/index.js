@@ -42,12 +42,14 @@ export default function Profil() {
     useEffect(() => {
 
         if (user && auth && id && id[0] === auth._id) {
-            loadDataUser();
+            usernameRef.current.value = user.username ? user.username : '';
+            titleRef.current.value = user.title ? user.title : '';
+            emailRef.current.value = user.email ? user.email : '';
             setUid(user._id)
         }
 
 
-    }, [user, user._id, auth, id])
+    }, [user, auth, id])
 
     useEffect(() => {
 
@@ -66,12 +68,6 @@ export default function Profil() {
 
 
     }, [id, auth])
-
-    const loadDataUser = () => {
-        usernameRef.current.value = user.username ? user.username : '';
-        titleRef.current.value = user.title ? user.title : '';
-        emailRef.current.value = user.email ? user.email : '';
-    }
 
     const handleSubmitEditProfil = (e) => {
         e.preventDefault();

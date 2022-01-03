@@ -12,7 +12,7 @@ import Button from '../components/Button'
 import GuestLayout from '../components/GuestLayout'
 import ValidationMessage from '../components/ValidationMessage'
 
-function register() {
+function Register() {
 
     const [data, setData] = useState({
         username: '',
@@ -121,4 +121,4 @@ function register() {
     )
 }
 
-export default register
+export default Register
