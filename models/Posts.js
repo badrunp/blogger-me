@@ -15,12 +15,11 @@ const blogSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    tags: [
-        {
-            type: String, 
-            trim: true
-        }
-    ],
+    summary: {
+        type: String,
+        trim: true,
+        required: true
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'

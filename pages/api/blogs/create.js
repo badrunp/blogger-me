@@ -9,7 +9,7 @@ export default async function handler(req,res){
     
     await dbConnect();
 
-    const {title, category, content} = req.body;
+    const {title, category, content, summary} = req.body;
     const {_TOKEN} = req.cookies;
 
 
@@ -27,6 +27,11 @@ export default async function handler(req,res){
             value: category
         },
         {
+            label: "summary",
+            required: true,
+            value: summary
+        },
+        {
             label: "content",
             required: true,
             value: content
@@ -40,6 +45,7 @@ export default async function handler(req,res){
     const newPost = new Post({
         title,
         category,
+        summary,
         content,
         author: _id
     })

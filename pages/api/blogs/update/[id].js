@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
 
-    const {title, category, content} = req.body;
+    const {title, category, content,summary} = req.body;
 
     const validations = validate([
         {
@@ -23,6 +23,11 @@ export default async function handler(req, res) {
             label: "category",
             required: true,
             value: category
+        },
+        {
+            label: "summary",
+            required: true,
+            value: summary
         },
         {
             label: "content",
@@ -41,7 +46,8 @@ export default async function handler(req, res) {
                 const newPost = await Post.findOneAndUpdate({ _id: id }, { $set: {
                     title,
                     category,
-                    content
+                    content,
+                    summary
                 } }, { new: true })
                 return res.status(200).json({
                     status: res.statusCode,

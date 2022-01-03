@@ -18,7 +18,7 @@ function detailBlog({ posts, post }) {
                                 <Avatar
                                     image={'/images/img-blog4.png'}
                                     name={post.author.username}
-                                    title={post.author.title}
+                                    title={post && post.author.title}
                                 />
 
                                 <div className="relative w-full h-80 lg:h-[488px] overflow-hidden">
@@ -34,7 +34,7 @@ function detailBlog({ posts, post }) {
                                 <div className="flex flex-col items-start justify-start space-y-2">
                                     <PostTitle title={post.title} size="text-3xl" redirect={false} />
 
-                                    <PostContent content={post.content} markdown={true} />
+                                    <PostContent content={post.summary} markdown={true} />
 
                                 </div>
 
@@ -49,7 +49,7 @@ function detailBlog({ posts, post }) {
                                                         key={item._id}
                                                         id={item._id}
                                                         title={item.title}
-                                                        content={item.content}
+                                                        summary={item.summary}
                                                         category={item.category}
                                                         time={item.createdAt}
                                                         image={item.image}
@@ -97,7 +97,7 @@ export async function getStaticProps(ctx) {
             posts,
             post
         },
-        revalidate: 1
+        revalidate: 5
     }
 }
 

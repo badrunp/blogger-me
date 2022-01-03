@@ -13,6 +13,7 @@ import ProfilLink from "../../components/ProfilLink"
 import ValidationMessage from "../../components/ValidationMessage"
 import { postConstant } from "../../constant/redux"
 import dynamic from "next/dynamic";
+import Textarea from '../../components/Textarea';
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
@@ -34,6 +35,7 @@ export default function Profil() {
     const [dataPost, setDataPost] = useState({
         title: '',
         category: '',
+        summary: ''
     })
     const [dataContent, setDataContent] = useState("");
 
@@ -89,6 +91,7 @@ export default function Profil() {
         const data = {
             title: dataPost.title,
             category: dataPost.category,
+            summary: dataPost.summary,
             content: dataContent
         }
 
@@ -97,6 +100,7 @@ export default function Profil() {
             setDataPost({
                 title: '',
                 category: '',
+                summary: ''
             })
             setDataContent('');
             setTimeout(() => {
@@ -184,7 +188,7 @@ export default function Profil() {
                             <form className={`${id && id[1] === 'create-post' ? 'block' : 'hidden'}`} onSubmit={handleSubmitCreatePost}>
                                 {
                                     message && (
-                                        <Alert className="my-6 mt-0 bg-green-500 text-white" message={message} />
+                                        <Alert className="my-6 mt-0 bg-emerald-500 text-white" message={message} />
                                     )
                                 }
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -213,6 +217,15 @@ export default function Profil() {
                                         <ValidationMessage validations={validations} name={'category'} />
 
                                     </div>
+                                </div>
+                                <div className="grid grid-cols-1 gap-6 mb-6">
+                                    <div className="block">
+                                        <AuthLabel className="text-sm md:text-base" title={'Summary'} inputFor={'summary'} />
+                                        <Textarea name={'summary'} value={dataPost.summary} onChange={handleChangeInputPost} />
+                                        <ValidationMessage validations={validations} name={'summary'} />
+
+                                    </div>
+
                                 </div>
                                 <div className="grid grid-cols-1 gap-6 mb-6">
                                     <div className="block">

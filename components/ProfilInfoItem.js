@@ -1,5 +1,3 @@
-import React from 'react'
-
 function ProfilInfoItem({ label, value }) {
     return (
         <>

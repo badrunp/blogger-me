@@ -18,6 +18,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
         id: '',
         title: '',
         category: '',
+        summary: ''
     })
     const [dataPostContent, setDataPostContent] = useState('')
 
@@ -32,12 +33,13 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
         setDataPostContent(value);
     }
 
-    const handleClickModalEdit = (id, title, category, content) => {
+    const handleClickModalEdit = (id, title, category, content, summary) => {
         setDataPost({
             ...dataPost,
             id,
             title,
             category,
+            summary
         })
 
         setDataPostContent(content)
@@ -51,6 +53,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
         const data = {
             title: dataPost.title,
             category: dataPost.category,
+            summary: dataPost.summary,
             content: dataPostContent
         }
 
@@ -94,6 +97,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
                                     key={item._id}
                                     id={item._id}
                                     title={item.title}
+                                    summary={item.summary}
                                     content={item.content}
                                     category={item.category}
                                     time={item.createdAt}
@@ -134,7 +138,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
             {
                 message && !loading ? (
                     <div className="fixed top-0 left-4 z-50">
-                        <Alert message={message} className="bg-green-500 text-white w-52" />
+                        <Alert message={message} className="bg-emerald-500 text-white w-52" />
                     </div>
                 ) : null
             }

@@ -9,11 +9,6 @@ export const footerPageMenuLinks = [
         id: 2,
         label: 'Blogs',
         link: '/blogs'
-    },
-    {
-        id: 3,
-        label: 'About',
-        link: '/about'
     }
 ]
 

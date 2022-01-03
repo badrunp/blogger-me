@@ -1,4 +1,3 @@
-import { Dialog, Transition } from '@headlessui/react'
 import AuthLabel from '../AuthLabel'
 import Input from '../Input'
 import dynamic from "next/dynamic";
@@ -6,6 +5,7 @@ import Button from '../Button';
 import ValidationMessage from '../ValidationMessage';
 import Modal from '../Modal';
 import ModalTitle from '../ModalTitle';
+import Textarea from '../Textarea';
 
 
 const MDEditor = dynamic(
@@ -61,6 +61,15 @@ function PostEdit({
                         <ValidationMessage validations={validations} name={'category'} />
 
                     </div>
+                </div>
+                <div className="grid grid-cols-1 gap-6 mb-6">
+                    <div className="block">
+                        <AuthLabel className="text-sm md:text-base" title={'Summary'} inputFor={'summary'} />
+                        <Textarea name={'summary'} value={dataPost.summary} onChange={handleChangeInput} />
+                        <ValidationMessage validations={validations} name={'summary'} />
+
+                    </div>
+
                 </div>
                 <div className="grid grid-cols-1 gap-6 mb-6">
                     <div className="block">

@@ -1,10 +1,10 @@
 import { Menu, Transition } from "@headlessui/react"
 
-function Dropdown({ title, children, className = 'w-44' }) {
+function Dropdown({ title, children, className = 'w-44', padding = 'px-5 py-2' }) {
     return (
         <>
             <Menu as={'div'} className="relative">
-                <Menu.Button className="tracking-tight text-gray-800 px-5 text-sm shadow font-semibold bg-white py-2 rounded flex flex-row items-center space-x-2">
+                <Menu.Button className={`${padding} tracking-tight text-gray-800 text-sm  md:shadow font-semibold bg-white rounded flex flex-row items-center space-x-2`}>
                     {title}
                 </Menu.Button>
                 <Transition
@@ -15,7 +15,7 @@ function Dropdown({ title, children, className = 'w-44' }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <Menu.Items className={`${className} absolute top-0 right-0 bg-white shadow mt-12 rounded py-2 px-[6px] focus:outline-none`}>
+                    <Menu.Items className={`${className} absolute top-0 right-0 bg-white shadow-sm border border-gray-300 mt-12 rounded py-2 px-[6px] focus:outline-none`}>
                         {children}
                     </Menu.Items>
                 </Transition>

@@ -22,7 +22,7 @@ function Home(props) {
                   key={post._id}
                   id={post._id}
                   title={post.title}
-                  content={post.content}
+                  content={post.summary}
                   category={post.category}
                   time={post.createdAt}
                   image={post.image}
@@ -38,7 +38,7 @@ function Home(props) {
                     key={item._id}
                     id={item._id}
                     title={item.title}
-                    content={item.content}
+                    summary={item.summary}
                     category={item.category}
                     time={item.createdAt}
                     image={item.image}
@@ -64,7 +64,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      posts: posts || []
+      posts: posts || [],
+      revalidate: 5
     }
   }
 }

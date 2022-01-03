@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Skeleton({className}) {
     return (
         <>

@@ -7,7 +7,9 @@ function PostImage({ image }) {
                 image ? (
                     <Image className="object-cover object-top" src={`${image}`} alt="image" layout="fill" />
                 ) : (
-                    <div className="w-full h-full bg-zinc-200"></div>
+                    <div className="w-full h-full bg-zinc-200">
+                        <Image className="object-cover" src={'/images/default-blog-image.jpg'} alt="default blog image" layout="fill" />
+                    </div>
                 )
             }
         </>

@@ -63,7 +63,7 @@ function register() {
 
     return (
         <>
-            <GuestLayout title="Sign Un">
+            <GuestLayout title="Sign Up">
                 <AuthTitle title={'Daftar akun'} />
 
                 {

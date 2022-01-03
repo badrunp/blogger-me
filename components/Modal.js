@@ -15,7 +15,7 @@ function Modal({ children, modalActive, setModalActive, width = '' }) {
                 <Dialog onClose={() => setModalActive(false)} as={'div'} className={'fixed inset-0 overflow-y-auto z-50'}>
 
                     <div className="flex flex-row items-center justify-center w-full min-h-screen">
-                        <Dialog.Overlay className={'fixed inset-0 bg-black/20'} />
+                        <Dialog.Overlay className={'fixed inset-0 bg-black/50'} />
 
                         <div className={`${width} bg-white z-50 shadow-md rounded-lg py-4 px-6`}>
                           {children}

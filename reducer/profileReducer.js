@@ -157,6 +157,7 @@ export default function profileReducer(state = initialState, action) {
                         ...item,
                         title: post.title,
                         category: post.category,
+                        summary: post.summary,
                         content: post.content,
                     }
                 }

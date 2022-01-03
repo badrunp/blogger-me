@@ -1,4 +1,3 @@
-import React from 'react'
 import { toCapitaliceFirst } from '../lib/helper'
 
 function ValidationMessage({validations = {}, name = ''}) {

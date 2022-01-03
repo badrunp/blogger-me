@@ -23,7 +23,7 @@ function blogs({ posts }) {
                                         key={item._id}
                                         id={item._id}
                                         title={item.title}
-                                        content={item.content}
+                                        summary={item.summary}
                                         category={item.category}
                                         time={item.createdAt}
                                         image={item.image}

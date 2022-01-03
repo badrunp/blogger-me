@@ -53,7 +53,7 @@ export default function LayoutProfil({ children }) {
                                             Object.keys(user).length > 0 ? (
                                                 <Fragment>
                                                     <div className=" w-32 h-32 sm:w-40 sm:h-40 rounded-full relative overflow-hidden bg-zinc-100 mx-auto">
-                                                        <Image src="/images/img-blog5.png" layout="fill" />
+                                                        <Image src="/images/man.png" layout="fill" />
                                                     </div>
 
                                                     <ProfilInfoItem
