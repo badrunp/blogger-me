@@ -2,6 +2,7 @@ import BlogTitle from "../../components/BlogTitle";
 import Container from "../../components/Container"
 import Layout from "../../components/Layout"
 import PostListItem from "../../components/posts/PostListItem"
+import url from "../../constant/url";
 
 function blogs({ posts }) {
     return (
@@ -41,7 +42,7 @@ function blogs({ posts }) {
 
 export async function getStaticProps() {
 
-    const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/blogs?limit=9`);
+    const request = await fetch(`${url}/blogs?limit=9`);
     const response = await request.json();
     const { posts } = response;
 

@@ -6,6 +6,7 @@ import PostContent from "../../components/posts/PostContent"
 import PostImage from "../../components/posts/PostImage"
 import PostListItem from "../../components/posts/PostListItem"
 import PostTitle from "../../components/posts/PostTitle"
+import url from "../../constant/url"
 
 function detailBlog({ posts, post }) {
     return (
@@ -86,10 +87,10 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
 
     const { id } = ctx.params;
-    const reqPost = await fetch('http://localhost:3000/api/blogs/' + id + '/id');
+    const reqPost = await fetch(`${url}/api/blogs/` + id + '/id');
     const {post} = await reqPost.json();
 
-    const reqPosts = await fetch(`${process.env.NEXT_PUBLIC_URL}/blogs?limit=7`);
+    const reqPosts = await fetch(`${url}/blogs?limit=7`);
     const {posts} = await reqPosts.json();
 
     return {
