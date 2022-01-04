@@ -73,7 +73,7 @@ function detailBlog({ posts, post }) {
 
 export async function getStaticPaths() {
 
-    const request = await fetch('http://localhost:3000/api/blogs')
+    const request = await fetch(`${url}/api/blogs`)
     const { posts } = await request.json();
 
     const paths = posts.map(item => ({ params: { id: item._id.toString() } }))
