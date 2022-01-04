@@ -73,7 +73,7 @@ function detailBlog({ posts, post }) {
 
 export async function getStaticPaths() {
 
-    const request = await fetch(`${url}/api/blogs`)
+    const request = await fetch(`${url}/blogs`)
     const { posts } = await request.json();
 
     const paths = posts.map(item => ({ params: { id: item._id.toString() } }))
@@ -87,7 +87,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
 
     const { id } = ctx.params;
-    const reqPost = await fetch(`${url}/api/blogs/` + id + '/id');
+    const reqPost = await fetch(`${url}/blogs/` + id + '/id');
     const {post} = await reqPost.json();
 
     const reqPosts = await fetch(`${url}/blogs?limit=7`);
