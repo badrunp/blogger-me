@@ -1,5 +1,6 @@
 import dbConnect from "../../../lib/dbConnect";
 import Post from "../../../models/Posts";
+import User from "../../../models/User";
 
 
 async function handler(req, res) {
@@ -14,7 +15,7 @@ async function handler(req, res) {
 
         if (limit) {
 
-            const posts = await Post.find({}).populate('author').limit(parseInt(limit))
+            const posts = await Post.find({}).populate({path: 'author', model: User}).limit(parseInt(limit))
             
             return res.status(200).json({
                 status: res.statusCode,
@@ -23,7 +24,7 @@ async function handler(req, res) {
             
         } else {
             
-            const posts = await Post.find({}).populate('author')
+            const posts = await Post.find({}).populate({path: 'author', model: User})
 
             return res.status(200).json({
                 status: res.statusCode,

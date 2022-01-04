@@ -29,4 +29,4 @@ const blogSchema = new mongoose.Schema({
 })
 
 
-export default mongoose.models.Blogs || mongoose.model('Blogs', blogSchema);
+export default mongoose.models.blogs || mongoose.model('blogs', blogSchema);

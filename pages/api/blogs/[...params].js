@@ -1,5 +1,6 @@
 import dbConnect from '../../../lib/dbConnect';
 import Post from '../../../models/Posts';
+import User from '../../../models/User';
 
 export default async function handler(req, res) {
 
@@ -11,7 +12,7 @@ export default async function handler(req, res) {
 
     try {
         if (params[1] === 'id') {
-            const post = await Post.findOne({ _id: params[0] }).populate('author');
+            const post = await Post.findOne({ _id: params[0] }).populate({path: 'author', model: User});
             if (post) {
                 return res.status(200).json({
                     status: res.statusCode,
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
             }
         } else {
             const limit = params[2] ? parseInt(params[2]) : 'none'
-            const posts = await Post.find({ author: params[0] }).limit(limit).populate('author');
+            const posts = await Post.find({ author: params[0] }).limit(limit).populate({path: 'author', model: User});
             if (posts) {
                 return res.status(200).json({
                     status: res.statusCode,
