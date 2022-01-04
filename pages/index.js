@@ -60,10 +60,7 @@ function Home(props) {
 export async function getStaticProps() {
 
   const request = await fetch(`${url}/blogs?limit=7`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
+    method: "GET"
   });
   const response = await request.json();
   const { posts } = response;

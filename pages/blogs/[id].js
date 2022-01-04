@@ -76,10 +76,11 @@ export async function getStaticPaths() {
     const request = await fetch(`${url}/blogs`, {
         method: "GET",
         headers: {
-            "Content-Type": "application/json"
+            'User-Agent': '*'
         }
     })
-    const { posts } = await request.json();
+    const response = await request.json();
+    const {posts} = response
 
     const paths = posts.map(item => ({ params: { id: item._id.toString() } }))
 
@@ -93,18 +94,12 @@ export async function getStaticProps(ctx) {
 
     const { id } = ctx.params;
     const reqPost = await fetch(`${url}/blogs/` + id + '/id', {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        method: "GET"
     });
     const {post} = await reqPost.json();
 
     const reqPosts = await fetch(`${url}/blogs?limit=7`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        method: "GET"
     });
     const {posts} = await reqPosts.json();
 
