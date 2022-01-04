@@ -200,3 +200,73 @@ export function updatePost(id, data){
 
     }
 }
+
+
+export function getPostHome(){
+    return async (dispatch) => {
+
+        dispatch({type: postConstant.GET_POST_REQUEST});
+        try {
+            
+            const request = await fetch('/api/blogs?limit=7')
+
+            const {posts} = await request.json();
+
+            dispatch({
+                type: postConstant.GET_POST_HOME_SUCCESS,
+                payload: {
+                    posts
+                }
+            })
+
+            return true;
+
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: postConstant.GET_POST_FAILURE,
+                payload: {
+                    error
+                }
+            })
+
+            return false;
+        }
+
+    }
+}
+
+
+export function getPostBlog(){
+    return async (dispatch) => {
+
+        dispatch({type: postConstant.GET_POST_REQUEST});
+        try {
+            
+            const request = await fetch('/api/blogs?limit=7')
+
+            const {posts} = request.json();
+
+            dispatch({
+                type: postConstant.GET_POST_HOME_SUCCESS,
+                payload: {
+                    posts
+                }
+            })
+
+            return true;
+
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: postConstant.GET_POST_FAILURE,
+                payload: {
+                    error
+                }
+            })
+
+            return false;
+        }
+
+    }
+}
