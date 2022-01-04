@@ -7,7 +7,7 @@ import Layout from "../../components/Layout"
 import PostListItem from "../../components/posts/PostListItem"
 import PostSkeleton from "../../components/posts/PostSkeleton";
 
-function blogs() {
+function Blogs() {
     const { posts_home: posts, loading } = useSelector((state) => state.posts)
     const dispatch = useDispatch();
 
@@ -61,4 +61,4 @@ function blogs() {
     )
 }
 
-export default blogs
+export default Blogs
