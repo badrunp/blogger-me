@@ -73,12 +73,17 @@ function detailBlog({ posts, post }) {
 
 export async function getStaticPaths() {
 
-    const request = await fetch(`${url}/blogs`)
+    const request = await fetch(`${url}/blogs`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     const { posts } = await request.json();
 
     const paths = posts.map(item => ({ params: { id: item._id.toString() } }))
 
-    return {
+    return {    
         paths: paths,
         fallback: false,
     }
@@ -87,10 +92,20 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
 
     const { id } = ctx.params;
-    const reqPost = await fetch(`${url}/blogs/` + id + '/id');
+    const reqPost = await fetch(`${url}/blogs/` + id + '/id', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     const {post} = await reqPost.json();
 
-    const reqPosts = await fetch(`${url}/blogs?limit=7`);
+    const reqPosts = await fetch(`${url}/blogs?limit=7`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     const {posts} = await reqPosts.json();
 
     return {
