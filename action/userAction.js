@@ -30,7 +30,7 @@ export function userLogin(data) {
 
             const { status, validations, message, token, user } = response;
 
-            if (status === 402 && Object.keys(validations).length > 0) {
+            if (status == 402 && Object.keys(validations).length > 0) {
 
                 dispatch({
                     type: userConstant.USER_LOGIN_ERROR_VALIDATION,
@@ -41,7 +41,7 @@ export function userLogin(data) {
 
             }
 
-            if (status === 403 && message) {
+            if (status == 403 && message) {
 
                 dispatch({
                     type: userConstant.USER_LOGIN_ERROR_MESSAGE,
@@ -52,7 +52,7 @@ export function userLogin(data) {
 
             }
 
-            if (status === 200 && token && user) {
+            if (status == 200 && token && user) {
 
 
                 Cookies.set('_TOKEN', token, {
@@ -108,7 +108,20 @@ export function userRegister(data) {
 
             const { status, validations, message } = response;
 
-            if (status === 402 && Object.keys(validations).length > 0) {
+            if (message && status == 200) {
+
+                dispatch({
+                    type: userConstant.USER_REGSITER_SUCCESS,
+                    payload: {
+                        message
+                    }
+                });
+
+                return true;
+
+            }
+
+            if (status == 402 && Object.keys(validations).length > 0) {
 
                 dispatch({
                     type: userConstant.USER_REGSITER_ERROR_VALIDATION,
@@ -119,7 +132,7 @@ export function userRegister(data) {
 
             }
 
-            if (status === 403 && message) {
+            if (status == 403 && message) {
 
                 dispatch({
                     type: userConstant.USER_REGSITER_ERROR_MESSAGE,
@@ -130,22 +143,9 @@ export function userRegister(data) {
 
             }
 
-            if (status === 200 && message) {
 
-                dispatch({
-                    type: userConstant.USER_REGSITER_SUCCESS
-                })
 
-                return {
-                    isRegister: true,
-                    message
-                }
-
-            }
-
-            return {
-                isRegister: false,
-            }
+            return false;
 
         } catch (error) {
 
@@ -156,9 +156,7 @@ export function userRegister(data) {
                 }
             })
 
-            return {
-                isRegister: false
-            }
+            return false;
 
         }
 

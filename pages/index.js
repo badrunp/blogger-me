@@ -3,22 +3,15 @@ import Layout from "../components/Layout";
 import ButtonMoreItems from "../components/ButtonMoreItems";
 import PostListItem from "../components/posts/PostListItem";
 import PostTopNav from "../components/posts/PostTopNav";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPostHome } from "../action/postAction";
+import { useSelector } from "react-redux";
 import PostSkeleton from '../components/posts/PostSkeleton';
 
 
 
 function Home() {
-  const { posts_home, loading } = useSelector((state) => state.posts)
+  const { posts: posts_home, loading } = useSelector((state) => state.posts)
   const posts = posts_home && posts_home.slice(1) || []
   const post = posts_home && posts_home[0] || {}
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPostHome())
-  }, [])
 
   return (
     <>
@@ -29,9 +22,9 @@ function Home() {
             {
               loading ? (
                 <div className="p-6 md:p-0 grid grid-cols-1 space-y-4 sm:space-y-0 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                  <PostSkeleton/>
-                  <PostSkeleton/>
-                  <PostSkeleton/>
+                  <PostSkeleton image="h-64" />
+                  <PostSkeleton image="h-64" />
+                  <PostSkeleton image="h-64" />
                 </div>
               ) : (
                 <>

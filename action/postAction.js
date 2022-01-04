@@ -213,7 +213,7 @@ export function getPostHome(){
             const {posts} = await request.json();
 
             dispatch({
-                type: postConstant.GET_POST_HOME_SUCCESS,
+                type: postConstant.GET_POST_SUCCESS,
                 payload: {
                     posts
                 }

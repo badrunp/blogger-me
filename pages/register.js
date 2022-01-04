@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userRegister } from '../action/userAction'
 import Alert from '../components/Alert'
@@ -11,6 +11,7 @@ import AuthTitle from '../components/AuthTitle'
 import Button from '../components/Button'
 import GuestLayout from '../components/GuestLayout'
 import ValidationMessage from '../components/ValidationMessage'
+import { userConstant } from '../constant/redux'
 
 function Register() {
 
@@ -19,10 +20,10 @@ function Register() {
         email: '',
         password: '',
     })
-    
+
     const router = useRouter();
     const dispatch = useDispatch();
-    const {loading, validations, message} = useSelector(state => state.auth)
+    const { loading, validations, message } = useSelector(state => state.auth)
 
     const handleChangeInput = (e) => {
 
@@ -36,28 +37,41 @@ function Register() {
 
     }
 
+    useEffect(() => {
+        return () => {
+            dispatch({ type: userConstant.USER_CLEAR_VALIDATIONS })
+            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+        }
+    }, [])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const {isRegister, message} = await dispatch(userRegister(data))
-        if(isRegister){
-            router.push({
-                pathname: '/login',
-                query: { message },
-            })
-            setData({
+        const isRegister = await dispatch(userRegister(data))
+        console.log(isRegister);
+        if (isRegister) {
+            router.push('/login');
+            await setData({
                 username: '',
                 email: '',
                 password: '',
             })
 
+            setTimeout(() => {
+                dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+            }, 3000)
+
             return;
         }
 
-        setData({
+        await setData({
             ...data,
             password: ''
         })
+
+        setTimeout(() => {
+            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+        }, 3000)
 
     }
 

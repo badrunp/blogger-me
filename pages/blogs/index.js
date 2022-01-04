@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPostHome } from "../../action/postAction";
+import { useSelector } from "react-redux";
 import BlogTitle from "../../components/BlogTitle";
 import Container from "../../components/Container"
 import Layout from "../../components/Layout"
@@ -8,12 +6,7 @@ import PostListItem from "../../components/posts/PostListItem"
 import PostSkeleton from "../../components/posts/PostSkeleton";
 
 function Blogs() {
-    const { posts_home: posts, loading } = useSelector((state) => state.posts)
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getPostHome())
-    }, [])
+    const { posts, loading } = useSelector((state) => state.posts)
     return (
         <>
             <Layout title="Blogs">
@@ -21,10 +14,10 @@ function Blogs() {
                     <div className="w-full py-8 sm:py-14 flex flex-col items-strart justify-start space-y-6 md:space-y-14 px-6 md:px-8 lg:px-12">
                         {
                             loading ? (
-                                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 space-y-4 md:space-y-0 gap-6">
-                                    <PostSkeleton />
-                                    <PostSkeleton />
-                                    <PostSkeleton />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-y-4 md:space-y-0 gap-6">
+                                    <PostSkeleton image="h-64" />
+                                    <PostSkeleton image="h-64" />
+                                    <PostSkeleton image="h-64" />
                                 </div>
                             ) : (
                                 <>

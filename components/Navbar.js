@@ -15,12 +15,21 @@ import Logo from './Logo'
 import NavbarSearch from "./NavbarSearch"
 import NavbarDropdownLink from "./NavbarDropdownLink"
 import Dropdown from "./Dropdown"
+import { getPostHome } from "../action/postAction"
 
 function Navbar() {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth)
     const [showSearch, setShowSearch] = useState(false)
     const router = useRouter();
+  const { posts, loading } = useSelector((state) => state.posts)
+
+
+    useEffect(() => {
+        if(posts.length === 0){
+            dispatch(getPostHome())
+        }
+    }, [])
 
     useEffect(() => {
 
@@ -78,7 +87,7 @@ function Navbar() {
                                                         <div className="w-7 h-7 bg-gray-200 rounded-full overflow-hidden relative flex-none mr-1">
                                                             <Image src={'/images/man.png'} alt="image" layout="fill" />
                                                         </div>
-                                                        <span className="block truncate w-32">{auth.user.username}</span>
+                                                        <span className="block truncate max-w-[128px]">{auth.user.username}</span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                                             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                                         </svg>
@@ -118,7 +127,7 @@ function Navbar() {
                             </ul>
 
                             <div className="block md:hidden mr-2">
-                                <button className="h-full flex items-center cursor-pointer" onClick={() => setShowSearch(!showSearch)}>
+                                <button className="h-full flex items-center cursor-pointer focus:outline-none" onClick={() => setShowSearch(!showSearch)}>
                                     {
                                         showSearch ? (
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

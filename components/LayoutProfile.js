@@ -42,7 +42,7 @@ export default function LayoutProfil({ children }) {
                 <Container className="md:container">
                     <div className="w-full py-8 md:py-14 px-4 md:px-8 xl:px-14">
                         <div className="grid lg:grid-cols-3 gap-6">
-                            <div className="lg:col-span-1">
+                            <div className="lg:col-span-1 order-2 md:order-1">
                                 <div className="bg-white w-full h-auto relative shadow rounded-md">
                                     <ProfilTitle />
 
@@ -92,7 +92,7 @@ export default function LayoutProfil({ children }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="lg:col-span-2">
+                            <div className="lg:col-span-2 order-1 md:order-2">
                                 {children}
                             </div>
                         </div>

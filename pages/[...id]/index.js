@@ -53,8 +53,8 @@ export default function Profil() {
 
     useEffect(() => {
 
-        if (auth && id) {
-            if (id[0] === auth._id) {
+        if (id) {
+            if (id[0] === auth?._id) {
                 if (id[1] === 'posts') {
                     if (isCreate || data.length === 0) {
                         dispatch(getPostsByAuthor(id[0]))

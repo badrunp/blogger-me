@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Alert from "../components/Alert"
 import AuthInput from "../components/AuthInput"
 import AuthLabel from "../components/AuthLabel"
@@ -11,16 +11,16 @@ import { useRouter } from "next/router"
 import { userLogin } from "../action/userAction"
 import AuthTitle from "../components/AuthTitle"
 import AuthFooter from "../components/AuthFooter"
+import { userConstant } from "../constant/redux"
 
 function Login() {
-
 
     const [data, setData] = useState({
         email: '',
         password: '',
     })
 
-    const { loading, validations, message } = useSelector(state => state.auth)
+    const { loading, validations, message, messageSuccess } = useSelector(state => state.auth)
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -36,22 +36,43 @@ function Login() {
 
     }
 
+    useEffect(() => {
+        return () => {
+            dispatch({ type: userConstant.USER_CLEAR_VALIDATIONS })
+            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+        }
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (router.query.message) {
+            router.replace('/login', undefined, {
+                shallow: true
+            })
+        }
         const isLogin = await dispatch(userLogin(data))
         if (isLogin) {
-            router.replace('/')
-            setData({
+            router.push('/')
+            await setData({
                 email: '',
                 password: ''
             })
+
+            setTimeout(() => {
+                dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+            }, 3000)
+
+            return
         }
 
-        setData({
+        await setData({
             ...data,
             password: ''
         })
+
+        setTimeout(() => {
+            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+        }, 3000)
     }
 
     return (
@@ -67,8 +88,8 @@ function Login() {
                 }
 
                 {
-                    router.query.message && (
-                        <Alert className="bg-emerald-500 text-white" message={router.query.message} />
+                    messageSuccess && (
+                        <Alert className="bg-emerald-500 text-white" message={messageSuccess} />
                     )
                 }
 
