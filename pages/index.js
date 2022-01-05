@@ -10,7 +10,7 @@ import PostSkeleton from '../components/posts/PostSkeleton';
 
 function Home() {
   const { posts: posts_home, loading } = useSelector((state) => state.posts)
-  const posts = posts_home && posts_home.slice(1) || []
+  const posts = posts_home && posts_home.slice(1, 6) || []
   const post = posts_home && posts_home[0] || {}
 
   return (

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import Avatar from "../../components/Avatar"
 import AvatarSkeleton from "../../components/AvatarSkeleton"
@@ -16,12 +16,15 @@ import Skeleton from "../../components/Skeleton"
 
 function DetailBlog() {
     const { query: { id } } = useRouter()
-    const { posts: posts_category, loading: loadingPosts } = useSelector((state) => state.posts)
+
+    const { posts: posts_category } = useSelector((state) => state.posts)
     const { posts: { data } } = useSelector(state => state.profile)
     const postsList = [...posts_category, ...data] || []
-    const posts = posts_category.filter(item => item._id != id) || []
-    const [post, setPost] = useState([])
+
+    const [post, setPost] = useState({})
+    const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true);
+    const [loadingPosts, setLoadingPosts] = useState(true)
 
     useEffect(() => {
 
@@ -48,6 +51,21 @@ function DetailBlog() {
         }
 
     }, [id, postsList])
+
+    useEffect(() => {
+
+        if (post && post.author && id) {
+            async function getRelatedPost() {
+                const request = await fetch('/api/blogs/author/' + post.author?._id + '?expect=' + id + '&limit=3')
+                const response = await request.json()
+
+                setPosts(response.posts)
+                setLoadingPosts(false)
+            }
+
+            getRelatedPost();
+        }
+    }, [post, id])
 
     return (
         <>
@@ -107,23 +125,19 @@ function DetailBlog() {
                                         loadingPosts ? (
                                             <PostSkeleton avatar={false} image="aspect-video" heightTitle="h-2" heightContent="h-3" />
                                         ) : (
-                                            posts && posts.map((item) => {
-                                                if (item._id != post._id) {
-                                                    return (
-                                                        <PostListItem
-                                                            key={item._id}
-                                                            id={item._id}
-                                                            title={item.title}
-                                                            summary={item.summary}
-                                                            category={item.category}
-                                                            time={item.createdAt}
-                                                            image={item.image}
-                                                            avatar={false}
-                                                            imageSize="aspect-video"
-                                                        />
-                                                    )
-                                                }
-                                            })
+                                            posts && posts.map((item) => (
+                                                <PostListItem
+                                                    key={item._id}
+                                                    id={item._id}
+                                                    title={item.title}
+                                                    summary={item.summary}
+                                                    category={item.category}
+                                                    time={item.createdAt}
+                                                    image={item.image}
+                                                    avatar={false}
+                                                    imageSize="aspect-video"
+                                                />
+                                            ))
                                         )
                                     }
                                 </div>

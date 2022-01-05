@@ -26,7 +26,7 @@ function Navbar() {
 
 
     useEffect(() => {
-        if (posts.length === 0) {
+        if (posts.length === 0 || loading) {
             dispatch(getPostHome())
         }
     }, [])

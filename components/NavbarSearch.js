@@ -25,12 +25,12 @@ function NavbarSearch({ active, closeSearch }) {
         setValue(e.target.value)
 
         if (e.target.value !== "") {
-            const posts = postsList.filter((item) => {
+            const posts =  [...new Map(postsList.map(item => [item._id, item])).values()].filter((item) => {
                 if (item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) != -1) {
                     return item;
                 }
                 return;
-            })
+            }).slice(0,5)
 
             if (posts.length == 0) {
                 setData([])
@@ -123,10 +123,10 @@ function NavbarSearch({ active, closeSearch }) {
                             <div className="absolute top-0 bg-white mt-10 ring-1 ring-gray-200 shadow-md py-2 px-2 rounded w-full" ref={dataResult}>
                                 <div className="flex flex-col divide-y divide-gray-300">
                                     <div className="flex flex-col space-y-1 px-3 py-1">
-                                        <p className="text-xs text-gray-700 break-all py-2">Mencari: {value}</p>
+                                        <p className="text-xs lg:text-sm text-gray-700 break-all py-2">Mencari: {value}</p>
                                         <div className="border-t border-gray-300 w-full" />
                                         <div className="py-2">
-                                            <p className="text-gray-700 text-xs">Hasil:</p>
+                                            <p className="text-gray-700 text-xs lg:text-sm">Hasil:</p>
                                             {
                                                 data && data.length > 0 ? (
                                                     data.map((item, i) => (

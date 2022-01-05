@@ -2,7 +2,7 @@ db.users.createOne()
 db.users.createMany()
 db.users.fin({ name: 'test' })
 db.users.find({ name: { $eq: "test" } })
-db.users.find({ name: { $neq: "test" } })
+db.users.find({ name: { $nin: "test" } })
 db.users.find({ age: { $gt: 19 } }) >
 db.users.find({ age: { $gte: 19 } }) >=
 db.users.find({ age: { $lt: 19 } }) <
