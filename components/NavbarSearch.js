@@ -26,7 +26,7 @@ function NavbarSearch({ active, closeSearch }) {
 
         if (e.target.value !== "") {
             const posts = postsList.filter((item) => {
-                if (item.title.indexOf(e.target.value) != -1) {
+                if (item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) != -1) {
                     return item;
                 }
                 return;
@@ -35,7 +35,7 @@ function NavbarSearch({ active, closeSearch }) {
             if (posts.length == 0) {
                 setData([])
                 timeOut = setTimeout(() => {
-                    if (e.target.value != "") {
+                    if (e.target.value != "" && posts.length == 0) {
                         async function getSearchData() {
                             const request = await fetch('/api/blogs/search/' + e.target.value)
                             const { posts } = await request.json();
