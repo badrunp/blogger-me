@@ -17,6 +17,8 @@ import Skeleton from "../../components/Skeleton"
 function DetailBlog() {
     const { query: { id } } = useRouter()
     const { posts: posts_category, loading: loadingPosts } = useSelector((state) => state.posts)
+    const { posts: { data } } = useSelector(state => state.profile)
+    const postsList = [...posts_category, ...data] || []
     const posts = posts_category.filter(item => item._id != id) || []
     const [post, setPost] = useState([])
     const [loading, setLoading] = useState(true);
@@ -24,24 +26,28 @@ function DetailBlog() {
     useEffect(() => {
 
         if (id) {
-            setLoading(true)
-            async function getData() {
-                try {
-                    const request = await fetch(`/api/blogs/${id}/id`)
-                    const { post } = await request.json();
+            if (postsList.some(item => item._id === id)) {
+                setPost(postsList.find(item => item._id === id))
+                setLoading(false)
+            } else {
+                async function getData() {
+                    try {
+                        const request = await fetch(`/api/blogs/${id}/id`)
+                        const { post } = await request.json();
 
-                    setPost(post)
-                    setLoading(false)
+                        setPost(post)
+                        setLoading(false)
 
-                } catch (error) {
-                    setLoading(false)
+                    } catch (error) {
+                        setLoading(false)
+                    }
                 }
-            }
 
-            getData()
+                getData()
+            }
         }
 
-    }, [id])
+    }, [id, postsList])
 
     return (
         <>

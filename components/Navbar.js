@@ -98,7 +98,7 @@ function Navbar() {
                                                         navbarDropdownMenuLinksAuthMd.map(item => (
                                                             <NavbarDropdownLink
                                                                 key={item.id}
-                                                                url={`${auth.user._id}${item.link}`}
+                                                                url={`/${auth.user._id}${item.link}`}
                                                                 icon={item.icon}
                                                                 title={item.title}
                                                             />
@@ -167,7 +167,7 @@ function Navbar() {
                                                     navbarDropdownMenuLinksAuthMobile.map((item, i) => (
                                                         <Fragment key={item.id}>
                                                             <NavbarDropdownLink
-                                                                url={`${item.id > 2 ? auth.user._id : ''}${item.link}`}
+                                                                url={`${item.id > 2 ? `/${auth.user._id}`: ''}${item.link}`}
                                                                 icon={item.icon}
                                                                 title={item.title}
                                                             />

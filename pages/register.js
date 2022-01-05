@@ -23,6 +23,7 @@ function Register() {
 
     const router = useRouter();
     const dispatch = useDispatch();
+    const [isRemoveMessage, setIsRemoveMessage] = useState(false)
     const { loading, validations, message } = useSelector(state => state.auth)
 
     const handleChangeInput = (e) => {
@@ -40,15 +41,17 @@ function Register() {
     useEffect(() => {
         return () => {
             dispatch({ type: userConstant.USER_CLEAR_VALIDATIONS })
-            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
+
+            if(isRemoveMessage){
+                dispatch({type: userConstant.USER_REMOVE_MESSAGE})
+            }
         }
-    }, [])
+    }, [isRemoveMessage])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const isRegister = await dispatch(userRegister(data))
-        console.log(isRegister);
         if (isRegister) {
             router.push('/login');
             await setData({
@@ -68,6 +71,8 @@ function Register() {
             ...data,
             password: ''
         })
+
+        setIsRemoveMessage(true)
 
         setTimeout(() => {
             dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
