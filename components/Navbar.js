@@ -22,11 +22,11 @@ function Navbar() {
     const auth = useSelector(state => state.auth)
     const [showSearch, setShowSearch] = useState(false)
     const router = useRouter();
-  const { posts, loading } = useSelector((state) => state.posts)
+    const { posts, loading } = useSelector((state) => state.posts)
 
 
     useEffect(() => {
-        if(posts.length === 0){
+        if (posts.length === 0) {
             dispatch(getPostHome())
         }
     }, [])
@@ -57,13 +57,10 @@ function Navbar() {
             <div className="w-full h-16 relative border-b md:border-none border-gray-200 bg-white md:bg-blue-500  md:shadow-md z-50">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
-                        {
-                            !showSearch && (
-                                <Logo />
-                            )
-                        }
+                        <Logo />
 
-                        <NavbarSearch active={showSearch} />
+                        <NavbarSearch active={showSearch} closeSearch={setShowSearch} />
+
 
                         <div className="flex flex-row items-center justify-center md:divide-x divide-gray-200">
                             <ul className="hidden md:flex flex-row items-center justify-center px-4 md:px-6 space-x-6">
@@ -129,15 +126,9 @@ function Navbar() {
                             <div className="block md:hidden mr-2">
                                 <button className="h-full flex items-center cursor-pointer focus:outline-none" onClick={() => setShowSearch(!showSearch)}>
                                     {
-                                        showSearch ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                        ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                            </svg>
-                                        )
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg>
                                     }
                                 </button>
                             </div>
@@ -167,7 +158,7 @@ function Navbar() {
                                                     navbarDropdownMenuLinksAuthMobile.map((item, i) => (
                                                         <Fragment key={item.id}>
                                                             <NavbarDropdownLink
-                                                                url={`${item.id > 2 ? `/${auth.user._id}`: ''}${item.link}`}
+                                                                url={`${item.id > 2 ? `/${auth.user._id}` : ''}${item.link}`}
                                                                 icon={item.icon}
                                                                 title={item.title}
                                                             />

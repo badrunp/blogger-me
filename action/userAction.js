@@ -108,6 +108,29 @@ export function userRegister(data) {
 
             const { status, validations, message } = response;
 
+
+            if (status == 402 && Object.keys(validations).length > 0) {
+                console.log(validations);
+                dispatch({
+                    type: userConstant.USER_REGSITER_ERROR_VALIDATION,
+                    payload: {
+                        validations
+                    }
+                })
+
+            }
+            
+            if (status == 403 && message) {
+
+                dispatch({
+                    type: userConstant.USER_REGSITER_ERROR_MESSAGE,
+                    payload: {
+                        message
+                    }
+                })
+
+            }
+
             if (message && status == 200) {
 
                 dispatch({
@@ -118,28 +141,6 @@ export function userRegister(data) {
                 });
 
                 return true;
-
-            }
-
-            if (status == 402 && Object.keys(validations).length > 0) {
-
-                dispatch({
-                    type: userConstant.USER_REGSITER_ERROR_VALIDATION,
-                    payload: {
-                        validations
-                    }
-                })
-
-            }
-
-            if (status == 403 && message) {
-
-                dispatch({
-                    type: userConstant.USER_REGSITER_ERROR_MESSAGE,
-                    payload: {
-                        message
-                    }
-                })
 
             }
 

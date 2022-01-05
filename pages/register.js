@@ -41,10 +41,12 @@ function Register() {
     useEffect(() => {
         return () => {
             dispatch({ type: userConstant.USER_CLEAR_VALIDATIONS })
+        }
+    }, [])
 
-            if (isRemoveMessage) {
-                dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
-            }
+    useEffect(() => {
+        if (isRemoveMessage) {
+            dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
         }
     }, [isRemoveMessage])
 
