@@ -42,8 +42,8 @@ function Register() {
         return () => {
             dispatch({ type: userConstant.USER_CLEAR_VALIDATIONS })
 
-            if(isRemoveMessage){
-                dispatch({type: userConstant.USER_REMOVE_MESSAGE})
+            if (isRemoveMessage) {
+                dispatch({ type: userConstant.USER_REMOVE_MESSAGE })
             }
         }
     }, [isRemoveMessage])
@@ -53,6 +53,7 @@ function Register() {
 
         const isRegister = await dispatch(userRegister(data))
         if (isRegister) {
+            setIsRemoveMessage(false)
             router.push('/login');
             await setData({
                 username: '',
