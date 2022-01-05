@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react"
+import { useSelector } from "react-redux";
 
 function NavbarSearch({ active, closeSearch }) {
 
@@ -11,6 +12,9 @@ function NavbarSearch({ active, closeSearch }) {
         width: 0,
         heigth: 0
     })
+    const { posts: posts_1, loading: loadingPosts } = useSelector((state) => state.posts)
+    const { posts: { data: posts_2 } } = useSelector(state => state.profile)
+    const postsList = [...posts_1, ...posts_2] || []
 
     const dataResult = useRef()
     const input = useRef()
@@ -21,15 +25,30 @@ function NavbarSearch({ active, closeSearch }) {
         setValue(e.target.value)
 
         if (e.target.value !== "") {
-            async function getSearchData() {
-                const request = await fetch('/api/blogs/search/' + e.target.value)
-                const { posts } = await request.json();
+            const posts = postsList.filter((item) => {
+                if (item.title.indexOf(e.target.value) != -1) {
+                    return item;
+                }
+                return;
+            })
 
+            if (posts.length == 0) {
+                setData([])
+                timeOut = setTimeout(() => {
+                    if (e.target.value != "") {
+                        async function getSearchData() {
+                            const request = await fetch('/api/blogs/search/' + e.target.value)
+                            const { posts } = await request.json();
+
+                            setData(posts)
+                        }
+
+                        getSearchData()
+                    }
+                }, 500)
+            } else {
                 setData(posts)
             }
-
-            getSearchData()
-
         } else {
             setData([])
         }
