@@ -178,7 +178,15 @@ export function updatePost(id, data){
                         message,
                         post
                     }
-                })
+                });
+
+                dispatch({
+                    type: postConstant.UPDATE_POST_BY_USER_SUCCESS,
+                    payload: {
+                        post
+                    }
+                });
+
                 return true;
 
             }
@@ -186,7 +194,7 @@ export function updatePost(id, data){
             return false;
 
         } catch (error) {
-            
+            console.log(error);
             dispatch({
                 type: postConstant.UPDATE_POST_FAILURE,
                 payload: {
@@ -216,6 +224,40 @@ export function getPostHome(){
                 type: postConstant.GET_POST_SUCCESS,
                 payload: {
                     posts
+                }
+            })
+
+            return true;
+
+        } catch (error) {
+            dispatch({
+                type: postConstant.GET_POST_FAILURE,
+                payload: {
+                    error
+                }
+            })
+
+            return false;
+        }
+
+    }
+}
+
+export function getPostBlog(skip = 0, limit = 6){
+    return async (dispatch) => {
+
+        dispatch({type: postConstant.GET_BLOG_POSTS_REQUEST});
+        try {
+            
+            const request = await fetch(`/api/blogs?limit=${limit}&skip=${skip}&order=-1`)
+
+            const {posts, total} = await request.json();
+
+            dispatch({
+                type: postConstant.GET_BLOG_POSTS_SUCCESS,
+                payload: {
+                    posts,
+                    total
                 }
             })
 

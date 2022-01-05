@@ -9,29 +9,20 @@ async function handler(req, res) {
 
     await dbConnect();
 
-    const { limit, skip } = req.query;
+    const { limit, skip, order } = req.query;
 
     try {
 
-        if (limit) {
+        const total = await Post.countDocuments({})
+        const posts = await Post.find({}).populate({ path: 'author', model: User }).limit(parseInt(limit) || 'none').skip(parseInt(skip) || 'none').sort({'createdAt': parseInt(order) || 1})
 
-            const posts = await Post.find({}).populate({path: 'author', model: User}).limit(parseInt(limit))
-            
-            return res.status(200).json({
-                status: res.statusCode,
-                posts
-            })
-            
-        } else {
-            
-            const posts = await Post.find({}).populate({path: 'author', model: User})
+        return res.status(200).json({
+            status: res.statusCode,
+            posts,
+            total
+        })
 
-            return res.status(200).json({
-                status: res.statusCode,
-                posts
-            })
 
-        }
 
     } catch (error) {
         console.log(error);

@@ -12,28 +12,33 @@ function NavbarSearch({ active, closeSearch }) {
         width: 0,
         heigth: 0
     })
-    const { posts: posts_1, loading: loadingPosts } = useSelector((state) => state.posts)
-    const { posts: { data: posts_2 } } = useSelector(state => state.profile)
-    const postsList = [...posts_1, ...posts_2] || []
+
+    const { posts: posts_1 } = useSelector((state) => state.posts)
+    const {blog_posts: {data: posts_2}} = useSelector(state => state.posts)
+    const { posts: { data: posts_3 } } = useSelector(state => state.profile)
+    const postsList = [...posts_1, ...posts_2, ...posts_3] || []
 
     const dataResult = useRef()
     const input = useRef()
     const inputRef = useRef()
+
+    const [loading, setLoading] = useState(false)
 
     const handleKeyUpInput = (e) => {
         clearTimeout(timeOut)
         setValue(e.target.value)
 
         if (e.target.value !== "") {
-            const posts =  [...new Map(postsList.map(item => [item._id, item])).values()].filter((item) => {
+            const posts = [...new Map(postsList.map(item => [item._id, item])).values()].filter((item) => {
                 if (item.title.toLowerCase().indexOf(e.target.value.toLowerCase()) != -1) {
                     return item;
                 }
                 return;
-            }).slice(0,5)
+            }).slice(0, 5)
 
             if (posts.length == 0) {
                 setData([])
+                setLoading(true)
                 timeOut = setTimeout(() => {
                     if (e.target.value != "" && posts.length == 0) {
                         async function getSearchData() {
@@ -41,6 +46,7 @@ function NavbarSearch({ active, closeSearch }) {
                             const { posts } = await request.json();
 
                             setData(posts)
+                            setLoading(false)
                         }
 
                         getSearchData()
@@ -140,8 +146,12 @@ function NavbarSearch({ active, closeSearch }) {
                                                         </Fragment>
                                                     ))
                                                 ) : (
+                                                    loading ? (
+                                                        <h3 className="text-gray-700 text-sm font-semibold py-2">Loading...</h3>
+                                                    ) : (
+                                                        <h3 className="text-gray-700 text-sm font-semibold py-2">Post tidak ditemukan!</h3>
 
-                                                    <h3 className="text-gray-700 text-sm font-semibold py-2">Post tidak ditemukan!</h3>
+                                                    )
 
                                                 )
                                             }

@@ -12,7 +12,7 @@ export default async function handler(req,res){
     if(keyword){
 
         try {
-            const posts = await Post.find({title: {$eq: keyword}}).limit(7)
+            const posts = await Post.find({title: new RegExp(keyword, 'i')}).limit(7)
 
             return res.status(200).json({
                 status: res.statusCode,

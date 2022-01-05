@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -17,9 +18,10 @@ import Skeleton from "../../components/Skeleton"
 function DetailBlog() {
     const { query: { id } } = useRouter()
 
-    const { posts: posts_category } = useSelector((state) => state.posts)
-    const { posts: { data } } = useSelector(state => state.profile)
-    const postsList = [...posts_category, ...data] || []
+    const { posts: posts_1 } = useSelector((state) => state.posts)
+    const {blog_posts: {data: posts_2}} = useSelector(state => state.posts)
+    const { posts: { data: posts_3 } } = useSelector(state => state.profile)
+    const postsList = [...posts_1, ...posts_2, ...posts_3] || []
 
     const [post, setPost] = useState({})
     const [posts, setPosts] = useState([])
@@ -77,7 +79,7 @@ function DetailBlog() {
 
                                 {
                                     !post || loading ? (
-                                        <AvatarSkeleton />
+                                        <AvatarSkeleton className="mt-2" />
                                     ) : (
                                         <Avatar
                                             image={'/images/img-blog4.png'}
@@ -119,11 +121,20 @@ function DetailBlog() {
 
 
                             </div>
-                            <div className="md:col-span-1 mt-9 md:mt-0 md:pt-[83px]">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8 ">
+                            <div className="md:col-span-1 mt-9 md:mt-0 md:pt-[79px]">
+                                {
+                                    loadingPosts ? (
+                                        <Skeleton className={'w-1/3 xl:w-full h-3'} />
+                                    ) : (
+                                        posts && posts.length > 0 && (
+                                            <h3 className="text-gray-700 text-lg font-semibold border-b pb-2 w-max border-gray-300 xl:w-full font-sans -mt-2">Terbaru dari {post?.author?.username}</h3>
+                                        )
+                                    )
+                                }
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8 mt-6">
                                     {
                                         loadingPosts ? (
-                                            <PostSkeleton avatar={false} image="aspect-video" heightTitle="h-2" heightContent="h-3" />
+                                            <PostSkeleton avatar={false} image="h-[140px]" heightTitle="h-2" heightContent="h-3" />
                                         ) : (
                                             posts && posts.map((item) => (
                                                 <PostListItem
@@ -135,12 +146,22 @@ function DetailBlog() {
                                                     time={item.createdAt}
                                                     image={item.image}
                                                     avatar={false}
-                                                    imageSize="aspect-video"
+                                                    imageSize="h-[140px]"
                                                 />
                                             ))
                                         )
                                     }
                                 </div>
+
+                                {
+                                    post && posts && posts.length > 0 && (
+                                        <div className="w-full flex justify-center xl:justify-end mt-6">
+                                            <Link href={`/${post.author._id}/posts`}>
+                                                <a className="text-blue-500 text-sm hover:text-blue-600 font-semibold">Lihat lainya</a>
+                                            </Link>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
