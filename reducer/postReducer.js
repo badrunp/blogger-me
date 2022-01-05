@@ -1,7 +1,7 @@
 import { postConstant } from "../constant/redux";
 
 const initialState = {
-    loading: false,
+    loading: true,
     posts: [],
     error: null
 }
