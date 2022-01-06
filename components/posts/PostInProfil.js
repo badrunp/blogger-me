@@ -33,7 +33,7 @@ function PostInProfil({ auth, id, loadingPost, data, isLoad, total, handleLoadPo
                                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
                                     {
                                         [...Array(3)].map((d, i) => (
-                                            <PostSkeleton />
+                                            <PostSkeleton key={i} />
                                         ))
                                     }
                                 </div>
