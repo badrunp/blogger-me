@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.primary{
+  @apply bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1 focus:outline-none
+}
+.danger{
+  @apply bg-red-500 text-white font-medium text-sm px-6 hover:bg-red-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1 focus:outline-none focus:ring-red-300
+}
+
 .skeleton-2::before,
 .skeleton-1::before {
   position: absolute;

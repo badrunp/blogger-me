@@ -1,5 +1,4 @@
-import React from 'react'
-import { parseDate } from '../../lib/helper'
+import { parseDate } from '../../lib/string'
 
 function PostCategoryAndTime({ category = '', time = '', size = "text-xs"  }) {
     return (

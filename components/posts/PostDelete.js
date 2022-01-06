@@ -14,8 +14,8 @@ function PostDelete({ modalActive, setModalActive, handleClick, loading }) {
                 </ModalTitle>
 
                 <div className='flex flex-row items-center justify-center py-2 sm:py-4 w-full space-x-4'>
-                    <Button className='bg-blue-500 text-white text-sm hover:bg-blue-600 focus:ring-2' onClick={handleClick}>{loading ? 'Loading...' : 'Yakin'}</Button>
-                    <Button className='bg-red-500 text-white text-sm hover:bg-red-600 focus:ring-2 focus:ring-red-300' onClick={() => setModalActive(false)}>Batal</Button>
+                    <Button className='primary' onClick={handleClick}>{loading ? 'Loading...' : 'Yakin'}</Button>
+                    <Button className='danger' onClick={() => setModalActive(false)}>Batal</Button>
                 </div>
             </Modal>
         </>

@@ -19,6 +19,11 @@ const initialState = {
 
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
+        case profileConstant.UPDATE_TOTAL_POST:
+            return {
+                ...state,
+                total: state.total + action.payload.count
+            }
         case profileConstant.UPDATE_SKIP_POST:
             return {
                 ...state,
@@ -54,7 +59,11 @@ export default function profileReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                user: action.payload.user
+                user: action.payload.user,
+                posts: {
+                    ...state.posts,
+                    message: action.payload.message
+                }
             }
         case profileConstant.USER_UPDATE_PROFILE_FAILURE:
             return {

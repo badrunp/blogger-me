@@ -85,8 +85,8 @@ function PostEdit({
                 </div>
 
                 <div className="flex flex-row items-center space-x-3">
-                    <Button className="bg-blue-500 text-white text-sm hover:bg-blue-600 focus:ring-2" onClick={handleClick}>{loading ? 'Loading...' : 'Kirim'}</Button>
-                    <Button className="bg-red-500 text-white text-sm hover:bg-red-600 focus:ring-2 focus:ring-red-300" onClick={() => setModalActive(false)}>Kembali</Button>
+                    <Button className="primary" onClick={handleClick}>{loading ? 'Loading...' : 'Kirim'}</Button>
+                    <Button className="danger" onClick={() => setModalActive(false)}>Kembali</Button>
                 </div>
             </Modal>
         </>

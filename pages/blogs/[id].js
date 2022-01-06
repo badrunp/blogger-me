@@ -85,6 +85,7 @@ function DetailBlog() {
                                             image={'/images/img-blog4.png'}
                                             name={post?.author?.username}
                                             title={post?.author?.title}
+                                            id={post?.author?._id}
                                         />
                                     )
                                 }

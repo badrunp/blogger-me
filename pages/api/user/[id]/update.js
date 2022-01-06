@@ -46,7 +46,8 @@ export default async function handler(req, res) {
 
                         return res.status(200).json({
                             status: res.statusCode,
-                            token: token
+                            token: token,
+                            message: "Berhasil ubah profile"
                         })
 
                     })

@@ -55,7 +55,7 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 relative border-b md:border-none border-gray-200 bg-white md:bg-blue-500  md:shadow-md z-50">
+            <div className="w-full h-16 border-b md:border-none border-gray-200 bg-white md:bg-blue-500  md:shadow z-50 sticky top-0">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
                         <Logo />
@@ -101,7 +101,6 @@ function Navbar() {
                                                                     icon={item.icon}
                                                                     title={item.title}
                                                                 />
-                                                                {i == 1 && <Line/>}
                                                             </Fragment>
                                                         ))
                                                     }

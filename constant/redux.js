@@ -32,7 +32,9 @@ export const profileConstant = {
     
     "RESET_PROFILE": "RESET_PROFILE",
     
-    "UPDATE_SKIP_POST": "UPDATE_SKIP_POST"
+    "UPDATE_SKIP_POST": "UPDATE_SKIP_POST",
+
+    "UPDATE_TOTAL_POST": "UPDATE_TOTAL_POST"
 }
 
 export const postConstant = {

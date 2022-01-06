@@ -130,7 +130,7 @@ function Register() {
                             <ValidationMessage validations={validations} name='password' />
                         </div>
 
-                        <Button type="submit" className="bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1">{loading ? 'Loading...' : 'Daftar'}</Button>
+                        <Button type="submit" className="primary">{loading ? 'Loading...' : 'Daftar'}</Button>
 
 
                         <AuthFooter>

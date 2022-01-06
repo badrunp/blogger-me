@@ -14,7 +14,6 @@ import ValidationMessage from "../../components/ValidationMessage"
 import { postConstant, profileConstant } from "../../constant/redux"
 import dynamic from "next/dynamic";
 import Textarea from '../../components/Textarea';
-import PostSkeleton from "../../components/posts/PostSkeleton"
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
@@ -57,7 +56,6 @@ export default function Profil() {
 
         if (id) {
             if (id[0] === auth?._id) {
-                console.log('ada');
                 if (id[1] === 'posts') {
                     if (isCreate || data.length == 0) {
                         dispatch(getPostsByAuthor(id[0]))
@@ -69,11 +67,10 @@ export default function Profil() {
 
         }
 
+    }, [id, auth])
 
-    }, [id])
 
-
-    const handleSubmitEditProfil = (e) => {
+    const handleSubmitEditProfil = async (e) => {
         e.preventDefault();
 
         const user = {
@@ -81,7 +78,12 @@ export default function Profil() {
             title: titleRef.current.value,
         }
 
-        dispatch(updateUserProfil(uid, user))
+        const isUpdate = dispatch(updateUserProfil(uid, user))
+        if (isUpdate) {
+            setTimeout(() => {
+                dispatch({ type: postConstant.USER_POST_CLEAR_MESSAGE })
+            }, 3000)
+        }
     }
 
 
@@ -147,6 +149,7 @@ export default function Profil() {
                     auth={auth}
                 />
 
+
                 <div className="w-full relative h-auto px-4 py-6">
 
                     {
@@ -186,7 +189,7 @@ export default function Profil() {
 
                                 </div>
 
-                                <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 text-sm md:text-base">{loading ? 'Loading...' : 'Update Profile'}</Button>
+                                <Button type="submit" className="primary">{loading ? 'Loading...' : 'Simpan'}</Button>
                             </form>
                         )
                     }
@@ -199,17 +202,11 @@ export default function Profil() {
                         data={data}
                         total={total}
                         handleLoadPosts={handleLoadPosts}
-                        page={id[1]}
                     />
 
                     {
                         auth && id && id[0] === auth._id && (
                             <form className={`${id && id[1] === 'create-post' ? 'block' : 'hidden'}`} onSubmit={handleSubmitCreatePost}>
-                                {
-                                    message && (
-                                        <Alert className="my-6 mt-0 bg-emerald-500 text-white" message={message} />
-                                    )
-                                }
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                                     <div className="block">
                                         <AuthLabel className="text-sm md:text-base" title={'Title'} inputFor={'title'} />
@@ -259,7 +256,7 @@ export default function Profil() {
 
                                 </div>
 
-                                <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600 focus:ring-2 text-sm md:text-base">{sendPostLoading ? 'Loading...' : 'Tambah Post'}</Button>
+                                <Button type="submit" className="primary">{sendPostLoading ? 'Loading...' : 'Tambah'}</Button>
                             </form>
                         )
                     }
@@ -267,6 +264,14 @@ export default function Profil() {
 
                 </div>
             </div>
+
+            {
+                message && (
+                    <div className="fixed top-2 left-2 md:left-3 md:top-3 z-50">
+                        <Alert message={message} className="bg-emerald-500 text-white w-60" />
+                    </div>
+                )
+            }
 
         </LayoutProfil>
     )

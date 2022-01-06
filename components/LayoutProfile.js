@@ -14,6 +14,7 @@ export default function LayoutProfil({ children }) {
 
     const dispatch = useDispatch()
     const { user, total } = useSelector(state => state.profile)
+    const { user: auth } = useSelector(state => state.auth)
     const { query: { id }, replace } = useRouter();
 
 
@@ -60,10 +61,14 @@ export default function LayoutProfil({ children }) {
                                                         label={'Nama'}
                                                         value={user.username}
                                                     />
-                                                    <ProfilInfoItem
-                                                        label={'Email'}
-                                                        value={user.email}
-                                                    />
+                                                    {
+                                                        id == auth?._id && (
+                                                            <ProfilInfoItem
+                                                                label={'Email'}
+                                                                value={user.email}
+                                                            />
+                                                        )
+                                                    }
                                                     <ProfilInfoItem
                                                         label={'Title/Job'}
                                                         value={user.title ? user.title : '-'}

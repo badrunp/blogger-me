@@ -1,4 +1,4 @@
-import { toCapitaliceFirst } from '../lib/helper'
+import { toCapitaliceFirst } from '../lib/string'
 
 function ValidationMessage({validations = {}, name = ''}) {
     return (

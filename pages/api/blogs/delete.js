@@ -22,7 +22,7 @@ export default async function handler(req, res) {
             return res.status(200).json({
                 status: res.statusCode,
                 post: deletePost,
-                message: `Post berhasil dihapus`
+                message: `Berhasil menghapus post`
             })
         } catch (error) {
             console.log(error);

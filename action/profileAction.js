@@ -62,13 +62,11 @@ export function updateUserProfil(id, data){
                 body: JSON.stringify(data)
             });
             const response = await request.json();
-            console.log(response);
 
-            const {status, token} = response;
+            const {status, token, message} = response;
 
             if(status !== 200 || !token){
 
-                // window.location = '/';
                 return false;
 
             }
@@ -87,7 +85,8 @@ export function updateUserProfil(id, data){
             dispatch({
                 type: profileConstant.USER_UPDATE_PROFILE_SUCCESS,
                 payload: {
-                    user: user
+                    user: user,
+                    message
                 }
             })
 

@@ -2,14 +2,13 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, updatePost } from "../../action/postAction"
 import { postConstant } from "../../constant/redux"
-import Alert from "../Alert"
 import PostDelete from "./PostDelete"
 import PostEdit from "./PostEdit"
 import PostListItem from "./PostListItem"
 import PostSkeleton from "./PostSkeleton"
 
 function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
-    const { message, updatePostLoading: loading, validations } = useSelector(state => state.profile.posts)
+    const { updatePostLoading: loading, validations } = useSelector(state => state.profile.posts)
     const dispatch = useDispatch()
     const [modalEditActive, setModalEditActive] = useState(false)
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
@@ -135,14 +134,6 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
                 handleClick={handleClickDelete}
                 loading={loading}
             />
-
-            {
-                message && (
-                    <div className="fixed top-2 left-2 md:left-3 md:top-3 z-50">
-                        <Alert message={message} className="bg-emerald-500 text-white w-60" />
-                    </div>
-                ) 
-            }
         </>
     )
 }

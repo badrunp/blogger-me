@@ -2,7 +2,6 @@ import dbConnect from '../../../../lib/dbConnect';
 import Post from '../../../../models/Posts';
 import validate from "../../../../lib/validation";
 
-
 export default async function handler(req, res) {
 
     if (req.method != "POST") return res.status(404).json({})
@@ -51,7 +50,7 @@ export default async function handler(req, res) {
                 } }, { new: true })
                 return res.status(200).json({
                     status: res.statusCode,
-                    message: 'Ubah post berhasil',
+                    message: 'Berhasil mengubah post',
                     post: newPost
                 })
             }

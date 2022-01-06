@@ -119,7 +119,7 @@ function Login() {
                             <ValidationMessage validations={validations} name={'password'} />
                         </div>
 
-                        <Button type="submit" disabled={loading} className={`${loading ? 'cursor-wait' : 'cursor-pointer'} bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1`}>{loading ? 'Loading...' : 'Masuk'}</Button>
+                        <Button type="submit" disabled={loading} className={`${loading ? 'cursor-wait' : 'cursor-pointer'} primary`}>{loading ? 'Loading...' : 'Masuk'}</Button>
 
                         <AuthFooter>
                             Tidak punya akun? silahkan <Link href="/register"><a className="inline-block underline text-blue-500">Daftar</a></Link>

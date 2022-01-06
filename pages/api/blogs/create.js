@@ -56,7 +56,7 @@ export default async function handler(req,res){
             if(post){
                 return res.status(200).json({
                     status: res.statusCode,
-                    message: "Create post berhasil",
+                    message: "Berhasil membuat post",
                     post
                 })
             }

@@ -1,4 +1,4 @@
-import { postConstant } from "../constant/redux";
+import { postConstant, profileConstant } from "../constant/redux";
 
 export function createPost(data){
     return async (dispatch) => {
@@ -39,6 +39,8 @@ export function createPost(data){
                         message
                     }
                 })
+
+                dispatch(updateTotalPost(1))
                 return true;
 
             }
@@ -126,6 +128,8 @@ export function deletePost(id){
                          post
                     }
                 })
+
+                dispatch(updateTotalPost(-1))
 
                 return true;
             }
@@ -273,6 +277,20 @@ export function getPostBlog(skip = 0, limit = 6){
 
             return false;
         }
+
+    }
+}
+
+
+export function updateTotalPost(count){
+    return async (dispatch) => {
+
+        dispatch({
+            type: profileConstant.UPDATE_TOTAL_POST,
+            payload: {
+                count
+            }
+        })
 
     }
 }
