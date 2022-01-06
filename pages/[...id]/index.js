@@ -33,6 +33,7 @@ export default function Profil() {
     const emailRef = useRef();
     const [isLoad, setIsLoad] = useState(false)
 
+
     const [dataPost, setDataPost] = useState({
         title: '',
         category: '',
@@ -55,7 +56,7 @@ export default function Profil() {
     useEffect(() => {
 
         if (id) {
-            if (id[0] === auth?._id) {
+            if (auth && id[0] === auth._id) {
                 if (id[1] === 'posts') {
                     if (isCreate || data.length == 0) {
                         dispatch(getPostsByAuthor(id[0]))
@@ -64,7 +65,6 @@ export default function Profil() {
             } else {
                 dispatch(getPostsByAuthor(id[0]))
             }
-
         }
 
     }, [id, auth])

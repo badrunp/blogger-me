@@ -31,23 +31,35 @@ export default function profileReducer(state = initialState, action) {
             }
         case profileConstant.RESET_PROFILE:
             return {
-                ...initialState
+                ...initialState,
+                posts: {
+                    ...state.posts,
+                    loading: false
+                }
             }
         case profileConstant.USER_PROFILE_REQUEST:
             return {
                 ...initialState,
-                loading: true
+                loading: true,
             }
         case profileConstant.USER_PROFILE_SUCCESS:
             return {
                 ...initialState,
                 user: action.payload.user,
-                total: action.payload.total
+                total: action.payload.total,
+                posts: {
+                    ...state.posts,
+                    loading: false
+                }
             }
         case profileConstant.USER_PROFILE_FAILURE:
             return {
                 ...initialState,
-                error: action.payload.error
+                error: action.payload.error,
+                posts: {
+                    ...state.posts,
+                    loading: false
+                }
             }
 
         case profileConstant.USER_UPDATE_PROFILE_REQUEST:
@@ -167,7 +179,7 @@ export default function profileReducer(state = initialState, action) {
         case postConstant.UPDATE_POST_SUCCESS:
             const post = action.payload.post;
             const newPosts = state.posts.data.map(item => {
-                if(item._id === post._id){
+                if (item._id === post._id) {
                     return {
                         ...item,
                         title: post.title,
