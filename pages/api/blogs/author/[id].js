@@ -12,7 +12,7 @@ export default async function handler(req,res){
     try {
         if(id){
             const query = expect ? { $and: [{_id: {$nin: expect}}, {author: id}] } : {author: id}
-            const posts = await Post.find(query, {author: 0}).sort({'updatedAt': -1}).limit(parseInt(limit) || 'none')
+            const posts = await Post.find(query, {author: 0}).sort({'createdAt': -1}).limit(parseInt(limit) || 'none')
 
             return res.status(200).json({
                 status: res.statusCode,

@@ -23,7 +23,9 @@ function Blogs() {
 
     }, [posts])
 
-    const handleLoadPosts = async () => {
+    const handleLoadPosts = async (e) => {
+        e.preventDefault()
+
         let limit = 3;
         setIsLoad(true)
         if (posts.length < total) {
@@ -44,7 +46,7 @@ function Blogs() {
                 <Container className="md:container px-0 md:px-4">
                     <div className="w-full py-8 sm:py-14 flex flex-col items-strart justify-start space-y-6 md:space-y-14 px-6 md:px-8 lg:px-12">
                         {
-                            loading ? (
+                            loading && !isLoad ? (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                     <PostSkeleton image="h-64" />
                                     <PostSkeleton image="h-64" />
@@ -75,22 +77,22 @@ function Blogs() {
                                             ))
                                         }
 
-                                        {
-                                            isLoad && (
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                                    <PostSkeleton image="h-64" />
-                                                    <PostSkeleton image="h-64" />
-                                                    <PostSkeleton image="h-64" />
-                                                </div>
-                                            )
-                                        }
                                     </div>
+                                    {
+                                        isLoad && loading && (
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                                                <PostSkeleton image="h-64" />
+                                                <PostSkeleton image="h-64" />
+                                                <PostSkeleton image="h-64" />
+                                            </div>
+                                        )
+                                    }
                                 </>
                             )
                         }
                         {
                             posts.length > 0 && posts.length < total && (
-                                <Button onClick={handleLoadPosts} className="w-max mx-auto bg-blue-500 text-gray-100 tracking-wide font-medium hover:bg-blue-600 focus:ring-2 text-sm focus:ring-blue-300">Selengkapnya</Button>
+                                <Button onClick={handleLoadPosts} className="w-max mx-auto bg-blue-500 text-gray-100 tracking-wide font-medium hover:bg-blue-600 focus:ring-2 text-sm focus:ring-blue-300">Selanjutnya</Button>
                             )
                         }
                     </div>

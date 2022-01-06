@@ -6,12 +6,12 @@ function PostSkeleton({ avatar = true, image = 'h-44', heightTitle = 'h-3', heig
     return (
         <>
             <div className={`flex ${className} flex-col items-start justify-start space-y-4`}>
-                <Skeleton className={`w-full ${image}`} />
+                <Skeleton className={`w-full ${image} skeleton-1`} />
                 <div className="flex flex-row items-start space-x-2 w-full">
-                    <Skeleton className={`w-3/12 ${heightTitle}`} />
-                    <Skeleton className={`w-2/12 ${heightTitle}`} />
+                    <Skeleton className={`w-3/12 ${heightTitle} skeleton-1`} />
+                    <Skeleton className={`w-2/12 ${heightTitle} skeleton-2`} />
                 </div>
-                <ContentSkeleton height={heightContent} />
+                <ContentSkeleton height={heightContent} className="skeleton-1" />
                 {
                     avatar && (
                         <AvatarSkeleton />

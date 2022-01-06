@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, updatePost } from "../../action/postAction"
 import { postConstant } from "../../constant/redux"
@@ -8,7 +8,7 @@ import PostEdit from "./PostEdit"
 import PostListItem from "./PostListItem"
 import PostSkeleton from "./PostSkeleton"
 
-function PostInProfilItem({ loadingPost, data, edited = false }) {
+function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
     const { message, updatePostLoading: loading, validations } = useSelector(state => state.profile.posts)
     const dispatch = useDispatch()
     const [modalEditActive, setModalEditActive] = useState(false)
@@ -48,6 +48,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
 
     }
 
+
     const handleClickEdit = async () => {
 
         const data = {
@@ -86,7 +87,7 @@ function PostInProfilItem({ loadingPost, data, edited = false }) {
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
                 {
-                    loadingPost ? (
+                    loadingPost && !isLoad ? (
                         [1, 2, 3].map((i) => (
                             <PostSkeleton key={i} />
                         ))

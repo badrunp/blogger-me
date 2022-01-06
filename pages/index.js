@@ -28,7 +28,7 @@ function Home() {
                   <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:px-8 lg:px-14">
                     <div className="md:col-span-3">
                       <div className="relative w-full h-[398px] overflow-hidden">
-                        <Skeleton className={'w-full h-full'} />
+                        <Skeleton className={'w-full h-full skeleton-1'} />
                       </div>
                     </div>
                     <div className="md:col-span-2 p-6 md:p-0">
@@ -36,17 +36,17 @@ function Home() {
 
 
                         <div className="flex flex-row items-start space-x-2 w-full">
-                          <Skeleton className={`w-1/3 h-3 lg:h-4`} />
-                          <Skeleton className={`w-1/5 h-3 lg:h-4`} />
+                          <Skeleton className={`w-1/3 h-3 lg:h-4 skeleton-1`} />
+                          <Skeleton className={`w-1/5 h-3 lg:h-4 skeleton-2`} />
                         </div>
 
-                        <ContentSkeleton />
+                        <ContentSkeleton className="skeleton-1" />
 
                         <AvatarSkeleton />
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 md:p-0 grid grid-cols-1 space-y-4 sm:space-y-0 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  <div className="p-6 md:p-0 grid grid-cols-1 space-y-4 sm:space-y-0 md:grid-cols-2 xl:grid-cols-3 gap-6 md:px-8 lg:px-14">
                     <PostSkeleton image="h-64" />
                     <PostSkeleton image="h-64" />
                     <PostSkeleton image="h-64" />

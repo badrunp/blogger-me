@@ -4,6 +4,7 @@ const initialState = {
     user: {},
     loading: false,
     error: null,
+    skip: 6,
     posts: {
         loading: true,
         isCreate: false,
@@ -11,12 +12,18 @@ const initialState = {
         updatePostLoading: false,
         validations: {},
         message: "",
-        data: []
+        data: [],
+        total: 0,
     }
 }
 
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
+        case profileConstant.UPDATE_SKIP_POST:
+            return {
+                ...state,
+                skip: action.payload.skip
+            }
         case profileConstant.RESET_PROFILE:
             return {
                 ...initialState
@@ -129,7 +136,8 @@ export default function profileReducer(state = initialState, action) {
                     ...state,
                     loading: false,
                     isCreate: false,
-                    data: action.payload.posts
+                    data: [...state.posts.data, ...action.payload.posts],
+                    total: action.payload.total
                 }
             }
         case postConstant.GET_POST_BY_AUTHOR_FAILURE:

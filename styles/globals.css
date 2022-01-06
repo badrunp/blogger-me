@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.skeleton-2::before,
+.skeleton-3::before,
+.skeleton-1::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    rgba(209, 213, 219, 1),
+    rgba(209, 213, 219, .3) 20%,
+    rgba(209, 213, 219, 1) 40%,
+    rgba(209, 213, 219, 1) 100%
+  );
+  background-size: 450px 400px;
+  animation: skeleton-1 1s linear infinite;
+}
+
+.skeleton-2::before {
+  animation-delay: 0.2.1s;
+}
+
+.skeleton-3::before {
+  animation-delay: 0.4.1s;
+}
+
+@keyframes skeleton-1 {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}

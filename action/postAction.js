@@ -62,7 +62,7 @@ export function createPost(data){
     }
 }
 
-export function getPostsByAuthor(id){
+export function getPostsByAuthor(id, limit = 6, skip = 0){
     return async (dispatch) => {
 
         dispatch({
@@ -71,17 +71,18 @@ export function getPostsByAuthor(id){
 
         try {
 
-            const resquest = await fetch('/api/blogs/' + id + '/author/6');
+            const resquest = await fetch(`/api/blogs/${id}/author/${limit}/${skip}`);
 
             const response = await resquest.json();
 
-            const {status, posts} = response;
+            const {status, posts, total} = response;
 
             if(status === 200 && posts){
                 dispatch({
                     type: postConstant.GET_POST_BY_AUTHOR_SUCCESS,
                     payload: {
-                        posts
+                        posts,
+                        total
                     }
                 })
 

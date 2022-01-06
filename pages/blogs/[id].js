@@ -92,7 +92,7 @@ function DetailBlog() {
                                 <div className="relative w-full h-80 lg:h-[488px] overflow-hidden">
                                     {
                                         !post || loading ? (
-                                            <Skeleton className={'w-full h-full'} />
+                                            <Skeleton className={'w-full h-full skeleton-1'} />
                                         ) : (
                                             <PostImage image={post.image} />
                                         )
@@ -101,7 +101,7 @@ function DetailBlog() {
 
                                 {
                                     !post || loading ? (
-                                        <ContentSkeleton />
+                                        <ContentSkeleton className="skeleton-1" />
                                     ) : (
                                         <>
                                             <PostCategoryAndTime
@@ -124,7 +124,7 @@ function DetailBlog() {
                             <div className="md:col-span-1 mt-9 md:mt-0 md:pt-[79px]">
                                 {
                                     loadingPosts ? (
-                                        <Skeleton className={'w-1/3 xl:w-full h-3'} />
+                                        <Skeleton className={'w-1/3 xl:w-full h-3 skeleton-1'} />
                                     ) : (
                                         posts && posts.length > 0 && (
                                             <h3 className="text-gray-700 text-lg font-semibold border-b pb-2 w-max border-gray-300 xl:w-full font-sans -mt-2">Terbaru dari {post?.author?.username}</h3>

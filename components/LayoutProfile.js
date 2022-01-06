@@ -52,7 +52,7 @@ export default function LayoutProfil({ children }) {
 
                                             Object.keys(user).length > 0 ? (
                                                 <Fragment>
-                                                    <div className=" w-32 h-32 sm:w-40 sm:h-40 rounded-full relative overflow-hidden bg-zinc-100 mx-auto">
+                                                    <div className=" w-32 h-32 sm:w-40 sm:h-40 rounded-full relative overflow-hidden mx-auto skeleton-1">
                                                         <Image src="/images/man.png" layout="fill" alt="default image" />
                                                     </div>
 
@@ -76,12 +76,12 @@ export default function LayoutProfil({ children }) {
                                                 </Fragment>
                                             ) : (
                                                 <>
-                                                    <div className="w-40 h-40 rounded-full bg-zinc-100 mx-auto animate-pulse"></div>
+                                                    <div className="w-40 h-40 rounded-full bg-zinc-100 mx-auto animate-pulse relative overflow-hidden skeleton-1"></div>
                                                     {
                                                         [...Array(3)].map((item, i) => (
                                                             <div key={i} className="w-full py-2 space-y-2">
-                                                                <Skeleton className={'w-2/6 h-4'} />
-                                                                <Skeleton className={'w-4/5 h-4'} />
+                                                                <Skeleton className={'w-2/6 h-4 skeleton-1'} />
+                                                                <Skeleton className={'w-4/5 h-4 skeleton-1'} />
                                                             </div>
                                                         ))
                                                     }

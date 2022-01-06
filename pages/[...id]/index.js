@@ -11,9 +11,10 @@ import LayoutProfil from "../../components/LayoutProfile"
 import PostInProfil from "../../components/posts/PostInProfil"
 import ProfilLink from "../../components/ProfilLink"
 import ValidationMessage from "../../components/ValidationMessage"
-import { postConstant } from "../../constant/redux"
+import { postConstant, profileConstant } from "../../constant/redux"
 import dynamic from "next/dynamic";
 import Textarea from '../../components/Textarea';
+import PostSkeleton from "../../components/posts/PostSkeleton"
 
 const MDEditor = dynamic(
     () => import("@uiw/react-md-editor"),
@@ -24,13 +25,14 @@ const MDEditor = dynamic(
 export default function Profil() {
 
     const { query: { id } } = useRouter();
-    const { user, loading, posts: { loading: loadingPost, validations, data, message, sendPostLoading, isCreate } } = useSelector(state => state.profile)
+    const { user, loading, skip, posts: { loading: loadingPost, validations, data, message, sendPostLoading, isCreate, total } } = useSelector(state => state.profile)
     const { user: auth } = useSelector(state => state.auth);
     const [uid, setUid] = useState();
     const dispatch = useDispatch();
     const usernameRef = useRef();
     const titleRef = useRef();
     const emailRef = useRef();
+    const [isLoad, setIsLoad] = useState(false)
 
     const [dataPost, setDataPost] = useState({
         title: '',
@@ -53,8 +55,8 @@ export default function Profil() {
 
     useEffect(() => {
 
-        if (id) {
-            if (id[0] === auth?._id) {
+        if (id && auth) {
+            if (id[0] === auth._id) {
                 if (id[1] === 'posts') {
                     if (isCreate || data.length === 0) {
                         dispatch(getPostsByAuthor(id[0]))
@@ -68,6 +70,7 @@ export default function Profil() {
 
 
     }, [id, auth])
+
 
     const handleSubmitEditProfil = (e) => {
         e.preventDefault();
@@ -114,6 +117,22 @@ export default function Profil() {
             ...dataPost,
             [name]: value
         })
+
+    }
+
+    const handleLoadPosts = async (e) => {
+        e.preventDefault()
+        let limit = 3;
+        setIsLoad(true)
+        if (data.length < total) {
+            const isLoad = await dispatch(getPostsByAuthor(id[0], limit, skip))
+            if (isLoad) {
+                dispatch({ type: profileConstant.UPDATE_SKIP_POST, payload: { skip: skip + limit } })
+                setIsLoad(false)
+            } else {
+                setIsLoad(false)
+            }
+        }
 
     }
 
@@ -175,9 +194,12 @@ export default function Profil() {
                         auth={auth}
                         id={id}
                         loadingPost={loadingPost}
+                        isLoad={isLoad}
                         data={data}
+                        total={total}
+                        handleLoadPosts={handleLoadPosts}
+                        page={id[1]}
                     />
-
 
                     {
                         auth && id && id[0] === auth._id && (
