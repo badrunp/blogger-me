@@ -1,5 +1,6 @@
 import dbConnect from '../../../../lib/dbConnect';
 import User from '../../../../models/User';
+import Post from '../../../../models/Posts';
 
 export default async function handler(req, res) {
 
@@ -10,13 +11,16 @@ export default async function handler(req, res) {
     const { id } = req.query;
     if (id) {
         User.findOne({ _id: id }, { password: 0 })
-            .then(user => {
+            .then(async user => {
 
                 if (!user) return res.status(404).json({ status: res.statusCode, message: "user not found!" })
 
+                const totalPost = await Post.find({author: id}).countDocuments()
+
                 return res.status(200).json({
                     status: res.statusCode,
-                    user
+                    user,
+                    total: totalPost
                 })
 
             })

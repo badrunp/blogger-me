@@ -13,14 +13,15 @@ export function getUserProfile(id) {
             const request = await fetch(`/api/user/${id}`)
             const response = await request.json();
 
-            const { status, user } = response;
+            const { status, user, total } = response;
 
             if (status === 200 && user) {
 
                 dispatch({
                     type: profileConstant.USER_PROFILE_SUCCESS,
                     payload: {
-                        user
+                        user,
+                        total
                     }
                 })
 

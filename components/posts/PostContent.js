@@ -5,7 +5,7 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
 })
 
 
-function PostContent({ content = '', size = 'text-xs', markdown = false }) {
+function PostContent({ content = '', size = 'text-xs', markdown = false, max = 100 }) {
     return (
         <>
         {
@@ -13,7 +13,7 @@ function PostContent({ content = '', size = 'text-xs', markdown = false }) {
                 <MarkdownPreview  source={content} />
             ) : (
             <p className={`block ${size} text-gray-600`}>
-                {content}
+                {content.substring(0,max)}{content.length >= max && '....'}
             </p>
             )
         }

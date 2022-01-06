@@ -13,7 +13,7 @@ import Skeleton from "./Skeleton";
 export default function LayoutProfil({ children }) {
 
     const dispatch = useDispatch()
-    const { user } = useSelector(state => state.profile)
+    const { user, total } = useSelector(state => state.profile)
     const { query: { id }, replace } = useRouter();
 
 
@@ -69,6 +69,10 @@ export default function LayoutProfil({ children }) {
                                                         value={user.title ? user.title : '-'}
                                                     />
                                                     <ProfilInfoItem
+                                                        label={'Total Posts'}
+                                                        value={total}
+                                                    />
+                                                    <ProfilInfoItem
                                                         label={'Bergabung pada'}
                                                         value={user.createdAt}
                                                     />
@@ -78,7 +82,7 @@ export default function LayoutProfil({ children }) {
                                                 <>
                                                     <div className="w-40 h-40 rounded-full bg-zinc-100 mx-auto animate-pulse relative overflow-hidden skeleton-1"></div>
                                                     {
-                                                        [...Array(3)].map((item, i) => (
+                                                        [...Array(4)].map((item, i) => (
                                                             <div key={i} className="w-full py-2 space-y-2">
                                                                 <Skeleton className={'w-2/6 h-4 skeleton-1'} />
                                                                 <Skeleton className={'w-4/5 h-4 skeleton-1'} />

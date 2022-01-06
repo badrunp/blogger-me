@@ -5,6 +5,7 @@ const initialState = {
     loading: false,
     error: null,
     skip: 6,
+    total: 0,
     posts: {
         loading: true,
         isCreate: false,
@@ -13,7 +14,6 @@ const initialState = {
         validations: {},
         message: "",
         data: [],
-        total: 0,
     }
 }
 
@@ -37,10 +37,7 @@ export default function profileReducer(state = initialState, action) {
             return {
                 ...initialState,
                 user: action.payload.user,
-                posts: {
-                    ...state.posts,
-                    data: []
-                }
+                total: action.payload.total
             }
         case profileConstant.USER_PROFILE_FAILURE:
             return {
@@ -130,14 +127,15 @@ export default function profileReducer(state = initialState, action) {
                 }
             }
         case postConstant.GET_POST_BY_AUTHOR_SUCCESS:
+            const array = [...state.posts.data, ...action.payload.posts]
+            const data = [...new Map(array.map(item => [item._id, item])).values()]
             return {
                 ...state,
                 posts: {
                     ...state,
                     loading: false,
                     isCreate: false,
-                    data: [...state.posts.data, ...action.payload.posts],
-                    total: action.payload.total
+                    data: data,
                 }
             }
         case postConstant.GET_POST_BY_AUTHOR_FAILURE:

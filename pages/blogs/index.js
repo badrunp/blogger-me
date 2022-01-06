@@ -73,6 +73,7 @@ function Blogs() {
                                                     time={item.createdAt}
                                                     image={item.image}
                                                     author={item.author}
+                                                    max={150}
                                                 />
                                             ))
                                         }

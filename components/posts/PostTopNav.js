@@ -39,6 +39,7 @@ function PostTopNav({
                         <PostContent
                             content={content}
                             size="text-sm"
+                            max={400}
                         />
 
                         {

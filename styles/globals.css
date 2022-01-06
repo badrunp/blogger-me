@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 .skeleton-2::before,
-.skeleton-3::before,
 .skeleton-1::before {
   position: absolute;
   content: "";
@@ -12,7 +11,7 @@
   background-image: linear-gradient(
     to right,
     rgba(209, 213, 219, 1),
-    rgba(209, 213, 219, .3) 20%,
+    rgba(209, 213, 219, .1) 20%,
     rgba(209, 213, 219, 1) 40%,
     rgba(209, 213, 219, 1) 100%
   );
@@ -24,9 +23,6 @@
   animation-delay: 0.2.1s;
 }
 
-.skeleton-3::before {
-  animation-delay: 0.4.1s;
-}
 
 @keyframes skeleton-1 {
   0% {

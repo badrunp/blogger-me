@@ -25,7 +25,7 @@ const MDEditor = dynamic(
 export default function Profil() {
 
     const { query: { id } } = useRouter();
-    const { user, loading, skip, posts: { loading: loadingPost, validations, data, message, sendPostLoading, isCreate, total } } = useSelector(state => state.profile)
+    const { user, loading, total, skip, posts: { loading: loadingPost, validations, data, message, sendPostLoading, isCreate } } = useSelector(state => state.profile)
     const { user: auth } = useSelector(state => state.auth);
     const [uid, setUid] = useState();
     const dispatch = useDispatch();
@@ -55,10 +55,11 @@ export default function Profil() {
 
     useEffect(() => {
 
-        if (id && auth) {
-            if (id[0] === auth._id) {
+        if (id) {
+            if (id[0] === auth?._id) {
+                console.log('ada');
                 if (id[1] === 'posts') {
-                    if (isCreate || data.length === 0) {
+                    if (isCreate || data.length == 0) {
                         dispatch(getPostsByAuthor(id[0]))
                     }
                 }
@@ -69,7 +70,7 @@ export default function Profil() {
         }
 
 
-    }, [id, auth])
+    }, [id])
 
 
     const handleSubmitEditProfil = (e) => {

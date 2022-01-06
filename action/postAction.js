@@ -75,14 +75,13 @@ export function getPostsByAuthor(id, limit = 6, skip = 0){
 
             const response = await resquest.json();
 
-            const {status, posts, total} = response;
+            const {status, posts} = response;
 
-            if(status === 200 && posts){
+            if(status == 200 && posts){
                 dispatch({
                     type: postConstant.GET_POST_BY_AUTHOR_SUCCESS,
                     payload: {
-                        posts,
-                        total
+                        posts
                     }
                 })
 

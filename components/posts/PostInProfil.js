@@ -28,15 +28,17 @@ function PostInProfil({ auth, id, loadingPost, data, isLoad, total, handleLoadPo
             {
                 page && page === 'posts' && (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
-                            {
-                                isLoad && (
-                                    [1, 2, 3].map((i) => (
-                                        <PostSkeleton key={i} />
-                                    ))
-                                )
-                            }
-                        </div>
+                        {
+                            isLoad && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+                                    {
+                                        [...Array(3)].map((d, i) => (
+                                            <PostSkeleton />
+                                        ))
+                                    }
+                                </div>
+                            )
+                        }
 
                         {
                             data.length > 0 && data.length < total && (

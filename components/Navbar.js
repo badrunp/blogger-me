@@ -16,6 +16,7 @@ import NavbarSearch from "./NavbarSearch"
 import NavbarDropdownLink from "./NavbarDropdownLink"
 import Dropdown from "./Dropdown"
 import { getPostHome } from "../action/postAction"
+import Line from "./Line"
 
 function Navbar() {
     const dispatch = useDispatch();
@@ -92,13 +93,16 @@ function Navbar() {
 
                                                 >
                                                     {
-                                                        navbarDropdownMenuLinksAuthMd.map(item => (
-                                                            <NavbarDropdownLink
-                                                                key={item.id}
-                                                                url={`/${auth.user._id}${item.link}`}
-                                                                icon={item.icon}
-                                                                title={item.title}
-                                                            />
+                                                        navbarDropdownMenuLinksAuthMd.map((item, i) => (
+                                                            <Fragment key={item.id}>
+                                                                <NavbarDropdownLink
+                                                                    key={item.id}
+                                                                    url={`/${auth.user._id}${item.link}`}
+                                                                    icon={item.icon}
+                                                                    title={item.title}
+                                                                />
+                                                                {i == 1 && <Line/>}
+                                                            </Fragment>
                                                         ))
                                                     }
                                                     <Menu.Item>
@@ -162,7 +166,7 @@ function Navbar() {
                                                                 icon={item.icon}
                                                                 title={item.title}
                                                             />
-                                                            {i == 1 && (<div className="w-full border-t mt-1 border-gray-300 h-1" />)}
+                                                            {i == 1 && <Line/>}
                                                         </Fragment>
                                                     ))
                                                 }
@@ -180,13 +184,15 @@ function Navbar() {
                                         ) : (
                                             <>
                                                 {
-                                                    navbarDropdownMenuLinksGuestMd.map(item => (
-                                                        <NavbarDropdownLink
-                                                            key={item.id}
-                                                            url={`${item.link}`}
-                                                            icon={item.icon}
-                                                            title={item.title}
-                                                        />
+                                                    navbarDropdownMenuLinksGuestMd.map((item, i) => (
+                                                        <Fragment key={item.id}>
+                                                            <NavbarDropdownLink
+                                                                url={`${item.link}`}
+                                                                icon={item.icon}
+                                                                title={item.title}
+                                                            />
+                                                            {i == 1 && <Line/>}
+                                                        </Fragment>
                                                     ))
                                                 }
 

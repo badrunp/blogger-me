@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, updatePost } from "../../action/postAction"
 import { postConstant } from "../../constant/redux"
@@ -88,7 +88,7 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
                 {
                     loadingPost && !isLoad ? (
-                        [1, 2, 3].map((i) => (
+                        [...Array(3)].map((d,i) => (
                             <PostSkeleton key={i} />
                         ))
                     ) : (
@@ -137,11 +137,11 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
             />
 
             {
-                message && !loading ? (
-                    <div className="fixed top-0 left-4 z-50">
-                        <Alert message={message} className="bg-emerald-500 text-white w-52" />
+                message && (
+                    <div className="fixed top-2 left-2 md:left-3 md:top-3 z-50">
+                        <Alert message={message} className="bg-emerald-500 text-white w-60" />
                     </div>
-                ) : null
+                ) 
             }
         </>
     )

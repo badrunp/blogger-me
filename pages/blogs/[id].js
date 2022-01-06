@@ -19,7 +19,7 @@ function DetailBlog() {
     const { query: { id } } = useRouter()
 
     const { posts: posts_1 } = useSelector((state) => state.posts)
-    const {blog_posts: {data: posts_2}} = useSelector(state => state.posts)
+    const { blog_posts: { data: posts_2 } } = useSelector(state => state.posts)
     const { posts: { data: posts_3 } } = useSelector(state => state.profile)
     const postsList = [...posts_1, ...posts_2, ...posts_3] || []
 
@@ -110,10 +110,11 @@ function DetailBlog() {
                                                 size="text-base"
                                             />
 
-                                            <div className="flex flex-col items-start justify-start space-y-2">
+                                            <div className="flex flex-col items-start justify-start space-y-6">
                                                 <PostTitle title={post.title} size="text-3xl" redirect={false} />
 
-                                                <PostContent content={post.summary} markdown={true} />
+                                                <PostContent content={post.content} markdown={true} />
+
                                             </div>
                                         </>
                                     )
@@ -124,7 +125,7 @@ function DetailBlog() {
                             <div className="md:col-span-1 mt-9 md:mt-0 md:pt-[79px]">
                                 {
                                     loadingPosts ? (
-                                        <Skeleton className={'w-1/3 xl:w-full h-3 skeleton-1'} />
+                                        <Skeleton className={'w-1/3 xl:w-full h-5 skeleton-1'} />
                                     ) : (
                                         posts && posts.length > 0 && (
                                             <h3 className="text-gray-700 text-lg font-semibold border-b pb-2 w-max border-gray-300 xl:w-full font-sans -mt-2">Terbaru dari {post?.author?.username}</h3>
@@ -134,7 +135,9 @@ function DetailBlog() {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 gap-6 lg:ga-8 mt-6">
                                     {
                                         loadingPosts ? (
-                                            <PostSkeleton avatar={false} image="h-[140px]" heightTitle="h-2" heightContent="h-3" />
+                                            [...Array(3)].map((data, i) => (
+                                                <PostSkeleton key={i} avatar={false} image="h-[140px]" heightTitle="h-2" heightContent="h-3" />
+                                            ))
                                         ) : (
                                             posts && posts.map((item) => (
                                                 <PostListItem
@@ -146,7 +149,7 @@ function DetailBlog() {
                                                     time={item.createdAt}
                                                     image={item.image}
                                                     avatar={false}
-                                                    imageSize="h-[140px]"
+                                                    imageSize="h-[220px] xl:h-[140px]"
                                                 />
                                             ))
                                         )

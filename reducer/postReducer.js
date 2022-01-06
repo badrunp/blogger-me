@@ -54,13 +54,15 @@ export default function postReducer(state = initialState, action) {
                 }
             }
         case postConstant.GET_BLOG_POSTS_SUCCESS:
+            const array = [...state.blog_posts.data, ...action.payload.posts]
+            const data = [...new Map(array.map(item => [item._id, item])).values()]
             return {
                 ...state,
                 total: action.payload.total,
                 blog_posts: {
                     ...state.blog_posts,
                     loading: false,
-                    data: [...state.blog_posts.data, ...action.payload.posts]
+                    data: data
                 }
             }
         case postConstant.UPDATE_SKIP_POST:

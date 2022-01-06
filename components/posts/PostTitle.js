@@ -6,7 +6,7 @@ function PostTitle({ id, title, size = 'text-lg', redirect = true }) {
             {
                 redirect ? (
                     <Link href={`/blogs/${id}`}>
-                        <a className={`block ${size} font-semibold text-gray-800 hover:underline w-max`}>{title}</a>
+                        <a className={`block ${size} font-semibold text-gray-800 hover:underline w-full break-all leading-6`}>{title}</a>
                     </Link>
                 ) : (
                     <h1 className={`block ${size} font-semibold text-gray-800 w-max`}>{title}</h1>
