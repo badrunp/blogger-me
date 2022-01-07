@@ -68,7 +68,7 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
         const array = []
         
         Object.keys(datas).map(item => {
-            if (item == "content" && dataContent == "") {
+            if (item == "content" && dataPostContent == "") {
                 array.push(item)
             } else if (dataPost[item] == "") {
                 array.push(item)
