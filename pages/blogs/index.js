@@ -91,7 +91,7 @@ function Blogs() {
                             )
                         }
                     {
-                        posts?.length > 6 && count == 3 && (
+                        posts.length > 6 && count == 3 && (
                             <Button onClick={handleLoadPosts} className="primary mx-auto">Selanjutnya</Button>
                         )
                     }
