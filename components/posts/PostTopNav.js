@@ -34,6 +34,7 @@ function PostTopNav({
                             id={id}
                             title={title}
                             size="text-3xl"
+                            leading='none'
                         />
 
                         <PostContent
