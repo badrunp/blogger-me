@@ -122,7 +122,7 @@ function Login() {
                         <Button type="submit" disabled={loading} className={`${loading ? 'cursor-wait' : 'cursor-pointer'} primary`}>{loading ? 'Loading...' : 'Masuk'}</Button>
 
                         <AuthFooter>
-                            Tidak punya akun? silahkan <Link href="/register"><a className="inline-block underline text-blue-500">Daftar</a></Link>
+                            Tidak punya akun? silahkan <Link href="/register"><a className="inline-block underline text-blue-600">Daftar</a></Link>
                         </AuthFooter>
                     </form>
                 </div>

@@ -27,7 +27,7 @@ function Navbar() {
 
 
     useEffect(() => {
-        if (posts.length === 0 || loading) {
+        if (loading) {
             dispatch(getPostHome())
         }
     }, [])
@@ -55,10 +55,10 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 border-b md:border-none border-gray-200 bg-white md:bg-blue-500  md:shadow z-50 sticky top-0">
+            <div className="w-full h-16 border-b md:border-none border-gray-200 bg-white md:bg-blue-600  md:shadow z-50 sticky top-0">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
-                        <Logo />
+                        <Logo color="md:text-white" />
 
                         <NavbarSearch active={showSearch} closeSearch={setShowSearch} />
 

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .primary{
-  @apply bg-blue-500 text-white font-medium text-sm px-6 hover:bg-blue-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1 focus:outline-none
+  @apply bg-blue-600 text-white font-medium text-sm px-6 hover:bg-blue-700 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1 focus:outline-none
 }
 .danger{
   @apply bg-red-500 text-white font-medium text-sm px-6 hover:bg-red-600 shadow-sm focus:ring-2 border-transparent focus:ring-offset-1 focus:outline-none focus:ring-red-300
@@ -17,10 +17,10 @@
   height: 100%;
   background-image: linear-gradient(
     to right,
-    rgba(209, 213, 219, 1),
+    rgba(209, 213, 219, .6),
     rgba(209, 213, 219, .1) 20%,
-    rgba(209, 213, 219, 1) 40%,
-    rgba(209, 213, 219, 1) 100%
+    rgba(209, 213, 219, .6) 40%,
+    rgba(209, 213, 219, .6) 100%
   );
   background-size: 450px 400px;
   animation: skeleton-1 1s linear infinite;

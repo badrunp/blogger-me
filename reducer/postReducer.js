@@ -5,17 +5,22 @@ const initialState = {
     posts: [],
     total: 0,
     error: null,
+    count: 3,
     blog_posts: {
         data: [],
         loading: true,
-        skip: 6
+        skip: 6,
     }
 }
 
 export default function postReducer(state = initialState, action) {
 
     switch (action.type) {
-
+        case postConstant.UPDATE_COUNT_POST:
+            return {
+                ...state,
+                count: action.payload.count
+            }
         case postConstant.GET_POST_REQUEST:
             return {
                 ...state,
@@ -58,7 +63,6 @@ export default function postReducer(state = initialState, action) {
             const data = [...new Map(array.map(item => [item._id, item])).values()]
             return {
                 ...state,
-                total: action.payload.total,
                 blog_posts: {
                     ...state.blog_posts,
                     loading: false,

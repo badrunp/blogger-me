@@ -1,14 +1,18 @@
 import Button from "../Button"
 import PostSkeleton from "./PostSkeleton"
+import useResize from '../../hook/resize'
 
 function Load({ isLoad, data, total, handleLoadPosts }) {
+
+    const {width} = useResize()
+
     return (
         <>
             {
                 isLoad && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
                         {
-                            [...Array(3)].map((d, i) => (
+                            [...Array(width < 640 ? 1 : 3)].map((d, i) => (
                                 <PostSkeleton key={i} />
                             ))
                         }

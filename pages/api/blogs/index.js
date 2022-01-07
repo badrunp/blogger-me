@@ -13,13 +13,11 @@ async function handler(req, res) {
 
     try {
 
-        const total = await Post.countDocuments({})
         const posts = await Post.find({}).populate({ path: 'author', model: User }).limit(parseInt(limit) || 'none').skip(parseInt(skip) || 'none').sort({'createdAt': parseInt(order) || 1})
 
         return res.status(200).json({
             status: res.statusCode,
-            posts,
-            total
+            posts
         })
 
 

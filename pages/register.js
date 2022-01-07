@@ -134,7 +134,7 @@ function Register() {
 
 
                         <AuthFooter>
-                            Sudah punya akun? silahkan <Link href="/login"><a className="inline-block underline text-blue-500">Masuk</a></Link>
+                            Sudah punya akun? silahkan <Link href="/login"><a className="inline-block underline text-blue-600">Masuk</a></Link>
                         </AuthFooter>
                     </form>
                 </div>

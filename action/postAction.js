@@ -255,17 +255,19 @@ export function getPostBlog(skip = 0, limit = 6){
             
             const request = await fetch(`/api/blogs?limit=${limit}&skip=${skip}&order=-1`)
 
-            const {posts, total} = await request.json();
+            const {posts} = await request.json();
 
             dispatch({
                 type: postConstant.GET_BLOG_POSTS_SUCCESS,
                 payload: {
                     posts,
-                    total
                 }
             })
 
-            return true;
+            return {
+                success: true,
+                count: posts.length
+            };
 
         } catch (error) {
             dispatch({
@@ -275,7 +277,9 @@ export function getPostBlog(skip = 0, limit = 6){
                 }
             })
 
-            return false;
+            return {
+                success: false
+            };
         }
 
     }

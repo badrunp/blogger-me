@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux";
+import useResize from '../hook/resize'
 
 function NavbarSearch({ active, closeSearch }) {
 
@@ -8,15 +9,13 @@ function NavbarSearch({ active, closeSearch }) {
     const [data, setData] = useState([])
     const [value, setValue] = useState('')
     const [isFocus, setIsFocus] = useState(false)
-    const [size, setSize] = useState({
-        width: 0,
-        heigth: 0
-    })
 
     const { posts: posts_1 } = useSelector((state) => state.posts)
     const {blog_posts: {data: posts_2}} = useSelector(state => state.posts)
     const { posts: { data: posts_3 } } = useSelector(state => state.profile)
     const postsList = [...posts_1, ...posts_2, ...posts_3] || []
+
+    const {width} = useResize()
 
     const dataResult = useRef()
     const input = useRef()
@@ -61,16 +60,6 @@ function NavbarSearch({ active, closeSearch }) {
     }
 
     useEffect(() => {
-
-        setSize({
-            ...size,
-            width: window.innerWidth,
-            heigth: window.innerHeight
-        })
-
-    }, [])
-
-    useEffect(() => {
         window.addEventListener('click', eventClick)
 
         return () => {
@@ -78,24 +67,8 @@ function NavbarSearch({ active, closeSearch }) {
         }
     })
 
-    useEffect(() => {
-        window.addEventListener('resize', eventResize)
-
-        return () => {
-            window.removeEventListener('resize', eventResize)
-        }
-    }, [size])
-
-    const eventResize = useCallback((e) => {
-        setSize({
-            ...size,
-            width: window.innerWidth,
-            heigth: window.innerHeight
-        })
-    })
-
     const eventClick = useCallback((e) => {
-        if (size.width < 768) {
+        if (width < 768) {
             inputRef.current.focus()
         }
 

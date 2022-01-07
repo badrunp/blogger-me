@@ -12,30 +12,29 @@ import { postConstant } from "../../constant/redux";
 function Blogs() {
 
     const dispatch = useDispatch()
-    const { total, blog_posts: { loading, data: posts, skip } } = useSelector(state => state.posts)
+    const { count, blog_posts: { loading, data: posts, skip } } = useSelector(state => state.posts)
     const [isLoad, setIsLoad] = useState(false)
 
     useEffect(() => {
 
-        if (posts.length === 0) {
+        if(loading){
             dispatch(getPostBlog())
         }
 
-    }, [posts])
+    }, [])
 
     const handleLoadPosts = async (e) => {
         e.preventDefault()
 
         let limit = 3;
         setIsLoad(true)
-        if (posts.length < total) {
-            const isLoad = await dispatch(getPostBlog(skip, limit))
-            if (isLoad) {
-                dispatch({ type: postConstant.UPDATE_SKIP_POST, payload: { skip: skip + limit } })
-                setIsLoad(false)
-            } else {
-                setIsLoad(false)
-            }
+        const { success, count } = await dispatch(getPostBlog(skip, limit))
+        if (success) {
+            dispatch({ type: postConstant.UPDATE_SKIP_POST, payload: { skip: skip + limit } })
+            dispatch({ type: postConstant.UPDATE_COUNT_POST, payload: { count } })
+            setIsLoad(false)
+        } else {
+            setIsLoad(false)
         }
 
     }
@@ -93,7 +92,7 @@ function Blogs() {
                         }
                     </div>
                     {
-                        posts && posts.length < total && (
+                        posts?.length > 0 && count == 3 && (
                             <Button onClick={handleLoadPosts} className="primary mx-auto mb-8">Selanjutnya</Button>
                         )
                     }
