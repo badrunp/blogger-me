@@ -54,7 +54,7 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 bg-white md:bg-blue-600 border-b shadow-sm md:shadow z-50 sticky top-0">
+            <div className="w-full h-16 bg-white md:bg-blue-600 border-b md:border-transparent shadow-sm md:shadow z-50 sticky top-0">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
                         <Logo color="text-gray-700 md:text-white" />
