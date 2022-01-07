@@ -82,7 +82,7 @@ function DetailBlog() {
                                         <AvatarSkeleton className="mt-2" />
                                     ) : (
                                         <Avatar
-                                            image={'/images/img-blog4.png'}
+                                            image={post?.author?.image}
                                             name={post?.author?.username}
                                             title={post?.author?.title}
                                             id={post?.author?._id}
