@@ -15,12 +15,12 @@ export const footerPageMenuLinks = [
 export const footerPageAuthLinks = [
     {
         id: 1,
-        label: 'Sign In',
+        label: 'Masuk',
         link: '/login'
     },
     {
         id: 2,
-        label: 'Sign Up',
+        label: 'Daftar',
         link: '/register'
     }
 ]
