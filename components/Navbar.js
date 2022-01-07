@@ -54,10 +54,10 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 bg-blue-600  md:shadow z-50 sticky top-0">
+            <div className="w-full h-16 bg-white md:bg-blue-600 border-b shadow-sm md:shadow z-50 sticky top-0">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
-                        <Logo color="text-white" />
+                        <Logo color="text-gray-700 md:text-white" />
 
                         <NavbarSearch active={showSearch} closeSearch={setShowSearch} />
 
@@ -128,7 +128,7 @@ function Navbar() {
                             <div className="block md:hidden mr-2">
                                 <button className="h-full flex items-center cursor-pointer focus:outline-none" onClick={() => setShowSearch(!showSearch)}>
                                     {
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg>
                                     }
@@ -138,7 +138,7 @@ function Navbar() {
                             <div className="block md:hidden">
                                 <Dropdown title={
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
                                     </svg>
                                 }

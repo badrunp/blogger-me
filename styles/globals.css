@@ -39,3 +39,7 @@
     background-position: 450px 0;
   }
 }
+
+code {
+  @apply w-6
+}

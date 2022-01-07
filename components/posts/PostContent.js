@@ -10,7 +10,7 @@ function PostContent({ content = '', size = 'text-xs', markdown = false, max = 1
         <>
         {
             markdown ? (
-                <MarkdownPreview  source={content} />
+                <MarkdownPreview source={content} className="!overflow-x-hidden" />
             ) : (
             <p className={`block ${size} text-gray-600`}>
                 {content.substring(0,max)}{content.length >= max && '....'}
