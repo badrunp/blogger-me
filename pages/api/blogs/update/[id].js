@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
 
-    const {title, category, content,summary} = req.body;
+    const {title, category, content,summary, image} = req.body;
 
     const validations = validate([
         {
@@ -46,7 +46,8 @@ export default async function handler(req, res) {
                     title,
                     category,
                     content,
-                    summary
+                    summary,
+                    image
                 } }, { new: true })
                 return res.status(200).json({
                     status: res.statusCode,

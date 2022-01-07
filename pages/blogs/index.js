@@ -90,12 +90,12 @@ function Blogs() {
                                 </>
                             )
                         }
-                    </div>
                     {
                         posts?.length > 0 && count == 3 && (
-                            <Button onClick={handleLoadPosts} className="primary mx-auto mb-8">Selanjutnya</Button>
+                            <Button onClick={handleLoadPosts} className="primary mx-auto">Selanjutnya</Button>
                         )
                     }
+                    </div>
                 </Container>
             </Layout>
         </>

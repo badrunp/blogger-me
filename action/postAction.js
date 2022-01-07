@@ -15,9 +15,7 @@ export function createPost(data){
                 body: JSON.stringify(data)
             })
 
-            const response = await request.json();
-
-            const {post, status, validations, message} = response;
+            const {post, status, validations, message} = await request.json();
 
             if(status === 402 && validations){
                 dispatch({
@@ -175,7 +173,7 @@ export function updatePost(id, data){
             }
 
             if(status === 200 && post){
-
+                
                 dispatch({
                     type: postConstant.UPDATE_POST_SUCCESS,
                     payload: {

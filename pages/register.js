@@ -90,7 +90,7 @@ function Register() {
 
                 {
                     message && (
-                        <Alert className="bg-red-500 text-white" message={message} />
+                        <Alert className="bg-red-500 text-white mt-6" message={message} />
                     )
                 }
 

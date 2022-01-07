@@ -83,13 +83,13 @@ function Login() {
 
                 {
                     message && (
-                        <Alert className="bg-red-500 text-white" message={message} />
+                        <Alert className="bg-red-500 text-white mt-6" message={message} />
                     )
                 }
 
                 {
                     messageSuccess && (
-                        <Alert className="bg-emerald-500 text-white" message={messageSuccess} />
+                        <Alert className="bg-emerald-500 text-white mt-6" message={messageSuccess} />
                     )
                 }
 

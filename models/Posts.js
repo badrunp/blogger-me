@@ -20,6 +20,11 @@ const blogSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    image: {
+        type: String,
+        trim: true,
+        required: true
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'

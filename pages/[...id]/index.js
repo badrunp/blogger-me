@@ -32,13 +32,16 @@ export default function Profil() {
     const titleRef = useRef();
     const emailRef = useRef();
     const [isLoad, setIsLoad] = useState(false)
+    const [uploadError, setUploadError] = useState('')
+    const [isUpload, setIsUpload] = useState(false)
 
 
     const [dataPost, setDataPost] = useState({
         title: '',
         category: '',
-        summary: ''
+        summary: '',
     })
+    const [image, setImage] = useState('')
     const [dataContent, setDataContent] = useState("");
 
     useEffect(() => {
@@ -49,7 +52,6 @@ export default function Profil() {
             emailRef.current.value = user.email ? user.email : '';
             setUid(user._id)
         }
-
 
     }, [user, auth, id])
 
@@ -66,6 +68,8 @@ export default function Profil() {
                 dispatch(getPostsByAuthor(id[0]))
             }
         }
+
+        return () => setUploadError('')
 
     }, [id, auth])
 
@@ -89,15 +93,60 @@ export default function Profil() {
 
     const handleSubmitCreatePost = async (e) => {
         e.preventDefault();
-
-        const data = {
+        const datas = {
             title: dataPost.title,
             category: dataPost.category,
             summary: dataPost.summary,
             content: dataContent
         }
+        
+        const array = []
+        
+        Object.keys(data).map(item => {
+            if (item == "content" && dataContent == "") {
+                array.push(item)
+            } else if (dataPost[item] == "") {
+                array.push(item)
+            }
+        })
+        
+        if (array.length === 0) {
+            if (image != "") {
+                setIsUpload(true)
+                const data = new FormData();
+                data.append('file', image)
+                data.append('upload_preset', 'blogger-me')
+                data.append('cloud_name', 'dha5gfvpi');
 
-        const isPost = await dispatch(createPost(data))
+                try {
+
+                    const request = await fetch('https://api.cloudinary.com/v1_1/dha5gfvpi/image/upload', {
+                        method: "POST",
+                        body: data
+                    })
+
+                    const { url } = await request.json()
+                    datas.image = url
+                    setIsUpload(false)
+
+                } catch (error) {
+                    console.log(error);
+                    setUploadError('Something Wrong')
+                    setTimeout(() => {
+                        setUploadError('')
+                    }, 3000)
+                    return;
+                }
+            } else {
+                setUploadError("Image is required")
+                setTimeout(() => {
+                    setUploadError('')
+                }, 3000)
+                return;
+            }
+        }
+
+        const isPost = await dispatch(createPost(datas))
         if (isPost) {
             setDataPost({
                 title: '',
@@ -105,6 +154,7 @@ export default function Profil() {
                 summary: ''
             })
             setDataContent('');
+            setImage('')
             setTimeout(() => {
                 dispatch({ type: postConstant.USER_POST_CLEAR_MESSAGE })
             }, 3000)
@@ -207,6 +257,15 @@ export default function Profil() {
                     {
                         auth && id && id[0] === auth._id && (
                             <form className={`${id && id[1] === 'create-post' ? 'block' : 'hidden'}`} onSubmit={handleSubmitCreatePost}>
+
+                                {
+                                    uploadError && (
+                                        <div className="fixed top-2 left-2 md:left-3 md:top-3 z-50">
+                                            <Alert message={uploadError} className="bg-red-500 text-white mb-6 w-60" />
+                                        </div>
+                                    )
+                                }
+
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                                     <div className="block">
                                         <AuthLabel className="text-sm md:text-base" title={'Title'} inputFor={'title'} />
@@ -234,6 +293,15 @@ export default function Profil() {
 
                                     </div>
                                 </div>
+                                <div className="grid grid-cols-1 mb-6">
+                                    <AuthLabel className="text-sm md:text-base" title={'Photo'} inputFor={'image'} />
+                                    <Input
+                                        type="file"
+                                        onChange={(e) => setImage(e.target.files[0])}
+
+                                    />
+
+                                </div>
                                 <div className="grid grid-cols-1 gap-6 mb-6">
                                     <div className="block">
                                         <AuthLabel className="text-sm md:text-base" title={'Summary'} inputFor={'summary'} />
@@ -256,7 +324,7 @@ export default function Profil() {
 
                                 </div>
 
-                                <Button type="submit" className="primary">{sendPostLoading ? 'Loading...' : 'Tambah'}</Button>
+                                <Button type="submit" className="primary">{sendPostLoading || isUpload ? (isUpload ? 'Upload file...' : 'Loading...') : 'Tambah'}</Button>
                             </form>
                         )
                     }

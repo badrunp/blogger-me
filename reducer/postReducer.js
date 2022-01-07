@@ -41,7 +41,8 @@ export default function postReducer(state = initialState, action) {
                         title: post.title,
                         category: post.category,
                         summary: post.summary,
-                        content: post.content
+                        content: post.content,
+                        image: post.image
                     }
                 }
                 return item;

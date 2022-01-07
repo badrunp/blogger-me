@@ -6,6 +6,7 @@ import ValidationMessage from '../ValidationMessage';
 import Modal from '../Modal';
 import ModalTitle from '../ModalTitle';
 import Textarea from '../Textarea';
+import Image from 'next/image'
 
 
 const MDEditor = dynamic(
@@ -18,12 +19,15 @@ function PostEdit({
     modalActive,
     setModalActive,
     dataPost,
+    image,
+    setImage,
     dataPostContent,
     handleChangeInput,
     handleChangeContent,
     handleClick,
     loading,
-    validations
+    validations,
+    isUpload
 }) {
     return (
         <>
@@ -62,6 +66,17 @@ function PostEdit({
 
                     </div>
                 </div>
+                <div className="grid grid-cols-1 mb-6">
+                    <AuthLabel className="text-sm md:text-base" title={'Photo'} inputFor={'image'} />
+                    <Input
+                        type="file"
+                        onChange={(e) => setImage(e.target.files[0])}
+
+                    />
+                    <div className='w-32 h-32 relative mt-6'>
+                        <Image src={image} alt={image} layout='fill' />
+                    </div>
+                </div>
                 <div className="grid grid-cols-1 gap-6 mb-6">
                     <div className="block">
                         <AuthLabel className="text-sm md:text-base" title={'Summary'} inputFor={'summary'} />
@@ -85,7 +100,7 @@ function PostEdit({
                 </div>
 
                 <div className="flex flex-row items-center space-x-3">
-                    <Button className="primary" onClick={handleClick}>{loading ? 'Loading...' : 'Kirim'}</Button>
+                    <Button className="primary" onClick={handleClick}>{loading || isUpload ? (isUpload ? 'Upload file...' : 'Loading...') : 'Kirim'}</Button>
                     <Button className="danger" onClick={() => setModalActive(false)}>Kembali</Button>
                 </div>
             </Modal>

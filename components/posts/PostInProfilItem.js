@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, updatePost } from "../../action/postAction"
 import { postConstant } from "../../constant/redux"
+import Alert from "../Alert"
 import PostDelete from "./PostDelete"
 import PostEdit from "./PostEdit"
 import PostListItem from "./PostListItem"
@@ -20,6 +21,12 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
         summary: ''
     })
     const [dataPostContent, setDataPostContent] = useState('')
+    const [image, setImage] = useState('')
+    const [newImage, setNewImage] = useState('')
+    const [isUpload, setIsUpload] = useState('')
+    const [uploadError, setUploadError] = useState('')
+
+
 
     const handleChangeInput = (e) => {
         setDataPost({
@@ -32,7 +39,7 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
         setDataPostContent(value);
     }
 
-    const handleClickModalEdit = (id, title, category, content, summary) => {
+    const handleClickModalEdit = (id, title, category, content, summary, image) => {
         setDataPost({
             ...dataPost,
             id,
@@ -42,7 +49,7 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
         })
 
         setDataPostContent(content)
-
+        setImage(image)
         setModalEditActive(true)
 
     }
@@ -50,14 +57,55 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
 
     const handleClickEdit = async () => {
 
-        const data = {
+        const datas = {
             title: dataPost.title,
             category: dataPost.category,
             summary: dataPost.summary,
-            content: dataPostContent
+            content: dataPostContent,
+            image: image
         }
 
-        const isUpdate = await dispatch(updatePost(dataPost.id, data))
+        const array = []
+        
+        Object.keys(data).map(item => {
+            if (item == "content" && dataContent == "") {
+                array.push(item)
+            } else if (dataPost[item] == "") {
+                array.push(item)
+            }
+        })
+        
+        if (array.length === 0) {
+            if (newImage != "") {
+                setIsUpload(true)
+                const data = new FormData();
+                data.append('file', newImage)
+                data.append('upload_preset', 'blogger-me')
+                data.append('cloud_name', 'dha5gfvpi');
+
+                try {
+
+                    const request = await fetch('https://api.cloudinary.com/v1_1/dha5gfvpi/image/upload', {
+                        method: "POST",
+                        body: data
+                    })
+
+                    const { url } = await request.json()
+                    datas.image = url
+                    setIsUpload(false)
+
+                } catch (error) {
+                    console.log(error);
+                    setUploadError('Something Wrong')
+                    setTimeout(() => {
+                        setUploadError('')
+                    }, 3000)
+                    return;
+                }
+            }
+        }
+
+        const isUpdate = await dispatch(updatePost(dataPost.id, datas))
         if (isUpdate) {
             setModalEditActive(false)
             setTimeout(() => {
@@ -87,7 +135,7 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 ">
                 {
                     loadingPost && !isLoad ? (
-                        [...Array(3)].map((d,i) => (
+                        [...Array(3)].map((d, i) => (
                             <PostSkeleton key={i} />
                         ))
                     ) : (
@@ -120,6 +168,9 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
                 modalActive={modalEditActive}
                 setModalActive={setModalEditActive}
                 dataPost={dataPost}
+                image={image}
+                setImage={setNewImage}
+                isUpload={isUpload}
                 dataPostContent={dataPostContent}
                 handleChangeInput={handleChangeInput}
                 handleChangeContent={handleChangeContent}
@@ -134,6 +185,14 @@ function PostInProfilItem({ loadingPost, data, edited = false, isLoad }) {
                 handleClick={handleClickDelete}
                 loading={loading}
             />
+
+            {
+                uploadError && (
+                    <div className="fixed top-2 left-2 md:left-3 md:top-3 z-50">
+                        <Alert message={uploadError} className="bg-red-500 text-white mb-6 w-60" />
+                    </div>
+                )
+            }
         </>
     )
 }

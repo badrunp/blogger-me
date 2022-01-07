@@ -9,7 +9,7 @@ export default async function handler(req,res){
     
     await dbConnect();
 
-    const {title, category, content, summary} = req.body;
+    const {title, category, content, summary, image} = req.body;
     const {_TOKEN} = req.cookies;
 
 
@@ -47,6 +47,7 @@ export default async function handler(req,res){
         category,
         summary,
         content,
+        image,
         author: _id
     })
 
