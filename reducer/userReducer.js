@@ -11,6 +11,14 @@ const initialState = {
 
 export default function userReducer(state = initialState, action){
     switch(action.type){
+        case userConstant.UPDATE_PHOTO_PROFILE_SUCCESS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    image: action.payload.image
+                }
+            }
         case userConstant.USER_CLEAR_VALIDATIONS:
             return {
                 ...state,

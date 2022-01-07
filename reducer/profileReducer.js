@@ -3,6 +3,7 @@ import { postConstant, profileConstant } from "../constant/redux";
 const initialState = {
     user: {},
     loading: false,
+    updatePhoto: true,
     error: null,
     skip: 6,
     total: 0,
@@ -19,6 +20,26 @@ const initialState = {
 
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
+        case profileConstant.UPDATE_PHOTO_PROFILE_REQUEST:
+            return {
+                ...state,
+                updatePhoto: true
+            }
+        case profileConstant.UPDATE_PHOTO_PROFILE_SUCCESS:
+            return {
+                ...state,
+                updatePhoto: false,
+                user: {
+                    ...state.user,
+                    image: action.payload.image
+                }
+            }
+        case profileConstant.UPDATE_PHOTO_PROFILE_FAILURE:
+            return {
+                ...state,
+                error: action.payload.error,
+                updatePhoto: false
+            }
         case profileConstant.UPDATE_TOTAL_POST:
             return {
                 ...state,

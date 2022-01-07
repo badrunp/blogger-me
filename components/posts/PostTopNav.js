@@ -45,7 +45,7 @@ function PostTopNav({
                         {
                             Object.keys(author).length > 0 && (
                                 <Avatar
-                                    image={'/images/img-blog3.png'}
+                                    image={author?.image}
                                     name={author.username}
                                     title={author.title}
                                     id={author._id}

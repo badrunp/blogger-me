@@ -10,7 +10,6 @@ import AvatarSkeleton from "../components/AvatarSkeleton";
 import PostSkeleton from "../components/posts/PostSkeleton";
 
 
-
 function Home() {
   const { posts: posts_home, loading } = useSelector((state) => state.posts)
   const posts = posts_home && posts_home.slice(1, 8) || []

@@ -102,14 +102,14 @@ export default function Profil() {
         
         const array = []
         
-        Object.keys(data).map(item => {
+        Object.keys(datas).map(item => {
             if (item == "content" && dataContent == "") {
                 array.push(item)
             } else if (dataPost[item] == "") {
                 array.push(item)
             }
         })
-        
+
         if (array.length === 0) {
             if (image != "") {
                 setIsUpload(true)

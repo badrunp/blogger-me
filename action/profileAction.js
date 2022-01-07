@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import jsonwebtoken from "jsonwebtoken";
-import { profileConstant, userConstant } from "../constant/redux"
+import { postConstant, profileConstant, userConstant } from "../constant/redux"
 
 export function getUserProfile(id) {
     return async (dispatch) => {
@@ -45,7 +45,7 @@ export function getUserProfile(id) {
     }
 }
 
-export function updateUserProfil(id, data){
+export function updateUserProfil(id, data) {
     return async (dispatch) => {
 
         dispatch({
@@ -53,7 +53,7 @@ export function updateUserProfil(id, data){
         });
 
         try {
-            
+
             const request = await fetch('/api/user/' + id + '/update', {
                 method: "POST",
                 headers: {
@@ -63,9 +63,9 @@ export function updateUserProfil(id, data){
             });
             const response = await request.json();
 
-            const {status, token, message} = response;
+            const { status, token, message } = response;
 
-            if(status !== 200 || !token){
+            if (status !== 200 || !token) {
 
                 return false;
 
@@ -100,6 +100,56 @@ export function updateUserProfil(id, data){
                 }
             })
 
+            return false;
+        }
+
+    }
+}
+
+export function updateUserPhoto(id, img) {
+    return async (dispatch) => {
+
+        dispatch({ type: profileConstant.UPDATE_PHOTO_PROFILE_REQUEST });
+        try {
+
+            const request = await fetch(`/api/user/edit-photo?id=${id}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ image: img })
+            })
+
+            const { image, status, token } = await request.json()
+
+            if (status == 200 && token) {
+
+                Cookies.set('_TOKEN', token);
+
+                dispatch({
+                    type: profileConstant.UPDATE_PHOTO_PROFILE_SUCCESS,
+                    payload: {
+                        image
+                    }
+                })
+
+                dispatch({type: postConstant.POST_HOME_RESET});
+                dispatch({type: postConstant.POST_BLOG_RESET});
+
+                return true;
+
+            }
+
+            return false;
+
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: profileConstant.UPDATE_PHOTO_PROFILE_FAILURE,
+                payload: {
+                    error
+                }
+            })
             return false;
         }
 

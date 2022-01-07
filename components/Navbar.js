@@ -23,7 +23,7 @@ function Navbar() {
     const auth = useSelector(state => state.auth)
     const [showSearch, setShowSearch] = useState(false)
     const router = useRouter();
-    const { posts, loading } = useSelector((state) => state.posts)
+    const { loading } = useSelector((state) => state.posts)
 
 
     useEffect(() => {
@@ -33,7 +33,6 @@ function Navbar() {
     }, [])
 
     useEffect(() => {
-
         dispatch(userIsLogin())
 
     }, [])
@@ -55,10 +54,10 @@ function Navbar() {
 
     return (
         <>
-            <div className="w-full h-16 border-b md:border-none border-gray-200 bg-white md:bg-blue-600  md:shadow z-50 sticky top-0">
+            <div className="w-full h-16 bg-blue-600  md:shadow z-50 sticky top-0">
                 <Container>
                     <div className="flex flex-row items-center justify-between h-full space-x-6">
-                        <Logo color="md:text-white" />
+                        <Logo color="text-white" />
 
                         <NavbarSearch active={showSearch} closeSearch={setShowSearch} />
 
@@ -83,7 +82,7 @@ function Navbar() {
                                                 <Dropdown
                                                     title={<>
                                                         <div className="w-7 h-7 bg-gray-200 rounded-full overflow-hidden relative flex-none mr-1">
-                                                            <Image src={'/images/man.png'} alt="image" layout="fill" />
+                                                            <Image src={auth?.user?.image ? auth.user.image : '/images/man.png'} alt="image" layout="fill" />
                                                         </div>
                                                         <span className="block truncate max-w-[128px]">{auth.user.username}</span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -129,7 +128,7 @@ function Navbar() {
                             <div className="block md:hidden mr-2">
                                 <button className="h-full flex items-center cursor-pointer focus:outline-none" onClick={() => setShowSearch(!showSearch)}>
                                     {
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg>
                                     }
@@ -139,18 +138,18 @@ function Navbar() {
                             <div className="block md:hidden">
                                 <Dropdown title={
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
                                     </svg>
                                 }
-                                    className={`${auth.user ? 'w-64' : 'w-52'}`}>
+                                    className={`${auth.user ? 'w-64' : 'w-52'}`} bg="bg-transparent">
                                     {
                                         auth.user ? (
                                             <>
                                                 <Menu.Item>
                                                     <div className="w-full py-3 px-4 flex flex-col items-center justify-center space-y-2">
                                                         <div className="relative overflow-hidden w-16 h-16 rounded-full">
-                                                            <Image src={'/images/man.png'} alt="image" layout="fill" />
+                                                            <Image src={auth?.user?.image ? auth.user.image : '/images/man.png'} alt="image" layout="fill" />
                                                         </div>
 
                                                         <h5 className="block text-gray-700 text-lg w-11/12 truncate text-center">{auth.user.username}</h5>

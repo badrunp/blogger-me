@@ -7,7 +7,7 @@ function Avatar({ image, name, title, id }) {
         <>
             <div className="flex flex-row items-center justify-start space-x-3 pt-2">
                 <div className="w-10 h-10 bg-zinc-200 rounded-full overflow-hidden relative">
-                    <Image src={'/images/man.png'} alt="default avatar" layout="fill" />
+                    <Image src={image ? image : '/images/man.png'} alt="default avatar" layout="fill" />
                 </div>
 
                 <div className="flex flex-col">

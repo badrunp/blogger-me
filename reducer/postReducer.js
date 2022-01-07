@@ -16,6 +16,22 @@ const initialState = {
 export default function postReducer(state = initialState, action) {
 
     switch (action.type) {
+        case postConstant.POST_HOME_RESET:
+            return {
+                ...state,
+                posts: [],
+                loading: true
+            }
+        case postConstant.POST_BLOG_RESET:
+            return {
+                ...state,
+                count: 3,
+                blog_posts: {
+                    data: [],
+                    loading: true,
+                    skip: 6
+                }
+            }
         case postConstant.UPDATE_COUNT_POST:
             return {
                 ...state,
