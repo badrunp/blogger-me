@@ -81,7 +81,6 @@ export function getPostsByAuthor(id, limit = 6, skip = 0) {
             const resquest = await fetch(`/api/blogs/${id}/author/${limit}/${skip}`);
 
             const response = await resquest.json();
-            console.log(response);
 
             const { status, posts } = response;
 
