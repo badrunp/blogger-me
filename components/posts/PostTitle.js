@@ -9,7 +9,7 @@ function PostTitle({ id, title, size = 'text-lg',leading = 'leading-6', redirect
                         <a className={`block ${size} font-semibold text-gray-800 hover:underline w-full break-words ${leading}`}>{title}</a>
                     </Link>
                 ) : (
-                    <h1 className={`block ${size} font-semibold text-gray-800 w-max break-words`}>{title}</h1>
+                    <h1 className={`block ${size} font-semibold text-gray-800 w-full`}>{title}</h1>
                 )
             }
         </>
