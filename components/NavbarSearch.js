@@ -99,9 +99,9 @@ function NavbarSearch({ active, closeSearch }) {
 
                     {
                         value.length > 0 && (
-                            <div className="absolute top-0 bg-white mt-10 ring-1 ring-gray-200 shadow-md py-2 px-2 rounded w-full" ref={dataResult}>
+                            <div className="absolute top-0 bg-white mt-10 ring-1 ring-gray-200 shadow-md py-2 px-2 rounded w-full overflow-y-auto" ref={dataResult}>
                                 <div className="flex flex-col divide-y divide-gray-300">
-                                    <div className="flex flex-col space-y-1 px-3 py-1">
+                                    <div className="flex flex-col space-y-1 px-3 py-1 overflow-y-auto">
                                         <p className="text-xs lg:text-sm text-gray-700 break-all py-2 font-semibold">Mencari: {value}</p>
                                         <div className="border-t border-gray-300 w-full" />
                                         <div className="py-2">
