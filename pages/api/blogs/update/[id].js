@@ -1,8 +1,18 @@
 import dbConnect from '../../../../lib/dbConnect';
 import Post from '../../../../models/Posts';
 import validate from "../../../../lib/validation";
+import { getCookie } from '../../../../lib/cookie';
+import jsonwebtoken from 'jsonwebtoken';
 
 export default async function handler(req, res) {
+
+    const cookie = getCookie(req)
+    if (!cookie._TOKEN) return res.status(405).json({status: res.statusCode, error: "Kesalahan!" })
+    try {
+        jsonwebtoken.verify(cookie._TOKEN, process.env.JWT_SECRET)
+    } catch (error) {
+        return res.status(405).json({ status: res.statusCode, error: "Kesalahan" })
+    }
 
     if (req.method != "POST") return res.status(404).json({})
 
@@ -10,7 +20,7 @@ export default async function handler(req, res) {
 
     const { id } = req.query;
 
-    const {title, category, content,summary, image} = req.body;
+    const { title, category, content, summary, image } = req.body;
 
     const validations = validate([
         {
@@ -42,13 +52,15 @@ export default async function handler(req, res) {
         if (id) {
             const post = await Post.findOne({ _id: id })
             if (post) {
-                const newPost = await Post.findOneAndUpdate({ _id: id }, { $set: {
-                    title,
-                    category,
-                    content,
-                    summary,
-                    image
-                } }, { new: true })
+                const newPost = await Post.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        title,
+                        category,
+                        content,
+                        summary,
+                        image
+                    }
+                }, { new: true })
                 return res.status(200).json({
                     status: res.statusCode,
                     message: 'Berhasil mengubah post',

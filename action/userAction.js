@@ -110,7 +110,6 @@ export function userRegister(data) {
 
 
             if (status == 402 && Object.keys(validations).length > 0) {
-                console.log(validations);
                 dispatch({
                     type: userConstant.USER_REGSITER_ERROR_VALIDATION,
                     payload: {

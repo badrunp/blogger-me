@@ -1,8 +1,17 @@
 import jsonwebtoken from 'jsonwebtoken';
+import { getCookie } from '../../../../lib/cookie';
 import dbConnect from '../../../../lib/dbConnect';
 import User from '../../../../models/User';
 
 export default async function handler(req, res) {
+
+    const cookie = getCookie(req)
+    if (!cookie._TOKEN) return res.status(405).json({ status: res.statusCode, error: "Kesalahan!" })
+    try {
+        jsonwebtoken.verify(cookie._TOKEN, process.env.JWT_SECRET)
+    } catch (error) {
+        return res.status(405).json({ status: res.statusCode, error: "Kesalahan" })
+    }
 
     if (req.method !== "POST") return res.status(404).json({})
 

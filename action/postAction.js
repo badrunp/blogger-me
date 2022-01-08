@@ -1,10 +1,11 @@
+import Cookies from "js-cookie";
 import { postConstant, profileConstant } from "../constant/redux";
 
-export function createPost(data){
+export function createPost(data) {
     return async (dispatch) => {
 
 
-        dispatch({type: postConstant.USER_CREATE_POST_REQUEST})
+        dispatch({ type: postConstant.USER_CREATE_POST_REQUEST })
         try {
 
             const request = await fetch('/api/blogs/create', {
@@ -15,9 +16,15 @@ export function createPost(data){
                 body: JSON.stringify(data)
             })
 
-            const {post, status, validations, message} = await request.json();
+            const { post, status, validations, message } = await request.json();
 
-            if(status === 402 && validations){
+            if (status == 405) {
+                Cookies.remove('_TOKEN')
+                document.location.href = '/'
+                return;
+            }
+
+            if (status === 402 && validations) {
                 dispatch({
                     type: postConstant.USER_CREATE_POST_VALIDATION,
                     payload: {
@@ -28,7 +35,7 @@ export function createPost(data){
                 return false;
             }
 
-            if(status === 200 && post){
+            if (status === 200 && post) {
 
                 dispatch({
                     type: postConstant.USER_CREATE_POST_SUCCESS,
@@ -46,7 +53,7 @@ export function createPost(data){
             return false;
 
         } catch (error) {
-            
+
             console.log(error);
             dispatch({
                 type: postConstant.USER_CREATE_POST_FAILURE,
@@ -62,7 +69,7 @@ export function createPost(data){
     }
 }
 
-export function getPostsByAuthor(id, limit = 6, skip = 0){
+export function getPostsByAuthor(id, limit = 6, skip = 0) {
     return async (dispatch) => {
 
         dispatch({
@@ -74,10 +81,11 @@ export function getPostsByAuthor(id, limit = 6, skip = 0){
             const resquest = await fetch(`/api/blogs/${id}/author/${limit}/${skip}`);
 
             const response = await resquest.json();
+            console.log(response);
 
-            const {status, posts} = response;
+            const { status, posts } = response;
 
-            if(status == 200 && posts){
+            if (status == 200 && posts) {
                 dispatch({
                     type: postConstant.GET_POST_BY_AUTHOR_SUCCESS,
                     payload: {
@@ -102,28 +110,34 @@ export function getPostsByAuthor(id, limit = 6, skip = 0){
 }
 
 
-export function deletePost(id){
+export function deletePost(id) {
     return async (dispatch) => {
 
-        dispatch({type: postConstant.DELETE_POST_REQUEST});
+        dispatch({ type: postConstant.DELETE_POST_REQUEST });
         try {
-            
+
             const request = await fetch('/api/blogs/delete', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({id})
+                body: JSON.stringify({ id })
             })
 
-            const {message, status, post} = await request.json()
+            const { message, status, post } = await request.json()
 
-            if(status == 200 && message){
+            if (status == 405) {
+                Cookies.remove('_TOKEN')
+                document.location.href = '/'
+                return;
+            }
+
+            if (status == 200 && message) {
                 dispatch({
                     type: postConstant.DELELE_POST_SUCCESS,
                     payload: {
-                         message,
-                         post
+                        message,
+                        post
                     }
                 })
 
@@ -135,18 +149,18 @@ export function deletePost(id){
             return false;
 
         } catch (error) {
-            dispatch({type: postConstant.DELETE_POST_FAILURE, payload: {error}})
+            dispatch({ type: postConstant.DELETE_POST_FAILURE, payload: { error } })
             return false;
         }
 
     }
 }
 
-export function updatePost(id, data){
+export function updatePost(id, data) {
     return async (dispatch) => {
 
 
-        dispatch({type: postConstant.UPDATE_POST_REQUEST})
+        dispatch({ type: postConstant.UPDATE_POST_REQUEST })
         try {
 
             const request = await fetch('/api/blogs/update/' + id, {
@@ -159,9 +173,15 @@ export function updatePost(id, data){
 
             const response = await request.json();
 
-            const {post, status, validations, message} = response;
+            const { post, status, validations, message } = response;
 
-            if(status === 402 && validations){
+            if (status == 405) {
+                Cookies.remove('_TOKEN')
+                document.location.href = '/'
+                return;
+            }
+
+            if (status === 402 && validations) {
                 dispatch({
                     type: postConstant.UPDATE_POST_VALIDATION,
                     payload: {
@@ -172,8 +192,8 @@ export function updatePost(id, data){
                 return false;
             }
 
-            if(status === 200 && post){
-                
+            if (status === 200 && post) {
+
                 dispatch({
                     type: postConstant.UPDATE_POST_SUCCESS,
                     payload: {
@@ -212,15 +232,15 @@ export function updatePost(id, data){
 }
 
 
-export function getPostHome(){
+export function getPostHome() {
     return async (dispatch) => {
 
-        dispatch({type: postConstant.GET_POST_REQUEST});
+        dispatch({ type: postConstant.GET_POST_REQUEST });
         try {
-            
+
             const request = await fetch('/api/blogs?limit=7')
 
-            const {posts} = await request.json();
+            const { posts } = await request.json();
 
             dispatch({
                 type: postConstant.GET_POST_SUCCESS,
@@ -245,15 +265,15 @@ export function getPostHome(){
     }
 }
 
-export function getPostBlog(skip = 0, limit = 6){
+export function getPostBlog(skip = 0, limit = 6) {
     return async (dispatch) => {
 
-        dispatch({type: postConstant.GET_BLOG_POSTS_REQUEST});
+        dispatch({ type: postConstant.GET_BLOG_POSTS_REQUEST });
         try {
-            
+
             const request = await fetch(`/api/blogs?limit=${limit}&skip=${skip}&order=-1`)
 
-            const {posts} = await request.json();
+            const { posts } = await request.json();
 
             dispatch({
                 type: postConstant.GET_BLOG_POSTS_SUCCESS,
@@ -284,7 +304,7 @@ export function getPostBlog(skip = 0, limit = 6){
 }
 
 
-export function updateTotalPost(count){
+export function updateTotalPost(count) {
     return async (dispatch) => {
 
         dispatch({

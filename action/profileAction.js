@@ -65,6 +65,12 @@ export function updateUserProfil(id, data) {
 
             const { status, token, message } = response;
 
+            if (status == 405) {
+                Cookies.remove('_TOKEN')
+                document.location.href = '/'
+                return;
+            }
+
             if (status !== 200 || !token) {
 
                 return false;
@@ -122,6 +128,12 @@ export function updateUserPhoto(id, img) {
 
             const { image, status, token } = await request.json()
 
+            if (status == 405) {
+                Cookies.remove('_TOKEN')
+                document.location.href = '/'
+                return;
+            }
+
             if (status == 200 && token) {
 
                 Cookies.set('_TOKEN', token);
@@ -133,8 +145,8 @@ export function updateUserPhoto(id, img) {
                     }
                 })
 
-                dispatch({type: postConstant.POST_HOME_RESET});
-                dispatch({type: postConstant.POST_BLOG_RESET});
+                dispatch({ type: postConstant.POST_HOME_RESET });
+                dispatch({ type: postConstant.POST_BLOG_RESET });
 
                 return true;
 
