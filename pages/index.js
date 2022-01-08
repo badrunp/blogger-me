@@ -19,7 +19,7 @@ function Home() {
     <>
       <Layout title={'Home'} className="bg-white">
         <Container className="md:container px-0 md:px-4">
-          <div className="w-full md:py-14 space-y-8 md:space-y-14">
+          <div className="w-full pb-6 md:pb-0 md:py-14 space-y-8 md:space-y-14">
 
             {
               loading ? (
