@@ -56,7 +56,7 @@ function Blogs() {
                                     {
                                         posts.length > 0 && (
                                             <BlogTitle
-                                                title="All Posts"
+                                                title="Semua Posts"
                                             />
                                         )
                                     }
