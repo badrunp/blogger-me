@@ -1,6 +1,6 @@
 db.users.createOne()
 db.users.createMany()
-db.users.fin({ name: 'test' })
+db.users.find({ name: 'test' })
 db.users.find({ name: { $eq: "test" } })
 db.users.find({ name: { $nin: "test" } })
 db.users.find({ age: { $gt: 19 } }) >
@@ -25,5 +25,16 @@ db.users.updateOne({ name: 'test' }, { $pull: { hobies: "drawing" } })
 db.users.updateMany({ name: 'test' }, { $unset: {age: ''} })
 db.users.deleteOne({ name: 'test' })
 db.users.deleteMany({ address: { $exists: true } })
+
+let match = value.match(/^[a-zA-Z]*/)
+let match2 = value.match(/\s*/)
+if(match2[0] == value){
+	return ""
+}
+
+if(match[0] == value){
+	return true;
+}
+
 
 !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
